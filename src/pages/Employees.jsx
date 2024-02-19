@@ -9,9 +9,10 @@ function Employees() {
         .then((data) => setEmployees(data));
     }, []);
     return (
-      <>
-        <table className="table-auto">
-          <thead>
+        <>
+            <div className="grid items-center m-10">
+        <table className="border-spacing-70 border-collapse border border-slate-500 ">
+          <thead className="border border-slate-600">
             <tr>
               <th>Profile</th>
               <th>First Name</th>
@@ -25,17 +26,20 @@ function Employees() {
           <tbody>
             {employees.map((employee) => (
               <tr key={employee.id}>
-                <td>{employee.profile_picture}</td>
-                <td>{employee.first_name}</td>
-                <td>{employee.last_name}</td>
-                <td>{employee.role}</td>
-                <td>{employee.phone}</td>
-                <td>{employee.active_status == 1 ? "Active" : "Inactive" }</td>
-                <td> icon</td>
+                <td className="px-8">{employee.profile_picture}</td>
+                <td className="px-8">{employee.first_name}</td>
+                <td className="px-8">{employee.last_name}</td>
+                <td className="px-8">{employee.role}</td>
+                <td className="px-8">{employee.phone}</td>
+                <td className="px-8">
+                  {employee.active_status == 1 ? "Active" : "Inactive"}
+                </td>
+                <td className="px-8"> icon</td>
               </tr>
             ))}
           </tbody>
         </table>
+        </div>
       </>
     );
 

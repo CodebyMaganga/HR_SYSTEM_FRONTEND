@@ -3,12 +3,14 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FaBars } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
 import { FaRegBell } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
+  { name: "Employees", href: "#", current: false },
   { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Job Applicants", href: "#", current: false },
+  { name: "Employees on Leave", href: "#", current: false },
 ];
 
 function classNames(...classes) {
