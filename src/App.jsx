@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import NavBar from "./components/NavBar";
 import Karibu from "./components/Karibu";
 import Card from "./components/Card";
-
+import Employees from "./pages/Employees";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <NavBar />
       <Karibu />
       <Card />
+      <Employees />
     </>
   );
 }
