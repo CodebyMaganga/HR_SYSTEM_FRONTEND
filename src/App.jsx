@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import NavBar from "./components/NavBar";
 import Karibu from "./components/Karibu";
 import Card from "./components/Card";
+import Login from "./pages/Login";
 
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
       <NavBar />
       <Karibu />
       <Card />
+
+      <Login />
     </>
   );
 }
