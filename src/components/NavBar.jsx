@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FaBars } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
-import { FaRegBell } from "react-icons/fa";
+import { FaRegBell,FaMoon, FaSun } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -18,6 +19,14 @@ function classNames(...classes) {
 }
 
 function NavBar() {
+
+  {/*Dark mode logic */}
+  const [darkMode, setDarkMode] = useState(false)
+
+  const toogleDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -65,6 +74,15 @@ function NavBar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+              {/*Dark Mode button */}
+              <button
+              onClick={toogleDarkMode}
+              className="mr-4 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none"
+              aria-label="Toggle Dark Mode">
+              {darkMode ? <FaSun className="h-6 4-6"/> : <FaMoon className="h-6 4-6"/>}
+              </button>
+
                 <button
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
