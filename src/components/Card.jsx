@@ -14,7 +14,8 @@ function Card() {
   
   }, []); 
   return (
-    <div className="flex justify-start -mt-20 z-50 overflow-x-auto border-solid">
+    <div id="controls-carousel" class="relative w-full" data-carousel="static">
+    <div className="flex justify-start -mt-20 z-20 overflow-x-auto border-solid relative">
       {/* Card 1: Total Employees */}
       <div className="flex-none w-64 rounded-[15px] overflow-hidden shadow-lg m-4 ">
         <div className="px-4 py-4">
@@ -59,6 +60,7 @@ function Card() {
           <p className="text-gray-700 text-lg">20 New</p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

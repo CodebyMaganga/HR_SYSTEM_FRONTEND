@@ -1,6 +1,6 @@
 function Karibu() {
   return (
-    <div className="flex justify-between  bg-gray-800">
+    <div className="flex justify-between bg-gray-400 px-0 relative z-10">
       <div className="text-white h-[250px]">
         <h1 className="pt-4 pl-6">Karibu Admin</h1>
         <h2 className="font-bold text-2xl pl-6">Good Morning, </h2>
