@@ -7,11 +7,11 @@ import { NavLink } from "react-router-dom";
 
 
 const navigation = [
-  { name: "Dashboard", href: "/", current: true },
-  { name: "Employees", href: "/Employees", current: false },
-  { name: "Projects", href: "/Projects", current: false },
-  { name: "Job Applicants", href: "/Job_Applicants", current: false },
-  { name: "Employees on Leave", href: "/Leave", current: false },
+  { name: "Dashboard", href: "/home", current: true },
+  { name: "Employees", href: "/employees", current: false },
+  { name: "Projects", href: "/projects", current: false },
+  { name: "Job Applicants", href: "/job-applicants", current: false },
+  { name: "Employees on Leave", href: "/leaves", current: false },
 ];
 
 function classNames(...classes) {
