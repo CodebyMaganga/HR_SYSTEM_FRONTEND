@@ -1,18 +1,21 @@
-import React from 'react'
-import Karibu from "../components/Karibu"
-import Card from "../components/Card";
-import { NavLink } from 'react-router-dom';
+import React from "react";
 
-function Home(){
+import Card from "../components/Card";
+import { NavLink } from "react-router-dom";
+import MidCards from "../components/MidCards";
+import BottomCards from "../components/BottomCards";
+
+function Home() {
   return (
     <div>
-      <Karibu />
-      <NavLink to="/Employees">
+      
+      <NavLink to="/employees">
         <Card />
       </NavLink>
-      
+      <MidCards />
+      <BottomCards />
     </div>
   );
 }
 
-export default Home
+export default Home;
