@@ -20,16 +20,16 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Employees" element={<Employees />} />
-        <Route path="/Projects" element={<Projects />} />
-        <Route path="/Departments" element={<Departments />} />
-        <Route path="/DepartmentEmployees" element={<DepartmentEmployees />} />
-        <Route path="/Leaves" element={<Leaves />} />
-        <Route path="/ProjectEmployees" element={<ProjectEmployees />} />
-        <Route path="/Documents" element={<Documents />} />
-        <Route path="/JobApplicants" element={<JobApplicants />} />
-        <Route path="/Interviews" element={<Interviews />} />
-        <Route path="/DepartmentEmployees" element={<DepartmentEmployees />} />
+        <Route path="/employees" element={<Employees />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/departments" element={<Departments />} />
+        <Route path="/department-employees" element={<DepartmentEmployees />} />
+        <Route path="/leaves" element={<Leaves />} />
+        <Route path="/project-employees" element={<ProjectEmployees />} />
+        <Route path="/documents" element={<Documents />} />
+        <Route path="/job-applicants" element={<JobApplicants />} />
+        <Route path="/interviews" element={<Interviews />} />
+        <Route path="/department-employees" element={<DepartmentEmployees />} />
       </Routes>
 
       <MidCards />
