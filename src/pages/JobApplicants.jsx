@@ -19,6 +19,7 @@ function JobApplicants() {
               <th className="px-4 py-4">Profile</th>
               <th className="px-4 py-4">First Name</th>
               <th className="px-4 py-4">Last Name</th>
+              <th className="px-4 py-4">Email</th>
               <th className="px-4 py-4">Address</th>
               <th className="px-4 py-4">Experience</th>
               <th className="px-4 py-4">Role</th>
@@ -41,6 +42,9 @@ function JobApplicants() {
                 </td>
                 <td className="whitespace-nowrap px-4 py-4">
                   {jobapplicant.last_name}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  {jobapplicant.email}
                 </td>
                 <td className="whitespace-nowrap px-4 py-4">
                   {jobapplicant.address}
