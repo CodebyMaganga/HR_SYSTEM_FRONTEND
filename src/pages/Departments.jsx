@@ -10,21 +10,28 @@ function Departments() {
   }, []);
   return (
     <>
-      <div className="grid items-center m-10">
-        <table className="border-spacing-70 border-collapse border border-slate-500 ">
-          <thead className="border border-slate-600">
+      <div className="grid items-center my-2 mx-10 ">
+        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg">
+          <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
-              <th>Department Name</th>
-              <th>Department Employees</th>
-              <th>Action</th>
+              <th className="px-6 py-4">Department Name</th>
+              <th className="px-6 py-4">Department Employees</th>
+              <th className="px-6 py-4">Action</th>
             </tr>
           </thead>
           <tbody>
             {departments.map((department) => (
-              <tr key={department.id}>
-                <td className="px-8">{department.department_name}</td>
-                <td className="px-8">department department_employees</td>
-                <td className="px-8"> icon</td>
+              <tr
+                key={department.id}
+                className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+              >
+                <td className="whitespace-nowrap px-6 py-4">
+                  {department.department_name}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  department department_employees
+                </td>
+                <td className="whitespace-nowrap px-6 py-4"> icon</td>
               </tr>
             ))}
           </tbody>
