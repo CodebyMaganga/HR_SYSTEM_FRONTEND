@@ -1,21 +1,20 @@
-import { useState } from "react";
-
 import NavBar from "./components/NavBar";
-import Karibu from "./components/Karibu"
+import Karibu from "./components/Karibu";
 import Home from "./pages/Home";
 import Employees from "./pages/Employees";
 import Projects from "./pages/Projects";
-import Leaves from "./pages/Leaves";
 import { Route, Routes } from "react-router-dom";
 
 import Departments from "./pages/Departments";
 import Documents from "./pages/Documents";
 import JobApplicants from "./pages/JobApplicants";
 import DepartmentEmployees from "./pages/DepartmentEmployees";
+import Leaves from "./pages/Leaves";
 import Interviews from "./pages/Interviews";
 import ProjectEmployees from "./pages/ProjectEmployees";
 import AddEmployee from "./pages/Forms/AddEmployee";
 import Login from "./pages/Login";
+import OnLeaveEmployees from "./pages/OnLeaveEmployees";
 
 function App() {
   return (
@@ -30,15 +29,13 @@ function App() {
         <Route path="/departments" element={<Departments />} />
         <Route path="/department-employees" element={<DepartmentEmployees />} />
         <Route path="/leaves" element={<Leaves />} />
+        <Route path="/on-leave-employees" element={<OnLeaveEmployees />} />
         <Route path="/project-employees" element={<ProjectEmployees />} />
         <Route path="/documents" element={<Documents />} />
         <Route path="/job-applicants" element={<JobApplicants />} />
         <Route path="/interviews" element={<Interviews />} />
         <Route path="/add-employee" element={<AddEmployee />} />
       </Routes>
-      
-
-      
     </>
   );
 }
