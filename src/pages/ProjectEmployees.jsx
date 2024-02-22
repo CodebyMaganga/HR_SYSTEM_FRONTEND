@@ -16,7 +16,8 @@ function ProjectEmployees() {
             <tr>
               <th>Project No</th>
               <th>Employee No</th>
-              <th>Action</th>
+              <th>Action
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -24,7 +25,6 @@ function ProjectEmployees() {
               <tr key={project_employee.id}>
                 <td className="px-8">{project_employee.profile_picture}</td>
                 <td className="px-8">{project_employee.first_name}</td>
-
                 <td className="px-8"> icon</td>
               </tr>
             ))}

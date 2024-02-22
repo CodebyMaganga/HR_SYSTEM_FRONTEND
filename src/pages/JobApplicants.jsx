@@ -3,7 +3,6 @@ import { BASE_URL } from "../components/utils";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 
-
 function JobApplicants() {
   const [jobapplicants, setJobapplicants] = useState([]);
   useEffect(() => {
@@ -20,6 +19,7 @@ function JobApplicants() {
               <th className="px-4 py-4">Profile</th>
               <th className="px-4 py-4">First Name</th>
               <th className="px-4 py-4">Last Name</th>
+              <th className="px-4 py-4">Email</th>
               <th className="px-4 py-4">Address</th>
               <th className="px-4 py-4">Experience</th>
               <th className="px-4 py-4">Role</th>
@@ -30,20 +30,38 @@ function JobApplicants() {
           </thead>
           <tbody>
             {jobapplicants.map((jobapplicant) => (
-              <tr key={jobapplicant.id} className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                <td className="whitespace-nowrap px-4 py-4">{jobapplicant.photo}</td>
-                <td className="whitespace-nowrap px-4 py-4">{jobapplicant.first_name}</td>
-                <td className="whitespace-nowrap px-4 py-4">{jobapplicant.last_name}</td>
-                <td className="whitespace-nowrap px-4 py-4">{jobapplicant.address}</td>
-                <td className="whitespace-nowrap px-4 py-4">{jobapplicant.experience}</td>
-                <td className="whitespace-nowrap px-4 py-4">{jobapplicant.role_applied}</td>
+              <tr
+                key={jobapplicant.id}
+                className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+              >
                 <td className="whitespace-nowrap px-4 py-4">
-                <button
+                  {jobapplicant.photo}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  {jobapplicant.first_name}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  {jobapplicant.last_name}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  {jobapplicant.email}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  {jobapplicant.address}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  {jobapplicant.experience}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  {jobapplicant.role_applied}
+                </td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  <button
                     className={`rounded-md p-2 ${
                       jobapplicant.active_status ? "bg-green-500" : "bg-red-500"
                     }`}
                   >
-                  {jobapplicant.active_status == 1 ? "Active" : "Inactive"}
+                    {jobapplicant.active_status == 1 ? "Active" : "Inactive"}
                   </button>
                 </td>
                 <td className="px-8">jobapplicant_interview</td>
