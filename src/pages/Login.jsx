@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { BASE_URL } from "../components/utils";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -11,9 +11,9 @@ function Login() {
   }
   const navigate = useNavigate();
 
-  const moveToDashboard = () => {
-    navigate("/home");
-  };
+  // const moveToDashboard = () => {
+  //   navigate("/home");
+  // };
 
   const formik = useFormik({
     validationSchema: Yup.object().shape({
@@ -24,46 +24,42 @@ function Login() {
       email: "",
       password: "",
     },
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const res = await fetch(`${BASE_URL}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const data = await res.json();
+        console.log(data);
+        //store access and refresh tokens in local storage
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
+
+        if (!res.ok) {
+          throw new Error("Invalid email/password");
+        }
+
+        if (data.statusCode == !200) {
+          toast.error(data.message);
+        } else if (data.status == "success") {
+          toast.success(data.message);
+          //upon a successful login, the user is navigated to the contacts page
+          navigate("/home");
+          // if login is successful, resetform
+          resetForm();
+          //persisting the user once logged in
+          // redirecting the user to contacts page
+        }
+      } catch (error) {
+        console.log("Unable to login", error.message);
+        toast.error("Login failed: " + error.message);
+      }
+    },
   });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(`${BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formik.values.email,
-          password: formik.values.password,
-        }),
-      });
-
-      const data = await response.json();
-      console.log(data);
-      localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("refresh_token", data.refresh_token);
-
-      if (!response.ok) {
-        throw new Error("Invalid email/password");
-      }
-
-      if (data.statusCode !== 200) {
-        toast.error(data.message);
-      } else if (data.status === "success") {
-        toast.success(data.message);
-
-        navigate("/home");
-
-        formik.resetForm();
-      }
-    } catch (error) {
-      console.log("Unable to login", error.message);
-      toast.error("Login failed: " + error.message);
-    }
-  };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -80,7 +76,7 @@ function Login() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form
           className="space-y-6"
-          onSubmit={handleSubmit}
+          onSubmit={formik.handleSubmit}
           action="#"
           method="POST"
         >
