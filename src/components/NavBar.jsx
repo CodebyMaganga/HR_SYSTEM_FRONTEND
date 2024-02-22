@@ -2,9 +2,9 @@ import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FaBars } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
-import { FaRegBell,FaMoon, FaSun } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
-
+import { FaRegBell, FaMoon, FaSun } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const navigation = [
   { name: "Dashboard", href: "/home", current: true },
@@ -19,13 +19,24 @@ function classNames(...classes) {
 }
 
 function NavBar() {
-
-  {/*Dark mode logic */}
-  const [darkMode, setDarkMode] = useState(false)
+  {
+    /*Dark mode logic */
+  }
+  const [darkMode, setDarkMode] = useState(false);
 
   const toogleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
+    setDarkMode(!darkMode);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      localStorage.clear();
+      navigate("/");
+      toast.success("Logged out");
+    }
+  };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -48,11 +59,11 @@ function NavBar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <NavLink to="/" activeClassName="active">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                    <img
+                      className="h-8 w-auto"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
+                    />
                   </NavLink>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -76,14 +87,18 @@ function NavBar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
-              {/*Dark Mode button */}
-              <button
-              onClick={toogleDarkMode}
-              className="mr-4 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none"
-              aria-label="Toggle Dark Mode">
-              {darkMode ? <FaSun className="h-6 4-6"/> : <FaMoon className="h-6 4-6"/>}
-              </button>
+                {/*Dark Mode button */}
+                <button
+                  onClick={toogleDarkMode}
+                  className="mr-4 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none"
+                  aria-label="Toggle Dark Mode"
+                >
+                  {darkMode ? (
+                    <FaSun className="h-6 4-6" />
+                  ) : (
+                    <FaMoon className="h-6 4-6" />
+                  )}
+                </button>
 
                 <button
                   type="button"
@@ -143,7 +158,7 @@ function NavBar() {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      <Menu.Item onClick={handleLogOut}>
                         {({ active }) => (
                           <a
                             href="#"
@@ -152,7 +167,7 @@ function NavBar() {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Sign out
+                            Log out
                           </a>
                         )}
                       </Menu.Item>
@@ -188,4 +203,4 @@ function NavBar() {
     </Disclosure>
   );
 }
-export default NavBar
+export default NavBar;
