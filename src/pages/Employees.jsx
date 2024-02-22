@@ -12,7 +12,7 @@ function Employees() {
   }, []);
   return (
     <>
-      <div className="grid items-center my-2 mx-10 ">
+      <div className=" @container grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>

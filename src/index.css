@@ -5,6 +5,8 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  font-size: 14px;
+  font-family: "Josefin Sans";
 }
 
 body {
@@ -12,5 +14,18 @@ body {
 }
 
 h1 {
-  font-family: "Josefin Sans";
+  font-size: 20px;
+  font-weight: 300;
+}
+h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+.displaycards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.employeescard {
+  color: #e4e8e3;
 }
