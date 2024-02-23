@@ -32,7 +32,7 @@ const AddEmployee = () => {
       role: "",
       nationality: "",
       emergency_contact: "",
-      bank_details: {
+      bankdetails: {
         employee_salary: "",
         employee_account: "",
         employee_bank: "",
@@ -57,7 +57,7 @@ const AddEmployee = () => {
       first_name: Yup.string().required("First name is required"),
       last_name: Yup.string().required("Last name is required"),
       DOB: Yup.date().required("D.O.B is required"),
-      email: Yup.string().email("Invalid email format").required("Email is required"),
+      email: Yup.string().required("Email is required"),
       phone: Yup.string().required("Phone is required"),
       gender: Yup.string().required("Gender is required"),
       national_ID: Yup.string().required("National ID is required"),
@@ -65,7 +65,7 @@ const AddEmployee = () => {
       role: Yup.string().required("Role is required"),
       nationality: Yup.string().required("Nationality is required"),
       emergency_contact: Yup.string().required("Emergency contact is required"),
-      bank_details: Yup.object({
+      bankdetails: Yup.object({
         employee_salary: Yup.string().required("Employee salary is required"),
         employee_account: Yup.string().required("Employee account is required"),
         employee_bank: Yup.string().required("Employee bank is required"),
@@ -82,12 +82,13 @@ const AddEmployee = () => {
         first_name: Yup.string().required("Dependant's first name is required"),
         last_name: Yup.string().required("Dependant's last name is required"),
         gender: Yup.string().required("Dependant's gender is required"),
-        age: Yup.number().positive().integer().required("Dependant's age is required"),
-        relationship: Yup.string().required("Dependant's relationship is required"),
+        age: Yup.number().required("Dependant's age is required"),
+        relationship: Yup.string().required(
+          "Dependant's relationship is required"
+        ),
       }),
     }),
-    onSubmit: async (values, { resetForm }) => {
-      console.log("Submitting form", values);
+    onSubmit: async (values, formikBag) => {
       try {
         const res = await fetch(`${BASE_URL}/employees`, {
           method: "POST",
@@ -97,20 +98,16 @@ const AddEmployee = () => {
           body: JSON.stringify(values),
         });
         const data = await res.json();
-        console.log(data);
-
+    
         if (!res.ok) {
           throw new Error("Failed to add employee");
         }
-
-        if (data.statusCode == !200) {
-          toast.error(data.message);
-        } else if (data.status == "success") {
+    
+        if (data.statusCode === 200) {
           toast.success(data.message);
-          // if login is successful, resetform
-          resetForm();
-          //persisting the user once logged in
-          // redirecting the user to contacts page
+          formikBag.resetForm();
+        } else {
+          toast.error(data.message);
         }
       } catch (error) {
         console.log("Unable to add employee", error.message);
@@ -222,32 +219,32 @@ const AddEmployee = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               type="text"
-              name="bank_details.employee_salary"
-              value={formik.values.bank_details.employee_salary}
+              name="bankdetails.employee_salary"
+              value={formik.values.bankdetails.employee_salary}
               placeholder="Employee Salary"
               onChange={formik.handleChange}
             />
 
             <InputField
               type="text"
-              name="bank_details.employee_account"
-              value={formik.values.bank_details.employee_account}
+              name="bankdetails.employee_account"
+              value={formik.values.bankdetails.employee_account}
               placeholder="Employee Account"
               onChange={formik.handleChange}
             />
 
             <InputField
               type="text"
-              name="bank_details.employee_bank"
-              value={formik.values.bank_details.employee_bank}
+              name="bankdetails.employee_bank"
+              value={formik.values.bankdetails.employee_bank}
               placeholder="Employee Bank"
               onChange={formik.handleChange}
             />
 
             <InputField
               type="text"
-              name="bank_details.branch_code"
-              value={formik.values.bank_details.branch_code}
+              name="bankdetails.branch_code"
+              value={formik.values.bankdetails.branch_code}
               placeholder="Branch Code"
               onChange={formik.handleChange}
             />
@@ -302,7 +299,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             />
 
-<InputField
+            <InputField
               type="text"
               name="dependants.last_name"
               value={formik.values.dependants.last_name}
@@ -318,7 +315,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             />
 
-<InputField
+            <InputField
               type="number"
               name="dependants.age"
               value={formik.values.dependants.age}
@@ -326,7 +323,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             />
 
-<InputField
+            <InputField
               type="text"
               name="dependants.relationship"
               value={formik.values.dependants.relationship}
