@@ -12,6 +12,7 @@ const navigation = [
   { name: "Projects", href: "/projects", current: false },
   { name: "Job Applicants", href: "/job-applicants", current: false },
   { name: "Employees on Leave", href: "/leaves", current: false },
+  { name: "Payroll", href: "/payroll", current: false },
 ];
 
 function classNames(...classes) {
