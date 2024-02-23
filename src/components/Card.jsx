@@ -44,12 +44,12 @@ function Card() {
         </div>
       </div>
 
-      {/* Card 4: Interviews */}
+      {/* Card 4: Payroll */}
       <div className="flex-none w-64 max-w-sm rounded-[15px] overflow-hidden shadow-lg m-4  ">
         <div className="px-4 py-4 bg-white">
           <IoIosChatbubbles className=" text-3xl" />
-          <div className="font-bold text-sm mb-2 mt-4">Interviews</div>
-          <p className="text-gray-700 text-lg">5 Today</p>
+          <div className="font-bold text-sm mb-2 mt-4">Payroll</div>
+          <p className="text-gray-700 text-lg">March</p>
         </div>
       </div>
 

@@ -10,7 +10,7 @@ import Documents from "./pages/Documents";
 import JobApplicants from "./pages/JobApplicants";
 import DepartmentEmployees from "./pages/DepartmentEmployees";
 import Leaves from "./pages/Leaves";
-import Interviews from "./pages/Interviews";
+import Payroll from "./pages/Payroll";
 import ProjectEmployees from "./pages/ProjectEmployees";
 import AddEmployee from "./pages/Forms/AddEmployee";
 import Login from "./pages/Login";
@@ -33,7 +33,7 @@ function App() {
         <Route path="/project-employees" element={<ProjectEmployees />} />
         <Route path="/documents" element={<Documents />} />
         <Route path="/job-applicants" element={<JobApplicants />} />
-        <Route path="/interviews" element={<Interviews />} />
+        <Route path="/payroll" element={<Payroll />} />
         <Route path="/add-employee" element={<AddEmployee />} />
       </Routes>
     </>
