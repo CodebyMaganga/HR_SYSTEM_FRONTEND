@@ -54,36 +54,36 @@ const AddEmployee = () => {
       },
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First name is required"),
-      lastName: Yup.string().required("Last name is required"),
-      dateOfBirth: Yup.string().required("D.O.B is required"),
-      email: Yup.string().required("Email is required"),
+      first_name: Yup.string().required("First name is required"),
+      last_name: Yup.string().required("Last name is required"),
+      DOB: Yup.date().required("D.O.B is required"),
+      email: Yup.string().email("Invalid email format").required("Email is required"),
       phone: Yup.string().required("Phone is required"),
       gender: Yup.string().required("Gender is required"),
-      nationalId: Yup.string().required("National ID is required"),
+      national_ID: Yup.string().required("National ID is required"),
       address: Yup.string().required("Address is required"),
       role: Yup.string().required("Role is required"),
       nationality: Yup.string().required("Nationality is required"),
-      emergencyContact: Yup.string().required("Emergency contact is required"),
-      bankDetails: Yup.object().shape({
-        employeeSalary: Yup.string().required("Employee salary required"),
-        employeeAccount: Yup.string().required("Employee Account required"),
-        employeeBank: Yup.string().required("Employee Bank required"),
-        branchCode: Yup.string().required("Branch code required"),
+      emergency_contact: Yup.string().required("Emergency contact is required"),
+      bank_details: Yup.object({
+        employee_salary: Yup.string().required("Employee salary is required"),
+        employee_account: Yup.string().required("Employee account is required"),
+        employee_bank: Yup.string().required("Employee bank is required"),
+        branch_code: Yup.string().required("Branch code is required"),
       }),
-      documents: Yup.object().shape({
-        documentType: Yup.string().required("Document type required"),
+      documents: Yup.object({
+        document_type: Yup.string().required("Document type is required"),
       }),
-      references:Yup.object().shape({
-        referenceName: Yup.string().required("Reference name required"),
-        referencePhone: Yup.string().required("Reference phone required"),
+      references: Yup.object({
+        reference_name: Yup.string().required("Reference name is required"),
+        reference_phone: Yup.string().required("Reference phone is required"),
       }),
-      dependants: Yup.object().shape({
-        firstName: Yup.string().required("Dependants first name is required"),
-        lastName: Yup.string().required("Dependants last name is required"),
-        gender: Yup.string().required("Dependants gender is required"),
-        age: Yup.number().required("Dependants age is required"),
-        relationship: Yup.string().required("Dependants relationship is required"),
+      dependants: Yup.object({
+        first_name: Yup.string().required("Dependant's first name is required"),
+        last_name: Yup.string().required("Dependant's last name is required"),
+        gender: Yup.string().required("Dependant's gender is required"),
+        age: Yup.number().positive().integer().required("Dependant's age is required"),
+        relationship: Yup.string().required("Dependant's relationship is required"),
       }),
     }),
     onSubmit: async (values, { resetForm }) => {
