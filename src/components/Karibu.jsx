@@ -2,7 +2,6 @@ import AddEmployee from "../pages/Forms/AddEmployee";
 import { useNavigate } from "react-router-dom";
 
 function Karibu() {
-
   {
     /* Navigating to AddEmployees page onClick */
   }
@@ -19,7 +18,10 @@ function Karibu() {
         <h2 className="font-bold text-2xl pl-6">Good Morning, </h2>
       </div>
       <div>
-        <button onClick={goToAddEmployee} className=" bg-violet-300 hover:bg-violet-300 text-black font-bold py-2 px-4 rounded-full m-6">
+        <button
+          onClick={goToAddEmployee}
+          className=" bg-violet-300 hover:bg-violet-300 text-black font-bold py-2 px-4 rounded-full m-6"
+        >
           + Add Employee
         </button>
       </div>
