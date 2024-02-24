@@ -14,7 +14,7 @@ function Projects() {
   const navigate = useNavigate();
 
   const goToAddProject = () => {
-    navigate("/projects");
+    navigate("/add-project");
   };
 
   const addProjectButtonData = {

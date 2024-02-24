@@ -59,7 +59,7 @@ function Home() {
             icon={employeeCardData.icon}
           />
         </NavLink>
-        <NavLink to="/on-leave-employees">
+        <NavLink to="/leaves">
           <Card
             title={onLeaveEmployeeCardData.title}
             text={onLeaveEmployeeCardData.text}

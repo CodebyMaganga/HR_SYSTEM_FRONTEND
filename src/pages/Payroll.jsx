@@ -35,7 +35,6 @@ function Payroll() {
                 <td className="whitespace-nowrap px-6 py-4">31/03/2024</td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {payment.employee_bank}
-                  
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {payment.employee_salary}
