@@ -4,11 +4,14 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
-import toast from 'react-hot-toast';
-import SearchFilter from "../components/SearchFilter"
+import toast from "react-hot-toast";
+import SearchFilter from "../components/SearchFilter";
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+
   useEffect(() => {
     fetch(`${BASE_URL}/employees`)
       .then((res) => res.json())
@@ -25,13 +28,13 @@ function Employees() {
     navigationFunction: goToAddEmployee,
     text: "Add Employee",
   };
-  
-//delete function 
+
+  //delete function
   const deleteEmployee = async (id) => {
-    if (window.confirm('Are you sure you want to delete this employee?')) {
+    if (window.confirm("Are you sure you want to delete this employee?")) {
       try {
         const res = await fetch(`${BASE_URL}/employees/${id}`, {
-          method: 'DELETE',
+          method: "DELETE",
         });
         const data = await res.json();
 
@@ -39,14 +42,30 @@ function Employees() {
           throw new Error(data.message || "Failed to delete the employee");
         }
 
-        setEmployees(employees.filter(employee => employee.id !== id));
-        toast.success('Employee deleted successfully');
+        setEmployees(employees.filter((employee) => employee.id !== id));
+        toast.success("Employee deleted successfully");
       } catch (error) {
-        console.error('Error:', error);
-        toast.error('Delete failed: ' + error.message);
+        console.error("Error:", error);
+        toast.error("Delete failed: " + error.message);
       }
     }
   };
+
+  const searchedEmployees = employees.filter(
+    (employee) =>
+      employee.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.last_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // console.log(searchedEmployees);
+
+  const handleFilterChange = (category) => {
+    setCategoryFilter(category);
+  };
+
+  const filteredData = ([] =
+    categoryFilter === "all"
+      ? searchedEmployees
+      : searchedEmployees.filter((item) => item.category === categoryFilter));
 
   return (
     <>
@@ -55,9 +74,13 @@ function Employees() {
         text={addEmployeeButtonData.text}
       />
 
-
       {/* Search component */}
-      <SearchFilter/>
+      <SearchFilter
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        categoryFilter={categoryFilter}
+        handleFilterChange={handleFilterChange}
+      />
       <div className=" @container grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
@@ -72,41 +95,45 @@ function Employees() {
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee) => (
+            {searchedEmployees.map((searchedEmployee) => (
               <tr
-                key={employee.id}
+                key={searchedEmployee.id}
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className="whitespace-nowrap px-6 py-4">
-                  {employee.profile_picture}
+                  {searchedEmployee.profile_picture}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {employee.first_name}
+                  {searchedEmployee.first_name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {employee.last_name}
+                  {searchedEmployee.last_name}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">{employee.role}</td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {employee.phone}
+                  {searchedEmployee.role}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  {searchedEmployee.phone}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <button
                     className={`rounded-md p-2 ${
-                      employee.active_status ? "bg-green-500" : "bg-red-500"
+                      searchedEmployee.active_status
+                        ? "bg-green-500"
+                        : "bg-red-500"
                     }`}
                   >
-                    {employee.active_status == 1 ? "Active" : "Inactive"}
+                    {searchedEmployee.active_status == 1
+                      ? "Active"
+                      : "Inactive"}
                   </button>
                 </td>
                 <td className="flex gap-4 py-5 px-6 text-3xl">
-                  <MdDelete 
-                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" 
-                    onClick={() => deleteEmployee(employee.id)} 
+                  <MdDelete
+                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
+                    onClick={() => deleteEmployee(searchedEmployee.id)}
                   />
-                  <CiEdit 
-                    className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" 
-                  />
+                  <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
                 </td>
               </tr>
             ))}
