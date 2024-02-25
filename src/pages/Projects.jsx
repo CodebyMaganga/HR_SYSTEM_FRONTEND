@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
 import AddButtons from "../components/AddButtons";
 import { useNavigate } from "react-router-dom";
+import FullscreenModal from "../components/FullscreenModal";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -27,6 +28,7 @@ function Projects() {
         navigationFunction={addProjectButtonData.navigationFunction}
         text={addProjectButtonData.text}
       />
+
       <div className="grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
@@ -47,7 +49,8 @@ function Projects() {
                   {project.project_status}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  project project_employees
+                  {" "}
+                  <FullscreenModal />
                 </td>
               </tr>
             ))}
