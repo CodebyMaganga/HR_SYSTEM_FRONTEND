@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
 function BottomCards() {
   // Fetch project data
@@ -13,16 +13,22 @@ function BottomCards() {
         // Count projects by status
         const statusCounts = {};
         data.forEach((project) => {
-          statusCounts[project.project_status] = statusCounts[project.project_status] ? statusCounts[project.project_status] + 1 : 1;
+          statusCounts[project.project_status] = statusCounts[
+            project.project_status
+          ]
+            ? statusCounts[project.project_status] + 1
+            : 1;
         });
 
         // Format data for pie chart
-        const formattedData = Object.entries(statusCounts).map(([status, count], index) => ({
-          name: status,
-          value: count,
-          color: getStatusColor(status),
-          percent: ((count / data.length) * 100).toFixed(2),
-        }));
+        const formattedData = Object.entries(statusCounts).map(
+          ([status, count], index) => ({
+            name: status,
+            value: count,
+            color: getStatusColor(status),
+            percent: ((count / data.length) * 100).toFixed(2),
+          })
+        );
         setProjectData(formattedData);
       });
   }, []);
@@ -30,14 +36,14 @@ function BottomCards() {
   // Define colors for different project statuses
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Active':
-        return '#FFBB28';
-      case 'In Progress':
-        return '#FF8042';
-      case 'Completed':
-        return '#00C49F';
+      case "Active":
+        return "#FFBB28";
+      case "In Progress":
+        return "#FF8042";
+      case "Completed":
+        return "#00C49F";
       default:
-        return '#FF0000';
+        return "#FF0000";
     }
   };
 
@@ -74,7 +80,7 @@ function BottomCards() {
                   </div>
                 </div>
                 <div>
-                  <button className="px-3 text-sm hover:bg-blue-500 bg-violet-400 text-white font-bold py-2 rounded-full">
+                  <button className="px-3 text-sm hover:bg-[#F9DDEE]  bg-[#CBF2FF] text-black font-bold py-2 rounded-full">
                     {jobApplicant.role_applied}
                   </button>
                 </div>
@@ -114,7 +120,15 @@ function BottomCards() {
         <div className="flex justify-center">
           {projectData.map((entry, index) => (
             <div key={`legend-${index}`} className="flex items-center mx-4">
-              <div className="mr-2" style={{ backgroundColor: entry.color, width: '16px', height: '16px', borderRadius: '50%' }}></div>
+              <div
+                className="mr-2"
+                style={{
+                  backgroundColor: entry.color,
+                  width: "16px",
+                  height: "16px",
+                  borderRadius: "50%",
+                }}
+              ></div>
               <div>{`${entry.name} (${entry.percent}%)`}</div>
             </div>
           ))}
