@@ -11,10 +11,6 @@ function Login() {
   }
   const navigate = useNavigate();
 
-  // const moveToDashboard = () => {
-  //   navigate("/home");
-  // };
-
   const formik = useFormik({
     validationSchema: Yup.object().shape({
       email: Yup.string().required("Email is required"),

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
+import AddButtons from "../components/AddButtons";
+import { useNavigate } from "react-router-dom";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -8,10 +10,25 @@ function Projects() {
       .then((res) => res.json())
       .then((data) => setProjects(data));
   }, []);
+
+  const navigate = useNavigate();
+
+  const goToAddProject = () => {
+    navigate("/add-project");
+  };
+
+  const addProjectButtonData = {
+    navigationFunction: goToAddProject,
+    text: "Add Project",
+  };
   return (
     <>
+      <AddButtons
+        navigationFunction={addProjectButtonData.navigationFunction}
+        text={addProjectButtonData.text}
+      />
       <div className="grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg">
+        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-6 py-4">Title</th>

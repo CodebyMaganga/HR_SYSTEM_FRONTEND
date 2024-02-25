@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
+import AddButtons from "../components/AddButtons";
 
 function Leaves() {
   const [leaves, setLeaves] = useState([]);
@@ -10,10 +12,26 @@ function Leaves() {
       .then((res) => res.json())
       .then((data) => setLeaves(data));
   }, []);
+
+  const navigate = useNavigate();
+
+  const goToAddEmployeeOnLeave = () => {
+    navigate("/add-employee-on-leave");
+  };
+
+  const addEmployeeOnLeaveButtonData = {
+    navigationFunction: goToAddEmployeeOnLeave,
+    text: "Add Employee On Leave",
+  };
+
   return (
     <>
+      <AddButtons
+        navigationFunction={addEmployeeOnLeaveButtonData.navigationFunction}
+        text={addEmployeeOnLeaveButtonData.text}
+      />
       <div className="grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg">
+        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-6 py-4">Leave Day</th>
