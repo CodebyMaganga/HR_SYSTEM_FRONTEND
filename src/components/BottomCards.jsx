@@ -14,7 +14,7 @@ function BottomCards() {
 
   // Fetch applicants data
   const [jobApplicants, setJobApplicants] = useState([]);
-  
+
   useEffect(() => {
     fetch(`${BASE_URL}/job_applicants`)
       .then((res) => res.json())
@@ -25,7 +25,7 @@ function BottomCards() {
   return (
     <div className="flex justify-between p-4 w-full">
       {/* Recent Job Applicants */}
-      <div className="h-80 w-1/2 rounded-[15px] overflow-auto h-40 shadow-lg bg-white p-4 m-2">
+      <div className="w-1/2 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5">
         <h2 className="font-bold text-xl mb-4">Recent Job Applicants</h2>
         {jobApplicants.map((jobApplicant) => (
           <div key={jobApplicant.id} className="border-b border-gray-200 py-1">
@@ -56,34 +56,15 @@ function BottomCards() {
         ))}
       </div>
 
-      {/* Upcoming Interviews Placeholder */}
-      <div className="h-80 w-1/2 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
+      {/* Upcoming Interviews */}
+      <div className="w-1/2 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5">
         <h2 className="font-bold text-xl mb-20">Upcoming Interviews</h2>
         {/* Placeholder content */}
       </div>
 
-      {/* Projects Overview */}
-      <div className="h-80 w-1/2 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
-        <h2 className="font-bold text-xl mb-4">Projects Overview</h2>
-        <div className='w-full h-full flex justify-center items-center'>
-        <ResponsiveContainer width="80%" height="80%">
-          <PieChart>
-            <Pie
-              data={projectData}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {projectData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-        </div>
+      {/* Projects Overview*/}
+      <div className="w-1/2 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5">
+        <h2 className="font-bold text-xl mb-20">Projects Overview</h2>
       </div>
     </div>
   );

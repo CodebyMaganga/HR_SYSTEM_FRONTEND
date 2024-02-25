@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
+import AddButtons from "../components/AddButtons";
 
 function JobApplicants() {
   const [jobapplicants, setJobapplicants] = useState([]);
@@ -10,10 +12,25 @@ function JobApplicants() {
       .then((res) => res.json())
       .then((data) => setJobapplicants(data));
   }, []);
+
+  const navigate = useNavigate();
+
+  const goToAddJobApplicants = () => {
+    navigate("/add-job-applicant");
+  };
+
+  const addJobApplicantButtonData = {
+    navigationFunction: goToAddJobApplicants,
+    text: "Add Job Applicant",
+  };
   return (
     <>
+      <AddButtons
+        navigationFunction={addJobApplicantButtonData.navigationFunction}
+        text={addJobApplicantButtonData.text}
+      />
       <div className="grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg">
+        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-4 py-4">Profile</th>
