@@ -5,6 +5,7 @@ import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
 import toast from 'react-hot-toast';
+import SearchFilter from "../components/SearchFilter"
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -53,6 +54,10 @@ function Employees() {
         navigationFunction={addEmployeeButtonData.navigationFunction}
         text={addEmployeeButtonData.text}
       />
+
+
+      {/* Search component */}
+      <SearchFilter/>
       <div className=" @container grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">

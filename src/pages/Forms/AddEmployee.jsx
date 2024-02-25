@@ -21,6 +21,7 @@ const AddEmployee = () => {
   // Formik useFormik hook
   const formik = useFormik({
     initialValues: {
+      profile_picture: "",
       first_name: "",
       last_name: "",
       DOB: "",
@@ -32,6 +33,9 @@ const AddEmployee = () => {
       role: "",
       nationality: "",
       emergency_contact: "",
+      active_status: "",
+      marital_status: "",
+      date_joined: "",
       bankdetails: {
         employee_salary: "",
         employee_account: "",
@@ -54,6 +58,7 @@ const AddEmployee = () => {
       },
     },
     validationSchema: Yup.object({
+      profile_picture: Yup.string().required("Profile picture is required"),
       first_name: Yup.string().required("First name is required"),
       last_name: Yup.string().required("Last name is required"),
       DOB: Yup.date().required("D.O.B is required"),
@@ -65,6 +70,9 @@ const AddEmployee = () => {
       role: Yup.string().required("Role is required"),
       nationality: Yup.string().required("Nationality is required"),
       emergency_contact: Yup.string().required("Emergency contact is required"),
+      active_status: Yup.string().required("Active status is required"),
+      marital_status: Yup.string().required("Marital status is required"),
+      date_joined: Yup.date().required("Date joined is required"),
       bankdetails: Yup.object({
         employee_salary: Yup.string().required("Employee salary is required"),
         employee_account: Yup.string().required("Employee account is required"),
@@ -125,6 +133,14 @@ const AddEmployee = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               type="text"
+              name="profile_picture"
+              value={formik.values.profile_picture}
+              placeholder="Profile Picture"
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              type="text"
               name="first_name"
               value={formik.values.first_name}
               placeholder="First Name"
@@ -140,7 +156,7 @@ const AddEmployee = () => {
             />
 
             <InputField
-              type="date"
+              type="text"
               name="DOB"
               value={formik.values.DOB}
               placeholder="D.O.B"
@@ -208,6 +224,30 @@ const AddEmployee = () => {
               name="emergency_contact"
               value={formik.values.emergency_contact}
               placeholder="Emergency Contact"
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              type="checkbox"
+              name="active_status"
+              value={formik.values.active_status}
+              placeholder="Active status"
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              type="text"
+              name="marital_status"
+              value={formik.values.marital_status}
+              placeholder="Marital status"
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              type="text"
+              name="date_joined"
+              value={formik.values.date_joined}
+              placeholder="Date joined"
               onChange={formik.handleChange}
             />
           </div>
