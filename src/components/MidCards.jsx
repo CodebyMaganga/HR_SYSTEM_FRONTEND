@@ -7,13 +7,22 @@ function EmployeeDistributionChart() {
 
   useEffect(() => {
     fetch(`${BASE_URL}/department_employees1`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
+        console.log('Fetched data:', data); // Debugging log
+
         const employeeCountByDepartment = data.reduce((acc, item) => {
           const department = item.department_name;
           acc[department] = (acc[department] || 0) + 1;
           return acc;
         }, {});
+
+        console.log('Count by department:', employeeCountByDepartment); // Debugging log
 
         // Calculate total number of employees
         const totalEmployees = Object.values(employeeCountByDepartment).reduce((sum, count) => sum + count, 0);
@@ -21,8 +30,10 @@ function EmployeeDistributionChart() {
         // Convert counts to percentages
         const chartData = Object.keys(employeeCountByDepartment).map(key => ({
           department: key,
-          employees: ((employeeCountByDepartment[key] / totalEmployees) * 100).toFixed(2)  // Converted to percentage and fixed to 2 decimal places
+          employees: totalEmployees > 0 ? ((employeeCountByDepartment[key] / totalEmployees) * 100).toFixed(2) : 0  // Converted to percentage and fixed to 2 decimal places
         }));
+
+        console.log('Chart Data:', chartData); // Debugging log
 
         setDepartmentEmployees(chartData);
       })
@@ -30,6 +41,7 @@ function EmployeeDistributionChart() {
         console.error('Error fetching data:', error);
       });
   }, []);
+
 
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -54,6 +66,7 @@ function EmployeeDistributionChart() {
 }
 
 function MidCards() {
+  
   return (
     <div className="flex p-4 w-full">
       {/* Employee Distribution by Department Card */}

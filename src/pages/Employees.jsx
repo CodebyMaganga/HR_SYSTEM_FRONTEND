@@ -24,9 +24,8 @@ function Employees() {
     navigationFunction: goToAddEmployee,
     text: "Add Employee",
   };
-
-   // Function to handle the deletion of an employee
-
+  
+//delete function 
   const deleteEmployee = async (id) => {
     if (window.confirm('Are you sure you want to delete this employee?')) {
       try {
