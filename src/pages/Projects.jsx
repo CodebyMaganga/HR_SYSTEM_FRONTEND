@@ -6,6 +6,9 @@ import FullscreenModal from "../components/FullscreenModal";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
   useEffect(() => {
     fetch(`${BASE_URL}/projects`)
       .then((res) => res.json())
@@ -22,13 +25,22 @@ function Projects() {
     navigationFunction: goToAddProject,
     text: "Add Project",
   };
+
+  const openModal = (content) => {
+    setIsModalOpen(true);
+    setModalContent(content);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <AddButtons
         navigationFunction={addProjectButtonData.navigationFunction}
         text={addProjectButtonData.text}
       />
-
       <div className="grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
@@ -49,14 +61,31 @@ function Projects() {
                   {project.project_status}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {" "}
-                  <FullscreenModal />
+                  <p onClick={() => openModal(projects)}>
+                    <button
+                      style={{
+                        backgroundColor: "lightblue",
+                        padding: "6px",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      View Full Details
+                    </button>
+                  </p>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <section>
+        <FullscreenModal
+          isModalOpen={isModalOpen}
+          modalContent={modalContent}
+          onClose={closeModal}
+        />
+      </section>
+      ;
     </>
   );
 }
