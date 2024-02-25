@@ -98,11 +98,11 @@ const AddEmployee = () => {
           body: JSON.stringify(values),
         });
         const data = await res.json();
-    
+
         if (!res.ok) {
           throw new Error("Failed to add employee");
         }
-    
+
         if (data.statusCode === 200) {
           toast.success(data.message);
           formikBag.resetForm();
