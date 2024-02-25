@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
+import toast from 'react-hot-toast';
 
 function JobApplicants() {
   const [jobapplicants, setJobapplicants] = useState([]);
@@ -23,6 +24,29 @@ function JobApplicants() {
     navigationFunction: goToAddJobApplicants,
     text: "Add Job Applicant",
   };
+
+  // delete function (delete a job applicant)
+  const deleteApplicant = async (id) => {
+    if (window.confirm('Are you sure you want to delete this applicant?')) {
+      try {
+        const res = await fetch(`${BASE_URL}/job_applicants/${id}`, {
+          method: 'DELETE',
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || "Failed to delete this applicant");
+        }
+
+        setJobapplicants(jobapplicants.filter(applicant => applicant.id !== id));
+        toast.success('Job Applicant deleted successfully');
+      } catch (error) {
+        console.error('Error:', error);
+        toast.error('Delete failed: ' + error.message);
+      }
+    }
+  };
+
   return (
     <>
       <AddButtons
@@ -30,8 +54,8 @@ function JobApplicants() {
         text={addJobApplicantButtonData.text}
       />
       <div className="grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b  font-medium text-black bg-gray-300 ">
+        <table className="border-b min-w-full text-center text-md bg-white -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
+          <thead className="border-b font-medium text-black bg-gray-300">
             <tr>
               <th className="px-4 py-4">Profile</th>
               <th className="px-4 py-4">First Name</th>
@@ -49,7 +73,7 @@ function JobApplicants() {
             {jobapplicants.map((jobapplicant) => (
               <tr
                 key={jobapplicant.id}
-                className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className="whitespace-nowrap px-4 py-4">
                   {jobapplicant.photo}
@@ -82,9 +106,14 @@ function JobApplicants() {
                   </button>
                 </td>
                 <td className="px-8">jobapplicant_interview</td>
-                <td className=" flex gap-4 py-5 px-6 text-3xl">
-                  <MdDelete className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" />
-                  <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
+                <td className="flex gap-4 py-5 px-6 text-3xl">
+                  <MdDelete 
+                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" 
+                    onClick={() => deleteApplicant(jobapplicant.id)} 
+                  />
+                  <CiEdit 
+                    className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" 
+                  />
                 </td>
               </tr>
             ))}

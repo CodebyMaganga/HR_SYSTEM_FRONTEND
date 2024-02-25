@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
+import toast from 'react-hot-toast';
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -22,6 +23,28 @@ function Employees() {
   const addEmployeeButtonData = {
     navigationFunction: goToAddEmployee,
     text: "Add Employee",
+  };
+  
+//delete function 
+  const deleteEmployee = async (id) => {
+    if (window.confirm('Are you sure you want to delete this employee?')) {
+      try {
+        const res = await fetch(`${BASE_URL}/employees/${id}`, {
+          method: 'DELETE',
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || "Failed to delete the employee");
+        }
+
+        setEmployees(employees.filter(employee => employee.id !== id));
+        toast.success('Employee deleted successfully');
+      } catch (error) {
+        console.error('Error:', error);
+        toast.error('Delete failed: ' + error.message);
+      }
+    }
   };
 
   return (
@@ -47,7 +70,7 @@ function Employees() {
             {employees.map((employee) => (
               <tr
                 key={employee.id}
-                className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className="whitespace-nowrap px-6 py-4">
                   {employee.profile_picture}
@@ -71,9 +94,14 @@ function Employees() {
                     {employee.active_status == 1 ? "Active" : "Inactive"}
                   </button>
                 </td>
-                <td className=" flex gap-4 py-5 px-6 text-3xl">
-                  <MdDelete className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" />
-                  <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
+                <td className="flex gap-4 py-5 px-6 text-3xl">
+                  <MdDelete 
+                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" 
+                    onClick={() => deleteEmployee(employee.id)} 
+                  />
+                  <CiEdit 
+                    className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" 
+                  />
                 </td>
               </tr>
             ))}
