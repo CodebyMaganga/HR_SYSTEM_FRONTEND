@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { BASE_URL } from "../components/utils";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-function EmployeeDistributionChart() {
-  const [departmentEmployees, setDepartmentEmployees] = useState([]);
+function EmployeeSalaryChart() {
+  const [employeeSalaries, setEmployeeSalaries] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/department_employees1`)
+    fetch(`${BASE_URL}/bank_details`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -16,37 +17,38 @@ function EmployeeDistributionChart() {
       .then(data => {
         console.log('Fetched data:', data); // Debugging log
 
-        const employeeCountByDepartment = data.reduce((acc, item) => {
-          const department = item.department_name;
-          acc[department] = (acc[department] || 0) + 1;
-          return acc;
-        }, {});
+        // Check if data is an array and not null or undefined
+        if (Array.isArray(data)) {
+          // Convert data to format suitable for BarChart
+          const chartData = data.map(item => {
+            // Check if item.employee is not null or undefined
+            if (item.employee) {
+              return {
+                name: `${item.employee.first_name} ${item.employee.last_name}`,
+                grossSalary: item.employee_salary
+              };
+            } else {
+              console.warn('Employee data is null or undefined:', item); // Log warning for null or undefined employee data
+              return null;
+            }
+          }).filter(Boolean); // Filter out null values
+          
+          console.log('Chart Data:', chartData); // Debugging log
 
-        console.log('Count by department:', employeeCountByDepartment); // Debugging log
-
-        // Calculate total number of employees
-        const totalEmployees = Object.values(employeeCountByDepartment).reduce((sum, count) => sum + count, 0);
-
-        // Convert counts to percentages
-        const chartData = Object.keys(employeeCountByDepartment).map(key => ({
-          department: key,
-          employees: totalEmployees > 0 ? ((employeeCountByDepartment[key] / totalEmployees) * 100).toFixed(2) : 0  // Converted to percentage and fixed to 2 decimal places
-        }));
-
-        console.log('Chart Data:', chartData); // Debugging log
-
-        setDepartmentEmployees(chartData);
+          setEmployeeSalaries(chartData);
+        } else {
+          console.error('Data is not an array:', data); // Log error if data is not an array
+        }
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }, []);
 
-
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart
-        data={departmentEmployees}
+        data={employeeSalaries}
         margin={{
           top: 20,
           right: 30,
@@ -55,24 +57,23 @@ function EmployeeDistributionChart() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="department" />
-        <YAxis label={{ value: '% No. of Employees', angle: -90, position: 'insideLeft' }}/>
+        <XAxis dataKey="name" />
+        <YAxis label={{ value: 'Gross Salary', angle: -90, position: 'insideLeft' }}/>
         <Tooltip />
         <Legend />
-        <Bar dataKey="employees" fill="#87D8FB" />
+        <Bar dataKey="grossSalary" fill="#82ca9d" />
       </BarChart>
     </ResponsiveContainer>
   );
 }
 
 function MidCards() {
-  
   return (
     <div className="flex p-4 w-full">
-      {/* Employee Distribution by Department Card */}
+      {/* Employee Salary Chart Card */}
       <div className="w-1/2 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
-        <h2 className="font-bold text-xl mb-2">Employee Distribution by Department</h2>
-        <EmployeeDistributionChart />
+        <h2 className="font-bold text-xl mb-2">Employee Gross Salary</h2>
+        <EmployeeSalaryChart />
       </div>
 
       {/* News and Events Card */}
