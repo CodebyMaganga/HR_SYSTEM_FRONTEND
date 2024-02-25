@@ -44,7 +44,7 @@ function EmployeeDistributionChart() {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="department" />
-        <YAxis label={{ value: 'Percentage (%)', angle: -90, position: 'insideLeft' }}/>
+        <YAxis label={{ value: '% No. of Employees', angle: -90, position: 'insideLeft' }}/>
         <Tooltip />
         <Legend />
         <Bar dataKey="employees" fill="#87D8FB" />
