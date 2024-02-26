@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
 import AddButtons from "../components/AddButtons";
 import { useNavigate } from "react-router-dom";
-import FullscreenModal from "../components/FullscreenModal";
+import ProjectDetailsModal from "../components/ProjectDetailsModal";
 import SearchFilter from "../components/SearchFilter";
 
 function Projects() {
@@ -105,7 +105,7 @@ function Projects() {
         </table>
       </div>
       <section>
-        <FullscreenModal
+        <ProjectDetailsModal
           isModalOpen={isModalOpen}
           modalContent={modalContent}
           onClose={closeModal}

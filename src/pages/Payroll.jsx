@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
+import SearchFilter from "../components/SearchFilter";
 
 const personalRelief = 2400;
 const contributionBenefit = 1080;
@@ -56,6 +57,9 @@ function fourthTier(taxableIncome) {
 
 function Payroll() {
   const [payments, setPayments] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+
   useEffect(() => {
     fetch(`${BASE_URL}/bank_details`)
       .then((res) => res.json())
@@ -102,8 +106,35 @@ function Payroll() {
 
     return totalTax;
   };
+
+  const searchedPayments = payments.filter(
+    (payment) =>
+      payment.employee.first_name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      payment.employee.last_name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+  );
+  // console.log(searchedEmployees);
+
+  const handleFilterChange = (category) => {
+    setCategoryFilter(category);
+  };
+
+  const filteredData = ([] =
+    categoryFilter === "all"
+      ? searchedPayments
+      : searchedPayments.filter((item) => item.category === categoryFilter));
+
   return (
     <>
+      <SearchFilter
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        categoryFilter={categoryFilter}
+        handleFilterChange={handleFilterChange}
+      />
       <div className="grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
@@ -117,25 +148,26 @@ function Payroll() {
             </tr>
           </thead>
           <tbody>
-            {payments.map((payment) => (
+            {searchedPayments.map((searchedPayment) => (
               <tr
-                key={payment.id}
+                key={searchedPayment.id}
                 className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className="whitespace-nowrap px-6 py-4">
-                  {payment.employee.first_name} {payment.employee.last_name}
+                  {searchedPayment.employee.first_name}{" "}
+                  {searchedPayment.employee.last_name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {payment.employee_bank}
+                  {searchedPayment.employee_bank}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {payment.employee_salary}
+                  {searchedPayment.employee_salary}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {CountDeductions(payment.employee_salary)}
+                  {CountDeductions(searchedPayment.employee_salary)}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {handleDeductions(payment.employee_salary)}
+                  {handleDeductions(searchedPayment.employee_salary)}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">31/03/2024</td>
               </tr>

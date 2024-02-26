@@ -5,10 +5,13 @@ import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
 import toast from "react-hot-toast";
+import EmployeeDetailsModal from "../components/EmployeeDetailsModal";
 import SearchFilter from "../components/SearchFilter";
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
@@ -51,6 +54,15 @@ function Employees() {
     }
   };
 
+  const openModal = (content) => {
+    setIsModalOpen(true);
+    setModalContent(content);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const searchedEmployees = employees.filter(
     (employee) =>
       employee.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -73,7 +85,6 @@ function Employees() {
         navigationFunction={addEmployeeButtonData.navigationFunction}
         text={addEmployeeButtonData.text}
       />
-
       {/* Search component */}
       <SearchFilter
         searchTerm={searchTerm}
@@ -92,6 +103,7 @@ function Employees() {
               <th className="px-6 py-4">Phone</th>
               <th className="px-6 py-4">Status</th>
               <th className="px-6 py-4">Action</th>
+              <th className="px-6 py-4">...</th>
             </tr>
           </thead>
           <tbody>
@@ -135,11 +147,32 @@ function Employees() {
                   />
                   <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
                 </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  <p onClick={() => openModal(searchedEmployee)}>
+                    <button
+                      style={{
+                        backgroundColor: "lightblue",
+                        padding: "6px",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      View More Details
+                    </button>
+                  </p>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <section>
+        <EmployeeDetailsModal
+          isModalOpen={isModalOpen}
+          modalContent={modalContent}
+          onClose={closeModal}
+        />
+      </section>
+      ;
     </>
   );
 }
