@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
-  const handleChange = (e) => {
-    onChange(e.target.value);
-  };
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { toast } from "react-hot-toast";
+import { BASE_URL } from "../../components/utils";
 
+const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
   return (
     <input
       type={type}
@@ -17,50 +17,87 @@ const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
 };
 
 function AddLeave() {
-  const [formData, setFormData] = useState({});
+  const formik = useFormik({
+    initialValues: {
+      leave_from: "",
+      leave_to: "",
+      leave_type: "",
+      leave_letter: "",
+      employees_on_leave: "",
+    },
+    validationSchema: Yup.object({
+      leave_from: Yup.string().required("the day of leave is required"),
+      leave_to: Yup.string().required("last day of leave is required"),
+      leave_type: Yup.string().required("Type of leave  is required"),
+      leave_letter: Yup.string().required("leave letter is required"),
+    }),
+    onSubmit: async (values, formikBag) => {
+      try {
+        const res = await fetch(`${BASE_URL}/leaves`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const data = await res.json();
 
-  const leaveFields = [
-    { name: "leaveFrom", placeholder: "Leave From" },
-    { name: "leaveTo", placeholder: "Leave to" },
-    { name: "leaveType", placeholder: "Leave Type" },
-    { name: "leaveLetter", placeholder: "Leave Letter" },
-    { name: "employeesonLeave", placeholder: "Employees on Leave" },
-  ];
+        if (!res.ok) {
+          throw new Error("Failed to add Leave");
+        }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
-  };
-
-  const handleChange = (fieldName, fieldValue) => {
-    setFormData({
-      ...formData,
-      [fieldName]: fieldValue,
-    });
-  };
-
+        if (data.statusCode === 200) {
+          toast.success(data.message);
+          formikBag.resetForm();
+        } else {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        console.log("Unable to add leaves", error.message);
+        toast.error("Failed to add leaves " + error.message);
+      }
+    },
+  });
   return (
-    <div className="container bg-gray-300 mx-auto p-4">
-      <form className="space-y-8 " onSubmit={handleSubmit}>
-        {/* Job Application Details Section */}
+    <div className="container bg-white mx-auto p-4">
+      <form className="space-y-8" onSubmit={formik.handleSubmit}>
+        {/*   Job applicant Details Section */}
         <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Job Leave Details</h2>
-          <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-            {leaveFields.map((field) => (
-              <InputField
-                key={field.name}
-                name={field.name}
-                value={formData[field.name] || ""}
-                placeholder={field.placeholder}
-                onChange={(e) => handleChange(field.name, e.target.value)}
-              />
-            ))}
+          <h2 className="font-bold text-xl mb-4">Leave Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputField
+              type="date"
+              name="first_name"
+              value={formik.values.leave_from}
+              placeholder="Enter Day of leave"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="date"
+              name="last_name"
+              value={formik.values.leave_to}
+              placeholder="Enter last day of leave"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="photo"
+              value={formik.values.leave_type}
+              placeholder="Enter the type of leave"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="email"
+              value={formik.values.leave_letter}
+              placeholder="Enter the letter of leave"
+              onChange={formik.handleChange}
+            />
           </div>
         </div>
         <button
           type="submit"
-          className="bg-gray-800 hover:bg-blue-100 text-white font-bold py-2 px-4 rounded"
+          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
         >
           Submit
         </button>

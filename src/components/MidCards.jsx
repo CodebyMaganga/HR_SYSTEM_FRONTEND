@@ -116,7 +116,7 @@ function MidCards() {
             <div className="flex displaycards">
               {/* Applicant Details and Button */}
               <div className="flex flex-row justify-between w-full">
-                <div className=" w-full rounded-[15px] h-38 bg-[#CBF2FF] overflow-auto displaycards hover:bg-[#] shadow-lg p-4 m-1 font-medium text-gray-700">
+                <div className=" w-full rounded-[15px] h-38 bg-[#CBF2FF] overflow-auto displaycards hover:bg-[#F9DDEE] shadow-lg p-4 m-1 font-medium text-gray-700">
                   <NavLink to={`/example-params/${department.id}`}>
                     <div className="displaycards">
                       {department.department_name}

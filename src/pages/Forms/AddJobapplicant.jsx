@@ -62,17 +62,17 @@ function AddJobapplicant() {
           toast.error(data.message);
         }
       } catch (error) {
-        console.log("Unable to add interviews", error.message);
-        toast.error("Failed to add interviews: " + error.message);
+        console.log("Unable to add job applicants", error.message);
+        toast.error("Failed to add job applicants " + error.message);
       }
     },
   });
   return (
     <div className="container bg-white mx-auto p-4">
       <form className="space-y-8" onSubmit={formik.handleSubmit}>
-        {/*   Department Details Section */}
+        {/*   Job applicant Details Section */}
         <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Interview Details</h2>
+          <h2 className="font-bold text-xl mb-4">Job Applicant Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               type="text"
@@ -91,49 +91,49 @@ function AddJobapplicant() {
             <InputField
               type="text"
               name="photo"
-              value={formik.values.last_name}
+              value={formik.values.photo}
               placeholder="Enter Profile photo"
               onChange={formik.handleChange}
             />
             <InputField
               type="text"
               name="email"
-              value={formik.values.last_name}
+              value={formik.values.email}
               placeholder="Enter the email"
               onChange={formik.handleChange}
             />
             <InputField
               type="text"
               name="address"
-              value={formik.values.last_name}
+              value={formik.values.address}
               placeholder="Enter the address"
               onChange={formik.handleChange}
             />
             <InputField
               type="text"
               name="experience"
-              value={formik.values.last_name}
+              value={formik.values.experience}
               placeholder="Enter Job applicant experience"
               onChange={formik.handleChange}
             />{" "}
             <InputField
               type="text"
               name="role_applied"
-              value={formik.values.last_name}
+              value={formik.values.role_applied}
               placeholder="The role applied"
               onChange={formik.handleChange}
             />{" "}
             <InputField
               type="text"
               name="status"
-              value={formik.values.last_name}
+              value={formik.values.status}
               placeholder="The job applicant status"
               onChange={formik.handleChange}
             />{" "}
             <InputField
               type="text"
               name="interview"
-              value={formik.values.last_name}
+              value={formik.values.interview}
               placeholder="Enter day of interview"
               onChange={formik.handleChange}
             />
@@ -141,7 +141,7 @@ function AddJobapplicant() {
         </div>
         <button
           type="submit"
-          className="bg-gray-800 hover:bg-blue-100 text-white font-bold py-2 px-4 rounded"
+          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
         >
           Submit
         </button>
