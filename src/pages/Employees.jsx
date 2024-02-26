@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -24,13 +24,13 @@ function Employees() {
     navigationFunction: goToAddEmployee,
     text: "Add Employee",
   };
-  
-//delete function 
+
+  //delete function
   const deleteEmployee = async (id) => {
-    if (window.confirm('Are you sure you want to delete this employee?')) {
+    if (window.confirm("Are you sure you want to delete this employee?")) {
       try {
         const res = await fetch(`${BASE_URL}/employees/${id}`, {
-          method: 'DELETE',
+          method: "DELETE",
         });
         const data = await res.json();
 
@@ -38,11 +38,11 @@ function Employees() {
           throw new Error(data.message || "Failed to delete the employee");
         }
 
-        setEmployees(employees.filter(employee => employee.id !== id));
-        toast.success('Employee deleted successfully');
+        setEmployees(employees.filter((employee) => employee.id !== id));
+        toast.success("Employee deleted successfully");
       } catch (error) {
-        console.error('Error:', error);
-        toast.error('Delete failed: ' + error.message);
+        console.error("Error:", error);
+        toast.error("Delete failed: " + error.message);
       }
     }
   };
@@ -53,7 +53,7 @@ function Employees() {
         navigationFunction={addEmployeeButtonData.navigationFunction}
         text={addEmployeeButtonData.text}
       />
-      <div className=" @container grid items-center my-2 mx-10 ">
+      <div className="  grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
@@ -95,13 +95,11 @@ function Employees() {
                   </button>
                 </td>
                 <td className="flex gap-4 py-5 px-6 text-3xl">
-                  <MdDelete 
-                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" 
-                    onClick={() => deleteEmployee(employee.id)} 
+                  <MdDelete
+                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
+                    onClick={() => deleteEmployee(employee.id)}
                   />
-                  <CiEdit 
-                    className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" 
-                  />
+                  <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
                 </td>
               </tr>
             ))}
