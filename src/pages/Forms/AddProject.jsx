@@ -21,14 +21,14 @@ function AddProject() {
     initialValues: {
       title: "",
       project_status: "",
-      project_employees: "",
+      // project_employees: "",
     },
     validationSchema: Yup.object({
       title: Yup.string().required("the project title is required"),
       project_status: Yup.string().required("the project status is required"),
-      project_employees: Yup.string().required(
-        "Project employees are required"
-      ),
+      // project_employees: Yup.string().required(
+      //   "Project employees are required"
+      // ),
     }),
     onSubmit: async (values, formikBag) => {
       try {
@@ -66,25 +66,25 @@ function AddProject() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               type="text"
-              name="first_name"
+              name="title"
               value={formik.values.title}
               placeholder="Enter Project Title"
               onChange={formik.handleChange}
             />
             <InputField
               type="text"
-              name="last_name"
+              name="project_status"
               value={formik.values.project_status}
               placeholder="Enter the status of project"
               onChange={formik.handleChange}
             />
-            <InputField
+            {/* <InputField
               type="text"
-              name="photo"
+              name="project_employees"
               value={formik.values.project_employees}
               placeholder="Employees assigned to project"
               onChange={formik.handleChange}
-            />
+            /> */}
           </div>
         </div>
         <button

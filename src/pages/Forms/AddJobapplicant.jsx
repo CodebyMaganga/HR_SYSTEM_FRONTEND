@@ -27,7 +27,7 @@ function AddJobapplicant() {
       experience: "",
       role_applied: "",
       status: "",
-      interview: "",
+     
     },
     validationSchema: Yup.object({
       first_name: Yup.string().required("first name is required"),
@@ -38,7 +38,7 @@ function AddJobapplicant() {
       experience: Yup.string().required("experience is required"),
       role_applied: Yup.string().required("role_applied is required"),
       status: Yup.string().required("status is required"),
-      interview: Yup.string().required("interview is required"),
+      
     }),
     onSubmit: async (values, formikBag) => {
       try {
@@ -130,13 +130,7 @@ function AddJobapplicant() {
               placeholder="The job applicant status"
               onChange={formik.handleChange}
             />{" "}
-            <InputField
-              type="text"
-              name="interview"
-              value={formik.values.interview}
-              placeholder="Enter day of interview"
-              onChange={formik.handleChange}
-            />
+            
           </div>
         </div>
         <button

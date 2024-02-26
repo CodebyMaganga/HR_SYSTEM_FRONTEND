@@ -66,29 +66,29 @@ function AddLeave() {
           <h2 className="font-bold text-xl mb-4">Leave Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
-              type="date"
-              name="first_name"
+              type="text"
+              name="leave_from"
               value={formik.values.leave_from}
               placeholder="Enter Day of leave"
               onChange={formik.handleChange}
             />
             <InputField
-              type="date"
-              name="last_name"
+              type="text"
+              name="leave_to"
               value={formik.values.leave_to}
               placeholder="Enter last day of leave"
               onChange={formik.handleChange}
             />
             <InputField
               type="text"
-              name="photo"
+              name="leave_type"
               value={formik.values.leave_type}
               placeholder="Enter the type of leave"
               onChange={formik.handleChange}
             />
             <InputField
               type="text"
-              name="email"
+              name="leave_letter"
               value={formik.values.leave_letter}
               placeholder="Enter the letter of leave"
               onChange={formik.handleChange}

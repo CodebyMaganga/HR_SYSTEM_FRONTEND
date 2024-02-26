@@ -56,6 +56,14 @@ function BottomCards() {
       .then((data) => setJobApplicants(data));
   }, []);
 
+  const [interviews, setInterviews] = useState([])
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/interviews`)
+      .then((res) => res.json())
+      .then((data) => setInterviews(data));
+  }, []);
+
   return (
     <div className="flex justify-between p-4 w-full">
       {/* Recent Job Applicants */}
@@ -92,8 +100,33 @@ function BottomCards() {
 
       {/* Upcoming Interviews */}
       <div className="w-1/2 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5">
-        <h2 className="font-bold text-xl mb-20">Upcoming Interviews</h2>
+        <h2 className="font-bold text-xl mb-4">Upcoming Interviews</h2>
         {/* Placeholder content */}
+        {interviews.map((interview) => (
+          <div key={interview.id} className="border-b border-gray-200 py-1">
+            <div className="flex items-center justify-between">
+              {/* Profile Image */}
+              <img
+                src="https://tse4.mm.bing.net/th?id=OIP.mQyY3CKatiLW45eKujJS9QHaHa&pid=Api&P=0&h=220"
+                alt={`${interview.first_name}'s profile`}
+                className="h-10 w-10 rounded-full"
+              />
+              <div className="flex flex-row justify-between w-full">
+                <div>
+                  <div className="font-medium text-gray-700">
+                    {interview.jobapplicant.first_name} {interview.jobapplicant.last_name}
+                  </div>
+                  
+                </div>
+                <div>
+                  <button className="px-3 text-sm hover:bg-[#F9DDEE]  bg-[#CBF2FF] text-black font-bold py-2 rounded-full">
+                    {interview.time}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Projects Overview*/}

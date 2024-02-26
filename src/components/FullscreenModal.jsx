@@ -111,7 +111,7 @@ const Modal = ({ isModalOpen, modalContent, onClose }) => {
   if (isModalOpen !== true) {
     return null;
   }
-  console.log(modalContent[0].title);
+  console.log(modalContent.title);
   return (
     <section className="modal">
       <article className="modal-content p-lg-4">
@@ -120,7 +120,7 @@ const Modal = ({ isModalOpen, modalContent, onClose }) => {
         </div>
         <main className="modal-mainContents">
           <h5 className="modal-title">
-            <h2>{modalContent[0].title}</h2>
+            <h2>{modalContent.title}</h2>
           </h5>
           <hr />
           <div className="modal-image text-center mt-lg-2">

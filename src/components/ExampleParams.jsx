@@ -6,7 +6,7 @@ function ExampleParams() {
 
   return (
     <>
-      <h1 style={{ marginTop: "100px" }}> This is {name}</h1>
+      <h1 style={{ marginTop: "100px" }}> This is {id}</h1>
     </>
   );
 }

@@ -89,24 +89,15 @@ function MidCards() {
       .then((data) => setDepartments(data));
   }, []);
 
+
   return (
     <div className="flex p-4 w-full">
       {/* Employee Salary Chart Card */}
-      <div className="w-5/12 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
+      <div className="w-2/3 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
         <h2 className="font-bold text-xl mb-2">Employee Gross Salary</h2>
         <EmployeeSalaryChart />
       </div>
-
-      <div className="w-3/12 max-w-sm rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
-        <h2 className="font-bold text-xl mb-2">News and Events</h2>
-        {/* Placeholder for graph */}
-        <div className="h-64 bg-gray-200 rounded flex items-center justify-center">
-          <span>Content Placeholder</span>
-        </div>
-      </div>
-
-      {/* News and Events Card */}
-      <div className="w-4/12 rounded-[15px] shadow-lg bg-white p-4 m-1">
+      <div className="w-1/3 rounded-[15px] shadow-lg bg-white p-4 m-1">
         <h2 className="font-bold text-xl mb-2 displaycards overflow-auto">
           Departments
         </h2>
@@ -116,13 +107,14 @@ function MidCards() {
             <div className="flex displaycards">
               {/* Applicant Details and Button */}
               <div className="flex flex-row justify-between w-full">
-                <div className=" w-full rounded-[15px] h-38 bg-[#CBF2FF] overflow-auto displaycards hover:bg-[#F9DDEE] shadow-lg p-4 m-1 font-medium text-gray-700">
-                  <NavLink to={`/example-params/${department.id}`}>
-                    <div className="displaycards">
-                      {department.department_name}
-                    </div>{" "}
-                  </NavLink>
-                </div>
+                <NavLink
+                  className=" w-full rounded-[15px] h-38 bg-[#CBF2FF] overflow-auto displaycards hover:bg-[#F9DDEE] shadow-lg p-4 m-1 font-medium text-gray-700"
+                  to={`/example-params/${department.id}`}
+                >
+                  <div className="displaycards">
+                    {department.department_name}
+                  </div>
+                </NavLink>
               </div>
             </div>
           </div>
