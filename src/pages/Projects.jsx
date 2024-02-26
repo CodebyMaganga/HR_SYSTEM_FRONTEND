@@ -61,7 +61,7 @@ function Projects() {
                   {project.project_status}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  <p onClick={() => openModal(projects)}>
+                  <p onClick={() => openModal(project)}>
                     <button
                       style={{
                         backgroundColor: "lightblue",
