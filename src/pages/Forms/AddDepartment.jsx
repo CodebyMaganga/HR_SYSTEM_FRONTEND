@@ -30,26 +30,6 @@ function AddDepartment() {
       role: "",
       nationality: "",
       emergency_contact: "",
-      bankdetails: {
-        employee_salary: "",
-        employee_account: "",
-        employee_bank: "",
-        branch_code: "",
-      },
-      documents: {
-        document_type: "",
-      },
-      references: {
-        reference_name: "",
-        reference_phone: "",
-      },
-      dependants: {
-        first_name: "",
-        last_name: "",
-        gender: "",
-        age: "",
-        relationship: "",
-      },
     },
     validationSchema: Yup.object({
       department_name: Yup.string().required("Department name is required"),
