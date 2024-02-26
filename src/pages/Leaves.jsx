@@ -4,9 +4,11 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
+import SearchFilter from "../components/SearchFilter";
 
 function Leaves() {
   const [leaves, setLeaves] = useState([]);
+
   useEffect(() => {
     fetch(`${BASE_URL}/leaves`)
       .then((res) => res.json())
@@ -30,6 +32,7 @@ function Leaves() {
         navigationFunction={addEmployeeOnLeaveButtonData.navigationFunction}
         text={addEmployeeOnLeaveButtonData.text}
       />
+
       <div className="grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
