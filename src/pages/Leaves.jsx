@@ -34,11 +34,11 @@ function Leaves() {
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
+              <th className="px-6 py-4">Employee on Leave</th>
               <th className="px-6 py-4">Leave Day</th>
               <th className="px-6 py-4">Leave return</th>
               <th className="px-6 py-4">Leave type</th>
               <th className="px-6 py-4">Leave letter</th>
-              <th className="px-6 py-4">Employees on Leave</th>
               <th className="px-6 py-4">Action</th>
             </tr>
           </thead>
@@ -48,6 +48,14 @@ function Leaves() {
                 key={leave.id}
                 className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
+                <td className="whitespace-nowrap px-6 py-4">
+                  {leave.employees_on_leave.map((employee_on_leave) => (
+                    <p key={employee_on_leave.id}>
+                      {employee_on_leave.employee.first_name}{" "}
+                      {employee_on_leave.employee.last_name}
+                    </p>
+                  ))}
+                </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {leave.leave_from}
                 </td>
@@ -60,9 +68,7 @@ function Leaves() {
                 <td className="whitespace-nowrap px-6 py-4">
                   {leave.leave_letter}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  leave employees_on_leave
-                </td>
+
                 <td className=" flex gap-4 py-5 px-6 text-3xl">
                   <MdDelete className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" />
                   <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />

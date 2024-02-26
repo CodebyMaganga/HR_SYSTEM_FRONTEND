@@ -108,12 +108,12 @@ function Payroll() {
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
-              <th className="px-6 py-4">Employee Number</th>
-              <th className="px-6 py-4">Payment Time</th>
+              <th className="px-6 py-4">Employee Name</th>
               <th className="px-6 py-4">Bank Details</th>
               <th className="px-6 py-4">Gross Salary</th>
               <th className="px-6 py-4"> Total Deductions</th>
               <th className="px-6 py-4">Net Salary</th>
+              <th className="px-6 py-4">Payment Time</th>
             </tr>
           </thead>
           <tbody>
@@ -123,9 +123,8 @@ function Payroll() {
                 className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className="whitespace-nowrap px-6 py-4">
-                  {payment.employee_id}
+                  {payment.employee.first_name} {payment.employee.last_name}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">31/03/2024</td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {payment.employee_bank}
                 </td>
@@ -138,6 +137,7 @@ function Payroll() {
                 <td className="whitespace-nowrap px-6 py-4">
                   {handleDeductions(payment.employee_salary)}
                 </td>
+                <td className="whitespace-nowrap px-6 py-4">31/03/2024</td>
               </tr>
             ))}
           </tbody>

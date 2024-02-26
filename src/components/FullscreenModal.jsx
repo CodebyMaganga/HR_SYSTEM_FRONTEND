@@ -105,13 +105,13 @@
 // export default FullscreenModal;
 
 import React from "react";
-import { IoMdClose } from "react-icons/io";
+import { TERipple } from "tw-elements-react";
 
 const Modal = ({ isModalOpen, modalContent, onClose }) => {
   if (isModalOpen !== true) {
     return null;
   }
-  console.log(modalContent.title);
+
   return (
     <section className="modal">
       <article className="modal-content p-lg-4">
@@ -130,25 +130,42 @@ const Modal = ({ isModalOpen, modalContent, onClose }) => {
         </div>
         <main className="modal-mainContents">
           <h5 className="modal-title">
-            <h2>{modalContent.title}</h2>
+            <h2>{modalContent.title}</h2> <br />
+            <h2>
+              {" "}
+              Number of Employees: {modalContent.project_employees.length}
+            </h2>
           </h5>
           <hr />
 
           <p className="mt-lg-3 modalText">
             {" "}
-            {modalContent.project_employees.map((project) => (
-              <li key={project.id}>
-                {" "}
-                <div className="modal-image text-center mt-lg-2">
-                  <img src={project.employee.profile_picture} alt="image" />
+            {modalContent.project_employees.map((project_employee) => (
+              <div
+                key={project_employee.id}
+                className="flex flex-col rounded-lg bg-white shadow-[0px_3px_14px_1px_#718096] dark:bg-neutral-700 md:max-w-xl md:flex-row mt-4"
+              >
+                <img
+                  className="h-auto w-[20%] rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                  src="https://tse4.mm.bing.net/th?id=OIP.mQyY3CKatiLW45eKujJS9QHaHa&pid=Api&P=0&h=220"
+                  alt=""
+                />
+                <div className="flex flex-col justify-start p-6">
+                  <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
+                    {/* Card title :  */}
+                    Employee ID: {project_employee.employee.id}
+                  </h5>
+                  <p className="mb-4 text-xl text-base text-neutral-600 dark:text-neutral-200">
+                    Name : {project_employee.employee.first_name} &nbsp;
+                    {project_employee.employee.last_name}
+                    <br />
+                    Role: {project_employee.employee.role}
+                  </p>
+                  <p className="text-xl text-neutral-500 dark:text-neutral-300">
+                    Contact: {project_employee.employee.phone}
+                  </p>
                 </div>
-                Employee ID: {project.employee.id}
-                <br />
-                Name : {project.employee.first_name} &nbsp;
-                {project.employee.last_name}
-                <br />
-                Role: {project.employee.role}
-              </li>
+              </div>
             ))}
           </p>
           {/* <div className="modal-button text-end">
