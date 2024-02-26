@@ -1,10 +1,9 @@
+import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Karibu from "./components/Karibu";
 import Home from "./pages/Home";
 import Employees from "./pages/Employees";
 import Projects from "./pages/Projects";
-import { Route, Routes } from "react-router-dom";
-
 import Departments from "./pages/Departments";
 import Documents from "./pages/Documents";
 import JobApplicants from "./pages/JobApplicants";
@@ -22,10 +21,14 @@ import AddJobapplicant from "./pages/Forms/AddJobapplicant";
 import AddProject from "./pages/Forms/AddProject";
 
 function App() {
+  const location = useLocation(); // Guys read on this ;-)
+
+  const isLoginPage = location.pathname === "/";
+
   return (
     <>
-      <NavBar />
-      <Karibu />
+      {!isLoginPage && <NavBar />}
+      {!isLoginPage && <Karibu />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
