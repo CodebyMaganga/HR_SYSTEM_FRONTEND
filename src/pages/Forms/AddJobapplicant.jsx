@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { toast } from "react-hot-toast";
+import { BASE_URL } from "../../components/utils";
 
 const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
-  const handleChange = (e) => {
-    onChange(e.target.value);
-  };
-
   return (
     <input
       type={type}
@@ -18,49 +17,126 @@ const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
 };
 
 function AddJobapplicant() {
-  const [formData, setFormData] = useState({});
+  const formik = useFormik({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      photo: "",
+      email: "",
+      address: "",
+      experience: "",
+      role_applied: "",
+      status: "",
+      interview: "",
+    },
+    validationSchema: Yup.object({
+      first_name: Yup.string().required("first name is required"),
+      last_name: Yup.string().required("last name is required"),
+      photo: Yup.string().required("Profile photo  is required"),
+      email: Yup.string().required("email is required"),
+      address: Yup.string().required("address is required"),
+      experience: Yup.string().required("experience is required"),
+      role_applied: Yup.string().required("role_applied is required"),
+      status: Yup.string().required("status is required"),
+      interview: Yup.string().required("interview is required"),
+    }),
+    onSubmit: async (values, formikBag) => {
+      try {
+        const res = await fetch(`${BASE_URL}/job_applicants`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const data = await res.json();
 
-  const jobapplicantFields = [
-    { name: "firstName", placeholder: "First Name" },
-    { name: "lastName", placeholder: "Last Name" },
-    { name: "email", placeholder: "Email" },
-    { name: "address", placeholder: "Address" },
-    { name: "experience", placeholder: "Experience" },
-    { name: "role_applied", placeholder: "Role applied " },
-    { name: "status", placeholder: "Status" },
-    { name: "interview", placeholder: "Interview" },
-    { name: "profile", placeholder: "Profile Picture URL" },
-  ];
+        if (!res.ok) {
+          throw new Error("Failed to add Job Applicant");
+        }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
-  };
-
-  const handleChange = (fieldName, fieldValue) => {
-    setFormData({
-      ...formData,
-      [fieldName]: fieldValue,
-    });
-  };
-
+        if (data.statusCode === 200) {
+          toast.success(data.message);
+          formikBag.resetForm();
+        } else {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        console.log("Unable to add interviews", error.message);
+        toast.error("Failed to add interviews: " + error.message);
+      }
+    },
+  });
   return (
-    <div className="container bg-gray-300 mx-auto p-4">
-      <form className="space-y-8 " onSubmit={handleSubmit}>
-        {/* Job Application Details Section */}
+    <div className="container bg-white mx-auto p-4">
+      <form className="space-y-8" onSubmit={formik.handleSubmit}>
+        {/*   Department Details Section */}
         <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Job Applicant Details</h2>
-          <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-            {jobapplicantFields.map((field) => (
-              <InputField
-                key={field.name}
-                name={field.name}
-                value={formData[field.name] || ""}
-                placeholder={field.placeholder}
-                onChange={(e) => handleChange(field.name, e.target.value)}
-              />
-            ))}
+          <h2 className="font-bold text-xl mb-4">Interview Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputField
+              type="text"
+              name="first_name"
+              value={formik.values.first_name}
+              placeholder="Enter First Name"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="last_name"
+              value={formik.values.last_name}
+              placeholder="Enter Job Applicant last name"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="photo"
+              value={formik.values.last_name}
+              placeholder="Enter Profile photo"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="email"
+              value={formik.values.last_name}
+              placeholder="Enter the email"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="address"
+              value={formik.values.last_name}
+              placeholder="Enter the address"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="experience"
+              value={formik.values.last_name}
+              placeholder="Enter Job applicant experience"
+              onChange={formik.handleChange}
+            />{" "}
+            <InputField
+              type="text"
+              name="role_applied"
+              value={formik.values.last_name}
+              placeholder="The role applied"
+              onChange={formik.handleChange}
+            />{" "}
+            <InputField
+              type="text"
+              name="status"
+              value={formik.values.last_name}
+              placeholder="The job applicant status"
+              onChange={formik.handleChange}
+            />{" "}
+            <InputField
+              type="text"
+              name="interview"
+              value={formik.values.last_name}
+              placeholder="Enter day of interview"
+              onChange={formik.handleChange}
+            />
           </div>
         </div>
         <button
