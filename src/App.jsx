@@ -16,6 +16,10 @@ import AddEmployee from "./pages/Forms/AddEmployee";
 import Login from "./pages/Login";
 import OnLeaveEmployees from "./pages/OnLeaveEmployees";
 import ExampleParams from "./components/ExampleParams";
+import AddDepartment from "./pages/Forms/AddDepartment";
+import AddLeave from "./pages/Forms/AddLeave";
+import AddJobapplicant from "./pages/Forms/AddJobapplicant";
+import AddProject from "./pages/Forms/AddProject";
 
 function App() {
   return (
@@ -37,6 +41,10 @@ function App() {
         <Route path="/payroll" element={<Payroll />} />
         <Route path="/add-employee" element={<AddEmployee />} />
         <Route path="/example-params/:id" element={<ExampleParams />} />
+        <Route path="/add-department" element={<AddDepartment />} />
+        <Route path="/add-employee-on-leave" element={<AddLeave />} />
+        <Route path="/add-job-applicant" element={<AddJobapplicant />} />
+        <Route path="/add-project" element={<AddProject />} />
       </Routes>
     </>
   );
