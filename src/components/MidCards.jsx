@@ -89,15 +89,14 @@ function MidCards() {
       .then((data) => setDepartments(data));
   }, []);
 
-
   return (
-    <div className="flex p-4 w-full">
+    <div className="flex p-4 w-full " style={{}}>
       {/* Employee Salary Chart Card */}
       <div className="w-2/3 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
         <h2 className="font-bold text-xl mb-2">Employee Gross Salary</h2>
         <EmployeeSalaryChart />
       </div>
-      <div className="w-1/3 rounded-[15px] shadow-lg bg-white p-4 m-1">
+      <div className="w-1/3 rounded-[15px] shadow-lg bg-white p-4 m-1 ">
         <h2 className="font-bold text-xl mb-2 displaycards overflow-auto">
           Departments
         </h2>

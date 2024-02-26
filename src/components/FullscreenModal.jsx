@@ -105,82 +105,72 @@
 // export default FullscreenModal;
 
 import React from "react";
-import { IoMdClose } from "react-icons/io";
+import { TERipple } from "tw-elements-react";
 
 const Modal = ({ isModalOpen, modalContent, onClose }) => {
   if (isModalOpen !== true) {
     return null;
   }
-  console.log(modalContent.title);
+
   return (
     <section className="modal">
       <article className="modal-content p-lg-4">
         <div className="exit-icon text-end">
-          <button onClick={onClose}> Close </button>
+          <button
+            onClick={onClose}
+            style={{
+              backgroundColor: "#6821c3",
+              padding: "4px 9px",
+              borderRadius: "10px",
+            }}
+          >
+            {" "}
+            Close{" "}
+          </button>
         </div>
         <main className="modal-mainContents">
           <h5 className="modal-title">
-            <h2>{modalContent.title}</h2>
+            <h2>{modalContent.title}</h2> <br />
+            <h2>
+              {" "}
+              Number of Employees: {modalContent.project_employees.length}
+            </h2>
           </h5>
           <hr />
-          <div className="modal-image text-center mt-lg-2">
-            <img src={modalContent.image} alt="image" />
-          </div>
+
           <p className="mt-lg-3 modalText">
             {" "}
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source. Lorem Ipsum comes from sections
-            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes
-            of Good and Evil) by Cicero, written in 45 BC. This book is a
-            treatise on the theory of ethics, very popular during the
-            Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
-            amet..", comes from a line in section 1.10.32. The standard chunk of
-            Lorem Ipsum used since the 1500s is reproduced below for those
-            interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et
-            Malorum" by Cicero are also reproduced in their exact original form,
-            accompanied by English versions from the 1914 translation by H.
-            Rackham. Contrary to popular belief, Lorem Ipsum is not simply
-            random text. It has roots in a piece of classical Latin literature
-            from 45 BC, making it over 2000 years old. Richard McClintock, a
-            Latin professor at Hampden-Sydney College in Virginia, looked up one
-            of the more obscure Latin words, consectetur, from a Lorem Ipsum
-            passage, and going through the cites of the word in classical
-            literature, discovered the undoubtable source. Lorem Ipsum comes
-            from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"
-            (The Extremes of Good and Evil) by Cicero, written in 45 BC. This
-            book is a treatise on the theory of ethics, very popular during the
-            Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
-            amet..", comes from a line in section 1.10.32. The standard chunk of
-            Lorem Ipsum used since the 1500s is reproduced below for those
-            interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et
-            Malorum" by Cicero are also reproduced in their exact original form,
-            accompanied by English versions from the 1914 translation by H.
-            Rackham. Contrary to popular belief, Lorem Ipsum is not simply
-            random text. It has roots in a piece of classical Latin literature
-            from 45 BC, making it over 2000 years old. Richard McClintock, a
-            Latin professor at Hampden-Sydney College in Virginia, looked up one
-            of the more obscure Latin words, consectetur, from a Lorem Ipsum
-            passage, and going through the cites of the word in classical
-            literature, discovered the undoubtable source. Lorem Ipsum comes
-            from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"
-            (The Extremes of Good and Evil) by Cicero, written in 45 BC. This
-            book is a treatise on the theory of ethics, very popular during the
-            Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
-            amet..", comes from a line in section 1.10.32. The standard chunk of
-            Lorem Ipsum used since the 1500s is reproduced below for those
-            interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et
-            Malorum" by Cicero are also reproduced in their exact original form,
-            accompanied by English versions from the 1914 translation by H.
-            Rackham.
+            {modalContent.project_employees.map((project_employee) => (
+              <div
+                key={project_employee.id}
+                className="flex flex-col rounded-lg bg-white shadow-[0px_3px_14px_1px_#718096] dark:bg-neutral-700 md:max-w-xl md:flex-row mt-4"
+              >
+                <img
+                  className="h-auto w-[20%] rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                  src="https://tse4.mm.bing.net/th?id=OIP.mQyY3CKatiLW45eKujJS9QHaHa&pid=Api&P=0&h=220"
+                  alt=""
+                />
+                <div className="flex flex-col justify-start p-6">
+                  <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
+                    {/* Card title :  */}
+                    Employee ID: {project_employee.employee.id}
+                  </h5>
+                  <p className="mb-4 text-xl text-base text-neutral-600 dark:text-neutral-200">
+                    Name : {project_employee.employee.first_name} &nbsp;
+                    {project_employee.employee.last_name}
+                    <br />
+                    Role: {project_employee.employee.role}
+                  </p>
+                  <p className="text-xl text-neutral-500 dark:text-neutral-300">
+                    Contact: {project_employee.employee.phone}
+                  </p>
+                </div>
+              </div>
+            ))}
           </p>
-          <div className="modal-button text-end">
+          {/* <div className="modal-button text-end">
             <button>End of content</button>
-          </div>
+          </div> */}
         </main>
       </article>
     </section>
