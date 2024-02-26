@@ -90,7 +90,7 @@ function MidCards() {
   }, []);
 
   return (
-    <div className="flex p-4 w-full ">
+    <div className="flex min-[648px]:grid p-4 w-full " style={{}}>
       {/* Employee Salary Chart Card */}
       <div className="w-2/3 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
         <h2 className="font-bold text-xl mb-2">Employee Gross Salary</h2>
