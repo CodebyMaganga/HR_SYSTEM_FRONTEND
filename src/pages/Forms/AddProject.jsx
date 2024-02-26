@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { toast } from "react-hot-toast";
+import { BASE_URL } from "../../components/utils";
 
 const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
-  const handleChange = (e) => {
-    onChange(e.target.value);
-  };
-
   return (
     <input
       type={type}
@@ -18,47 +17,79 @@ const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
 };
 
 function AddProject() {
-  const [formData, setFormData] = useState({});
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      project_status: "",
+      project_employees: "",
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required("the project title is required"),
+      project_status: Yup.string().required("the project status is required"),
+      project_employees: Yup.string().required(
+        "Project employees are required"
+      ),
+    }),
+    onSubmit: async (values, formikBag) => {
+      try {
+        const res = await fetch(`${BASE_URL}/projects`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const data = await res.json();
 
-  const projectFields = [
-    { name: "title", placeholder: "Project Title" },
-    { name: "status", placeholder: "Project Status" },
-    { name: "project_employees", placeholder: "Project Employees" },
-  ];
+        if (!res.ok) {
+          throw new Error("Failed to add Project");
+        }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
-  };
-
-  const handleChange = (fieldName, fieldValue) => {
-    setFormData({
-      ...formData,
-      [fieldName]: fieldValue,
-    });
-  };
+        if (data.statusCode === 200) {
+          toast.success(data.message);
+          formikBag.resetForm();
+        } else {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        console.log("Unable to add projects", error.message);
+        toast.error("Failed to add projects " + error.message);
+      }
+    },
+  });
   return (
-    <div className="container bg-gray-300 mx-auto p-4">
-      <form className="space-y-8 " onSubmit={handleSubmit}>
-        {/* Job Application Details Section */}
+    <div className="container bg-white mx-auto p-4">
+      <form className="space-y-8" onSubmit={formik.handleSubmit}>
+        {/*   Job applicant Details Section */}
         <div className="border border-black p-4 rounded-md">
           <h2 className="font-bold text-xl mb-4">Project Details</h2>
-          <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-            {projectFields.map((field) => (
-              <InputField
-                key={field.name}
-                name={field.name}
-                value={formData[field.name] || ""}
-                placeholder={field.placeholder}
-                onChange={(e) => handleChange(field.name, e.target.value)}
-              />
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputField
+              type="text"
+              name="first_name"
+              value={formik.values.title}
+              placeholder="Enter Project Title"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="last_name"
+              value={formik.values.project_status}
+              placeholder="Enter the status of project"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="photo"
+              value={formik.values.project_employees}
+              placeholder="Employees assigned to project"
+              onChange={formik.handleChange}
+            />
           </div>
         </div>
         <button
           type="submit"
-          className="bg-gray-800 hover:bg-blue-100 text-white font-bold py-2 px-4 rounded"
+          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
         >
           Submit
         </button>
