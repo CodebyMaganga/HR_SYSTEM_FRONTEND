@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
 import AddButtons from "../components/AddButtons";
 import { useNavigate } from "react-router-dom";
+import FullscreenModal from "../components/FullscreenModal";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
   useEffect(() => {
     fetch(`${BASE_URL}/projects`)
       .then((res) => res.json())
@@ -21,6 +25,16 @@ function Projects() {
     navigationFunction: goToAddProject,
     text: "Add Project",
   };
+
+  const openModal = (content) => {
+    setIsModalOpen(true);
+    setModalContent(content);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <AddButtons
@@ -47,13 +61,31 @@ function Projects() {
                   {project.project_status}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  project project_employees
+                  <p onClick={() => openModal(projects)}>
+                    <button
+                      style={{
+                        backgroundColor: "lightblue",
+                        padding: "6px",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      View Full Details
+                    </button>
+                  </p>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <section>
+        <FullscreenModal
+          isModalOpen={isModalOpen}
+          modalContent={modalContent}
+          onClose={closeModal}
+        />
+      </section>
+      ;
     </>
   );
 }
