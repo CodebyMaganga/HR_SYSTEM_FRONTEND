@@ -114,7 +114,6 @@ function Payroll() {
               <th className="px-6 py-4">Gross Salary</th>
               <th className="px-6 py-4"> Total Deductions</th>
               <th className="px-6 py-4">Net Salary</th>
-              <th className="px-6 py-4">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -139,7 +138,6 @@ function Payroll() {
                 <td className="whitespace-nowrap px-6 py-4">
                   {handleDeductions(payment.employee_salary)}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4"> icon</td>
               </tr>
             ))}
           </tbody>
