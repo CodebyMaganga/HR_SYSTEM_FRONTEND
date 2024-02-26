@@ -3,11 +3,14 @@ import { BASE_URL } from "../components/utils";
 import AddButtons from "../components/AddButtons";
 import { useNavigate } from "react-router-dom";
 import FullscreenModal from "../components/FullscreenModal";
+import SearchFilter from "../components/SearchFilter";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
 
   useEffect(() => {
     fetch(`${BASE_URL}/projects`)
@@ -35,11 +38,32 @@ function Projects() {
     setIsModalOpen(false);
   };
 
+  const searchedProjects = projects.filter((project) =>
+    project.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // console.log(searchedEmployees);
+
+  const handleFilterChange = (category) => {
+    setCategoryFilter(category);
+  };
+
+  const filteredData = ([] =
+    categoryFilter === "all"
+      ? searchedProjects
+      : searchedProjects.filter((item) => item.category === categoryFilter));
+
   return (
     <>
       <AddButtons
         navigationFunction={addProjectButtonData.navigationFunction}
         text={addProjectButtonData.text}
+      />
+      {/* Search component */}
+      <SearchFilter
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        categoryFilter={categoryFilter}
+        handleFilterChange={handleFilterChange}
       />
       <div className="grid items-center my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
@@ -51,17 +75,19 @@ function Projects() {
             </tr>
           </thead>
           <tbody>
-            {projects.map((project) => (
+            {searchedProjects.map((searchedProject) => (
               <tr
-                key={project.id}
+                key={searchedProject.id}
                 className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
-                <td className="whitespace-nowrap px-6 py-4">{project.title}</td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {project.project_status}
+                  {searchedProject.title}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  <p onClick={() => openModal(project)}>
+                  {searchedProject.project_status}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  <p onClick={() => openModal(searchedProject)}>
                     <button
                       style={{
                         backgroundColor: "lightblue",
@@ -69,7 +95,7 @@ function Projects() {
                         borderRadius: "10px",
                       }}
                     >
-                      View Full Details
+                      View Full List
                     </button>
                   </p>
                 </td>
