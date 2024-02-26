@@ -56,7 +56,7 @@ function BottomCards() {
       .then((data) => setJobApplicants(data));
   }, []);
 
-  const [interviews, setInterviews] = useState([])
+  const [interviews, setInterviews] = useState([]);
 
   useEffect(() => {
     fetch(`${BASE_URL}/interviews`)
@@ -67,7 +67,7 @@ function BottomCards() {
   return (
     <div className="flex justify-between p-4 w-full">
       {/* Recent Job Applicants */}
-      <div className="w-1/2 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5">
+      <div className="w-1/2 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5 ">
         <h2 className="font-bold text-xl mb-4">Recent Job Applicants</h2>
         {jobApplicants.map((jobApplicant) => (
           <div key={jobApplicant.id} className="border-b border-gray-200 py-1">
@@ -114,9 +114,9 @@ function BottomCards() {
               <div className="flex flex-row justify-between w-full">
                 <div>
                   <div className="font-medium text-gray-700">
-                    {interview.jobapplicant.first_name} {interview.jobapplicant.last_name}
+                    {interview.jobapplicant.first_name}{" "}
+                    {interview.jobapplicant.last_name}
                   </div>
-                  
                 </div>
                 <div>
                   <button className="px-3 text-sm hover:bg-[#F9DDEE]  bg-[#CBF2FF] text-black font-bold py-2 rounded-full">
