@@ -90,34 +90,36 @@ function MidCards() {
   }, []);
 
   return (
-    <div className="flex p-4 w-full " style={{}}>
-      {/* Employee Salary Chart Card */}
-      <div className="w-2/3 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-2">
-        <h2 className="font-bold text-xl mb-2">Employee Gross Salary</h2>
-        <EmployeeSalaryChart />
-      </div>
-      <div className="w-1/3 rounded-[15px] shadow-lg bg-white p-4 m-1 ">
-        <h2 className="font-bold text-xl mb-2 displaycards overflow-auto">
-          Departments
-        </h2>
-        {/* Placeholder for content */}
-        {departments.map((department) => (
-          <div key={department.id} className="py-1">
-            <div className="flex displaycards">
-              {/* Applicant Details and Button */}
-              <div className="flex flex-row justify-between w-full">
-                <NavLink
-                  className=" w-full rounded-[15px] h-38 bg-[#CBF2FF] overflow-auto displaycards hover:bg-[#F9DDEE] shadow-lg p-4 m-1 font-medium text-gray-700"
-                  to={`/example-params/${department.id}`}
-                >
-                  <div className="displaycards">
-                    {department.department_name}
-                  </div>
-                </NavLink>
+    <div className="container-fluid">
+      <div className="row p-0 displaycards" style={{}}>
+        {/* Employee Salary Chart Card */}
+        <div className="col-lg-6 col-md-7 col-sm-12 rounded-[15px] overflow-hidden shadow-lg bg-white p-4 m-3">
+          <h2 className="font-bold text-xl mb-2">Employee Gross Salary</h2>
+          <EmployeeSalaryChart />
+        </div>
+        <div className="col-lg-5 col-md-4 col-sm-12 rounded-[15px] shadow-lg bg-white p-4 m-3 ">
+          <h2 className="font-bold text-xl mb-2 displaycards overflow-auto">
+            Departments
+          </h2>
+          {/* Placeholder for content */}
+          {departments.map((department) => (
+            <div key={department.id} className="py-1">
+              <div className="">
+                {/* Applicant Details and Button */}
+                <div className="w-full">
+                  <NavLink
+                    className=" w-full rounded-[15px] h-38 bg-[#CBF2FF] overflow-auto displaycards hover:bg-[#F9DDEE] shadow-lg p-4 m-1 font-medium text-gray-700"
+                    to={`/example-params/${department.id}`}
+                  >
+                    <div className="displaycards">
+                      {department.department_name}
+                    </div>
+                  </NavLink>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
