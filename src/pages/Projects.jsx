@@ -13,7 +13,13 @@ function Projects() {
   const [categoryFilter, setCategoryFilter] = useState("all");
 
   useEffect(() => {
-    fetch(`${BASE_URL}/projects`)
+    fetch(`${BASE_URL}/projects`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}` ,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setProjects(data));
   }, []);
