@@ -4,6 +4,6 @@ export default {
   theme: {
     extend: {},
   },
-  darkMode: "class", // Enabled class-based dark mode(Tailwind buit in dark mode set up)
   plugins: [],
+  darkMode: "class",  // Enabled class-based dark mode(Tailwind buit in dark mode set up)
 };

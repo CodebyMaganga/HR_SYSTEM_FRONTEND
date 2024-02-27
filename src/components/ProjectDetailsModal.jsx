@@ -7,7 +7,7 @@ const ProjectDetailsModal = ({ isModalOpen, modalContent, onClose }) => {
   }
 
   return (
-    <section className="modal">
+    <section className="modal z-20 ">
       <article className="modal-content p-lg-4">
         <div className="exit-icon text-end">
           <button
@@ -22,7 +22,7 @@ const ProjectDetailsModal = ({ isModalOpen, modalContent, onClose }) => {
             Close{" "}
           </button>
         </div>
-        <main className="modal-mainContents">
+        <main className="modal-mainContents z-20 ">
           <h5 className="modal-title">
             <h2>{modalContent.title}</h2> <br />
             <h2>
