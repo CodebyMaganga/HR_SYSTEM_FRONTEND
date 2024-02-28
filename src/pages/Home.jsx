@@ -11,6 +11,7 @@ import {
   IoIosChatbubbles,
   IoIosCheckmarkCircleOutline,
 } from "react-icons/io";
+import Accordion from "../components/Accordion";
 
 function Home() {
   const employeeCardData = {
@@ -90,6 +91,7 @@ function Home() {
       </div>
       <MidCards />
       <BottomCards />
+      <Accordion />
     </>
   );
 }

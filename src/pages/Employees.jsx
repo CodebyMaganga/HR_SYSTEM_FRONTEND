@@ -115,9 +115,11 @@ function Employees() {
                 <td className="whitespace-nowrap px-6 py-4">
                   {searchedEmployee.profile_picture}
                 </td>
+
                 <td className="whitespace-nowrap px-6 py-4">
                   {searchedEmployee.first_name}
                 </td>
+
                 <td className="whitespace-nowrap px-6 py-4">
                   {searchedEmployee.last_name}
                 </td>
