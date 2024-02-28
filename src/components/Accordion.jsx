@@ -87,7 +87,7 @@ const Accordion = () => {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white ">
         <h2>
           <button
             type="button"
@@ -116,7 +116,7 @@ const Accordion = () => {
         </h2>
 
         {isOpen && (
-          <div>
+          <div className="grid place-items-center">
             <div className="mb-10 mt-4 text-center">
               <h2>No. of employees in each department</h2>
             </div>
@@ -161,6 +161,9 @@ const Accordion = () => {
               </AreaChart>
             </div>
             <div>
+              <div className="mb-10 mt-4 text-center">
+                <h2>Employees on Leave</h2>
+              </div>
               <LineChart
                 width={730}
                 height={250}
