@@ -135,8 +135,8 @@ function Payroll() {
         categoryFilter={categoryFilter}
         handleFilterChange={handleFilterChange}
       />
-      <div className="grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
+      <div className="grid displaycards overflow-x-auto my-2 mx-10 ">
+        <table className=" border-b  min-w-full  text-center text-md bg-white rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-6 py-4">Employee Name</th>

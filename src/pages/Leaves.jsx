@@ -33,16 +33,16 @@ function Leaves() {
         text={addEmployeeOnLeaveButtonData.text}
       />
 
-      <div className="grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
+      <div className="grid displaycards my-2  mx-10 ">
+        <table className=" border-b  min-w-full tablecard text-center text-md bg-white  rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-6 py-4">Employee on Leave</th>
-              <th className="px-6 py-4">Leave Day</th>
-              <th className="px-6 py-4">Leave return</th>
+              <th className="hidden sm:table-cell px-6 py-4">Leave Day</th>
+              <th className="hidden sm:table-cell px-6 py-4">Leave return</th>
               <th className="px-6 py-4">Leave type</th>
-              <th className="px-6 py-4">Leave letter</th>
-              <th className="px-6 py-4">Action</th>
+              <th className="hidden lg:table-cell px-6 py-4">Leave letter</th>
+              <th className=" px-6 py-4">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -59,20 +59,20 @@ function Leaves() {
                     </p>
                   ))}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className="hidden sm:table-cell hitespace-nowrap px-6 py-4">
                   {leave.leave_from}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className="hidden sm:table-cell whitespace-nowrap px-6 py-4">
                   {leave.leave_to}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className=" whitespace-nowrap px-6 py-4">
                   {leave.leave_type}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
                   {leave.leave_letter}
                 </td>
 
-                <td className=" flex gap-4 py-5 px-6 text-3xl">
+                <td className="flex gap-4 py-5 px-6 text-3xl">
                   <MdDelete className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out" />
                   <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
                 </td>

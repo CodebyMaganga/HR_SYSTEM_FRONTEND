@@ -39,34 +39,34 @@ function ExampleParams() {
           role="list"
           className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
         >
-          {departments2.map((department) => (
+          {departments2.map((department) =>
             department.id == id ? (
-            <li key={department.id}>
-              {department.department_employees.map((department_employee) => (
-                
-                <div
-                  key={department_employee.id}
-                  className="flex items-center gap-x-6"
-                >
-                  <img
-                    className="h-16 w-16 rounded-full"
-                    src="https://tse4.mm.bing.net/th?id=OIP.mQyY3CKatiLW45eKujJS9QHaHa&pid=Api&P=0&h=220"
-                    alt=""
-                  />
-                  <div>
-                    <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                      {department_employee.employee.first_name}
-                    </h3>
-                    <p className="text-sm font-semibold leading-6 text-indigo-600">
-                      {department_employee.employee.email}
-                    </p>
+              <li key={department.id}>
+                {department.department_employees.map((department_employee) => (
+                  <div
+                    key={department_employee.id}
+                    className="flex items-center gap-x-6"
+                  >
+                    <img
+                      className="h-16 w-16 rounded-full"
+                      src="https://tse4.mm.bing.net/th?id=OIP.mQyY3CKatiLW45eKujJS9QHaHa&pid=Api&P=0&h=220"
+                      alt=""
+                    />
+                    <div>
+                      <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                        {department_employee.employee.first_name}
+                      </h3>
+                      <p className="text-sm font-semibold leading-6 text-indigo-600">
+                        {department_employee.employee.email}
+                      </p>
+                    </div>
                   </div>
-                  
-                </div> 
-              ))}
-            </li> )
-            : <div></div>
-          ))}
+                ))}
+              </li>
+            ) : (
+              <div></div>
+            )
+          )}
         </ul>
       </div>
     </div>

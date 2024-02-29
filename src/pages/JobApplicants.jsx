@@ -74,31 +74,39 @@ function JobApplicants() {
 
   return (
     <>
-      <AddButtons
-        navigationFunction={addJobApplicantButtonData.navigationFunction}
-        text={addJobApplicantButtonData.text}
-      />
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <AddButtons
+              navigationFunction={addJobApplicantButtonData.navigationFunction}
+              text={addJobApplicantButtonData.text}
+            />
+          </div>
 
-      {/* Search component */}
-      <SearchFilter
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        categoryFilter={categoryFilter}
-        handleFilterChange={handleFilterChange}
-      />
-      <div className="grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
+          {/* Search component */}
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <SearchFilter
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              categoryFilter={categoryFilter}
+              handleFilterChange={handleFilterChange}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="overflow-x-auto m-5">
+        <table className=" border-b text-center text-md bg-white rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b font-medium text-black bg-gray-300">
             <tr>
-              <th className="px-4 py-4">Profile</th>
+              <th className="px-4 py-4 hidden  sm:table-cell">Profile</th>
               <th className="px-4 py-4">First Name</th>
-              <th className="px-4 py-4">Last Name</th>
+              <th className="px-4 py-4 hidden  lg:table-cell">Last Name</th>
               <th className="px-4 py-4">Email</th>
-              <th className="px-4 py-4">Address</th>
-              <th className="px-4 py-4">Experience</th>
-              <th className="px-4 py-4">Role</th>
-              <th className="px-4 py-4">Status</th>
-              <th className="px-4 py-4">Interview</th>
+              <th className="px-4 py-4 hidden lg:table-cell">Address</th>
+              <th className="px-4 py-4 hidden lg:table-cell">Experience</th>
+              <th className="px-4 py-4 hidden sm:table-cell">Role</th>
+              <th className="px-4 py-4 hidden lg:table-cell">Status</th>
+              <th className="px-4 py-4 hidden lg:table-cell">Interview</th>
               <th className="px-4 py-4">Action</th>
             </tr>
           </thead>
@@ -108,28 +116,28 @@ function JobApplicants() {
                 key={searchedJobApplicant.id}
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
-                <td className="whitespace-nowrap px-4 py-4">
+                <td className="whitespace-nowrap px-4 py-4 hidden  sm:table-cell">
                   {searchedJobApplicant.photo}
                 </td>
                 <td className="whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.first_name}
                 </td>
-                <td className="whitespace-nowrap px-4 py-4">
+                <td className=" hidden lg:table-cell whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.last_name}
                 </td>
                 <td className="whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.email}
                 </td>
-                <td className="whitespace-nowrap px-4 py-4">
+                <td className="hidden lg:table-cell whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.address}
                 </td>
-                <td className="whitespace-nowrap px-4 py-4">
+                <td className=" hidden lg:table-cell whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.experience}
                 </td>
-                <td className="whitespace-nowrap px-4 py-4">
+                <td className="hidden sm:table-cell whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.role_applied}
                 </td>
-                <td className="whitespace-nowrap px-4 py-4">
+                <td className=" hidden lg:table-cell whitespace-nowrap px-4 py-4">
                   <button
                     className={`rounded-md p-2 ${
                       searchedJobApplicant.active_status
@@ -142,7 +150,9 @@ function JobApplicants() {
                       : "Inactive"}
                   </button>
                 </td>
-                <td className="px-8">jobapplicant_interview</td>
+                <td className="hidden lg:table-cell px-8">
+                  jobapplicant_interview
+                </td>
                 <td className="flex gap-4 py-5 px-6 text-3xl">
                   <MdDelete
                     className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"

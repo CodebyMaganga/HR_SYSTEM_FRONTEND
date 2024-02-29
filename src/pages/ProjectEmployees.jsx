@@ -10,9 +10,9 @@ function ProjectEmployees() {
   }, []);
   return (
     <>
-      <div className="grid items-center m-10">
-        <table className="border-spacing-70 border-collapse border border-slate-500 ">
-          <thead className="border border-slate-600">
+      <div className="grid displaycards my-2 mx-10">
+        <table className="border-b  min-w-full tablecard text-center text-md bg-white  rounded-[10px] overflow-hidden shadow-lg mb-5 ">
+          <thead className="border-b  font-medium text-black bg-gray-300">
             <tr>
               <th>Project No</th>
               <th>Employee No</th>

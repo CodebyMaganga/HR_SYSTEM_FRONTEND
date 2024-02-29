@@ -12,7 +12,7 @@ const EmployeeDetailsModal = ({ isModalOpen, modalContent, onClose }) => {
           <button
             onClick={onClose}
             style={{
-              backgroundColor: "#6821c3",
+              backgroundColor: "#FF605C",
               padding: "4px 9px",
               borderRadius: "10px",
             }}
