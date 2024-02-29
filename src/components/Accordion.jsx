@@ -58,7 +58,7 @@ const Accordion = () => {
   };
 
   const employeeData = employees.map((employee) => ({
-    department_name: employee.employee_department.department_name,
+    department_name: employee.employee_department?.department_name,
     age: calculateAge(employee.DOB),
   }));
 

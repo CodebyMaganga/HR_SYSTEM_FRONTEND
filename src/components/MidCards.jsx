@@ -57,7 +57,7 @@ function EmployeeSalaryChart() {
   }, []);
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer className="overflow-x-scroll" height={300}>
       <BarChart
         data={employeeSalaries}
         margin={{
