@@ -142,7 +142,7 @@ function NavBar() {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Your Profile
+                            Admin
                           </a>
                         )}
                       </Menu.Item>
