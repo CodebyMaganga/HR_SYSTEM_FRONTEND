@@ -20,18 +20,32 @@ function SearchFilter({
             Your Email
           </label>
           <button
+<<<<<<< HEAD
             id="dropdown-button"
             data-dropdown-toggle="dropdown"
             className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
             type="button"
+=======
+            type="submit"
+            className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-violet-300 rounded-e-lg border border-violet-300 hover:bg-violet-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+>>>>>>> main
           >
             All categories{" "}
             <svg
+<<<<<<< HEAD
               className="w-2.5 h-2.5 ms-2.5"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 10 6"
+=======
+              className="w-4 h-4 text-black"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+
+>>>>>>> main
             >
               <path
                 stroke="currentColor"

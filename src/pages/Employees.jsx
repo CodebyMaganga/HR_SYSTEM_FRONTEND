@@ -115,6 +115,7 @@ function Employees() {
                 <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
                   {searchedEmployee.profile_picture}
                 </td>
+
                 <td className="whitespace-nowrap px-6 py-4">
                   {searchedEmployee.first_name}
                 </td>

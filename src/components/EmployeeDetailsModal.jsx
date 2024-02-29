@@ -6,7 +6,7 @@ const EmployeeDetailsModal = ({ isModalOpen, modalContent, onClose }) => {
   }
 
   return (
-    <section className="modal">
+    <section className="modal z-20">
       <article className="modal-content p-lg-4">
         <div className="exit-icon text-end">
           <button
