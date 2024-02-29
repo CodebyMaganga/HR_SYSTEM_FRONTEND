@@ -134,7 +134,7 @@ function BottomCards() {
         </div>
 
         {/* Projects Overview*/}
-        <div className="col-lg-3 col-md-5 col-sm-12 col-xs-12 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5">
+        <div className="col-lg-3 col-md-5 col-sm-12 col-xs-12 rounded-[15px] overflow-auto h-[300px] shadow-lg bg-white p-4 m-2 mb-5 ">
           <h2 className="font-bold text-xl mb-4">Projects Overview</h2>
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
@@ -156,7 +156,7 @@ function BottomCards() {
           </ResponsiveContainer>
           <div className="flex justify-center">
             {projectData.map((entry, index) => (
-              <div key={`legend-${index}`} className="flex items-center mx-4">
+              <div key={`legend-${index}`} className="displaycards mx-4">
                 <div
                   className="mr-2"
                   style={{

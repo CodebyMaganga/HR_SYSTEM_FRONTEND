@@ -92,17 +92,17 @@ function Employees() {
         categoryFilter={categoryFilter}
         handleFilterChange={handleFilterChange}
       />
-      <div className=" @container grid items-center my-2 mx-10 ">
-        <table className=" border-b  min-w-full  text-center text-md bg-white  -mt-24 rounded-[10px] overflow-hidden shadow-lg mb-5">
+      <div className="container-fluid displaycards ">
+        <table className=" border-b tablecard text-center text-md bg-white   rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
-              <th className="px-6 py-4">Profile</th>
+              <th className="hidden lg:table-cell px-6 py-4">Profile</th>
               <th className="px-6 py-4">First Name</th>
-              <th className="px-6 py-4">Last Name</th>
+              <th className=" hidden lg:table-cell px-6 py-4">Last Name</th>
               <th className="px-6 py-4">Role</th>
-              <th className="px-6 py-4">Phone</th>
-              <th className="px-6 py-4">Status</th>
-              <th className="px-6 py-4">Action</th>
+              <th className="hidden sm:table-cell px-6 py-4">Phone</th>
+              <th className="hidden lg:table-cell px-6 py-4">Status</th>
+              <th className="hidden lg:table-cell px-6 py-4">Action</th>
               <th className="px-6 py-4">...</th>
             </tr>
           </thead>
@@ -112,22 +112,22 @@ function Employees() {
                 key={searchedEmployee.id}
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
                   {searchedEmployee.profile_picture}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {searchedEmployee.first_name}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
                   {searchedEmployee.last_name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {searchedEmployee.role}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className="hidden sm:table-cell whitespace-nowrap px-6 py-4">
                   {searchedEmployee.phone}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
                   <button
                     className={`rounded-md p-2 ${
                       searchedEmployee.active_status
@@ -140,7 +140,7 @@ function Employees() {
                       : "Inactive"}
                   </button>
                 </td>
-                <td className="flex gap-4 py-5 px-6 text-3xl">
+                <td className=" hidden lg:table-cell gap-4 flex py-4 px-6 text-xl">
                   <MdDelete
                     className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
                     onClick={() => deleteEmployee(searchedEmployee.id)}
@@ -165,7 +165,7 @@ function Employees() {
           </tbody>
         </table>
       </div>
-      <section>
+      <section className="displaycards">
         <EmployeeDetailsModal
           isModalOpen={isModalOpen}
           modalContent={modalContent}
