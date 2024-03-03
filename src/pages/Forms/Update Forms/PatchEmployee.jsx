@@ -35,43 +35,7 @@ const PatchEmployee = ({
   console.log(x, y);
 
   const formik = useFormik({
-    initialValues: {
-      profile_picture: "",
-      first_name: "",
-      last_name: "",
-      DOB: "",
-      email: "",
-      phone: "",
-      gender: "",
-      national_ID: "",
-      address: "",
-      role: "",
-      nationality: "",
-      emergency_contact: "",
-      active_status: "",
-      marital_status: "",
-      date_joined: "",
-      bankdetails: {
-        employee_salary: "",
-        employee_account: "",
-        employee_bank: "",
-        branch_code: "",
-      },
-      documents: {
-        document_type: "",
-      },
-      references: {
-        reference_name: "",
-        reference_phone: "",
-      },
-      dependants: {
-        first_name: "",
-        last_name: "",
-        gender: "",
-        age: "",
-        relationship: "",
-      },
-    },
+    initialValues: tempEmployee,
     validationSchema: Yup.object({
       profile_picture: Yup.string().required("Profile picture is required"),
       first_name: Yup.string().required("First name is required"),
@@ -141,6 +105,19 @@ const PatchEmployee = ({
       }
     },
   });
+
+  useEffect(() => {
+    formik.setValues(tempEmployee);
+  }, [tempEmployee]); // Update form values when tempEmployee changes
+
+  const handleInputChange = (fieldName, fieldValue) => {
+    setChanged(true);
+    setTempEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      [fieldName]: fieldValue,
+    }));
+    formik.setFieldValue(fieldName, fieldValue);
+  };
 
   if (isPatchModalOpen !== true) {
     return null;
