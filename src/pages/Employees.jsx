@@ -121,7 +121,7 @@ function Employees() {
               <th className="px-6 py-4">Role</th>
               <th className="hidden sm:table-cell px-6 py-4">Phone</th>
               <th className="hidden lg:table-cell px-6 py-4">Status</th>
-              <th className="hidden lg:table-cell px-6 py-4">Action</th>
+              <th className=" px-6 py-4">Action</th>
               <th className="px-6 py-4">...</th>
             </tr>
           </thead>
@@ -169,15 +169,15 @@ function Employees() {
                       : "Inactive"}
                   </button>
                 </td>
-                <td className=" hidden lg:table-cell gap-4 flex py-4 px-6 text-xl">
+                <td className="displaycards gap-4 flex py-4 px-6 text-2xl">
                   {searchedEmployee.active_status ? (
                     <>
                       <MdPersonOff
-                        className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
+                        className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out text-2xl mt-2"
                         onClick={() => deactivateEmployee(searchedEmployee.id)}
                       />
                       <CiEdit
-                        className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out"
+                        className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out text-2xl mt-2"
                         onClick={() => openPatchModal(searchedEmployee)}
                       />
                     </>

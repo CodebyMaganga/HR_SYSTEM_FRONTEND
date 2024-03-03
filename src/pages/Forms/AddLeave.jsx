@@ -5,7 +5,14 @@ import * as Yup from "yup";
 import Select from "react-select";
 import { BASE_URL } from "../../components/utils";
 
-const InputField = ({ label, name, value, onChange, placeholder, type = "text" }) => {
+const InputField = ({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+}) => {
   return (
     <div className="mb-4">
       <label className="block font-bold mb-1" htmlFor={name}>
@@ -40,7 +47,7 @@ function AddLeave() {
         const data = await res.json();
         const employeeOptions = data.map((employee) => ({
           value: employee.id,
-          label: `${employee.first_name} ${employee.last_name}`
+          label: `${employee.first_name} ${employee.last_name}`,
         }));
         setEmployees(employeeOptions);
       } catch (error) {
@@ -54,17 +61,17 @@ function AddLeave() {
       "Maternity",
       "Paternity",
       "Bereavement Leave",
-      "Family/Medical Leave"
+      "Family/Medical Leave",
     ];
 
-    const leaveTypeOptions = allLeaveTypes.map((type) => ({ // changed data.map to allLeaveTypes.map
+    const leaveTypeOptions = allLeaveTypes.map((type) => ({
+      // changed data.map to allLeaveTypes.map
       value: type, // changed type.id to type
       label: type,
     }));
     setLeaveTypes(leaveTypeOptions);
-    
-    fetchEmployees(); // moved this line inside useEffect
 
+    fetchEmployees(); // moved this line inside useEffect
   }, []);
 
   const formik = useFormik({
@@ -72,11 +79,15 @@ function AddLeave() {
       leave_from: "",
       leave_to: "",
       leave_letter: "",
+      employees_on_leave: 0,
     },
     validationSchema: Yup.object({
       leave_from: Yup.string().required("The day of leave is required"),
       leave_to: Yup.string().required("The last day of leave is required"),
       leave_letter: Yup.string().required("Leave letter is required"),
+      employees_on_leave: Yup.number().required(
+        "Employees on leave is required"
+      ),
     }),
     onSubmit: async (values, formikBag) => {
       try {
@@ -170,20 +181,20 @@ function AddLeave() {
             />
           </div>
         </div>
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-center mt-4">
           <button
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
           >
             Submit
           </button>
-          <button
+          {/* <button
             type="button"
             onClick={formik.handleReset}
             className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
           >
             Cancel
-          </button>
+          </button> */}
         </div>
       </form>
     </div>
