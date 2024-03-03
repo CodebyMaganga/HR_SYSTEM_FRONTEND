@@ -5,6 +5,7 @@ import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
 import toast from "react-hot-toast";
+import Avatar from "react-avatar";
 import EmployeeDetailsModal from "../components/EmployeeDetailsModal";
 import PatchEmployee from "./Forms/Update Forms/PatchEmployee";
 import SearchFilter from "../components/SearchFilter";
@@ -45,7 +46,7 @@ function Employees() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({active_status:0}),
+          body: JSON.stringify({ active_status: 0 }),
         });
         const data = await res.json();
 
@@ -97,8 +98,6 @@ function Employees() {
       ? searchedEmployees
       : searchedEmployees.filter((item) => item.category === categoryFilter));
 
-  
-
   return (
     <>
       <AddButtons
@@ -133,7 +132,16 @@ function Employees() {
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
-                  {searchedEmployee.profile_picture}
+                  <Avatar
+                    name={
+                      searchedEmployee.first_name +
+                      " " +
+                      searchedEmployee.last_name
+                    }
+                    size="40"
+                    round={true}
+                    //onClick={() => openModal(searchedEmployee)}
+                  />
                 </td>
 
                 <td className="whitespace-nowrap px-6 py-4">
@@ -162,18 +170,18 @@ function Employees() {
                   </button>
                 </td>
                 <td className=" hidden lg:table-cell gap-4 flex py-4 px-6 text-xl">
-                {searchedEmployee.active_status ? (
-                  <>
-                  <MdPersonOff
-                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
-                    onClick={() => deactivateEmployee(searchedEmployee.id)}
-                  />
-                  <CiEdit
-                    className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out"
-                    onClick={() => openPatchModal(searchedEmployee)}
-                  />
-                  </>
-                 ) : null}
+                  {searchedEmployee.active_status ? (
+                    <>
+                      <MdPersonOff
+                        className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
+                        onClick={() => deactivateEmployee(searchedEmployee.id)}
+                      />
+                      <CiEdit
+                        className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out"
+                        onClick={() => openPatchModal(searchedEmployee)}
+                      />
+                    </>
+                  ) : null}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedEmployee)}>
