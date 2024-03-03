@@ -395,60 +395,80 @@ const PatchEmployee = ({
                 <div className="border border-black p-4 rounded-md">
                   <h2 className="font-bold text-xl mb-4">Bank Details</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {tempEmployee.bankdetails.map((bankdetail) => (
-                      <div key={bankdetail.id}>
+                    {tempEmployee.bankdetails.map((bankdetail, index) => (
+                      <div key={index}>
                         <InputField
                           type="text"
-                          name="bankdetail.employee_salary"
+                          name={`bankdetails[${index}].employee_salary`}
                           value={bankdetail.employee_salary}
                           placeholder="Employee Salary"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedBankdetails = [
+                              ...tempEmployee.bankdetails,
+                            ];
+                            updatedBankdetails[index].employee_salary =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              employee_salary: e.target.value,
+                              bankdetails: updatedBankdetails,
                             });
                           }}
                         />
 
                         <InputField
                           type="text"
-                          name="bankdetails.employee_account"
+                          name={`bankdetails[${index}].employee_account`}
                           value={bankdetail.employee_account}
                           placeholder="Employee Account"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedBankdetails = [
+                              ...tempEmployee.bankdetails,
+                            ];
+                            updatedBankdetails[index].employee_account =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              bankdetails: updatedBankdetails,
                             });
                           }}
                         />
 
                         <InputField
                           type="text"
-                          name="bankdetails.employee_bank"
+                          name={`bankdetails[${index}].employee_bank`}
                           value={bankdetail.employee_bank}
                           placeholder="Employee Bank"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedBankdetails = [
+                              ...tempEmployee.bankdetails,
+                            ];
+                            updatedBankdetails[index].employee_bank =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              bankdetails: updatedBankdetails,
                             });
                           }}
                         />
 
                         <InputField
                           type="text"
-                          name="bankdetails.branch_code"
+                          name={`bankdetails[${index}].branch_code`}
                           value={bankdetail.branch_code}
                           placeholder="Branch Code"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedBankdetails = [
+                              ...tempEmployee.bankdetails,
+                            ];
+                            updatedBankdetails[index].branch_code =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              bankdetails: updatedBankdetails,
                             });
                           }}
                         />
@@ -461,18 +481,23 @@ const PatchEmployee = ({
                 <div className="border border-black p-4 rounded-md overflow-auto">
                   <h2 className="font-bold text-xl mb-4">Document Details</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {tempEmployee.documents.map((document) => (
-                      <div key={document.id}>
+                    {tempEmployee.documents.map((document, index) => (
+                      <div key={index}>
                         <InputField
                           type="text"
-                          name="documents.document_type"
+                          name={`documents[${index}].document_type`}
                           value={document.document_type}
                           placeholder="Document Type"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedDocuments = [
+                              ...tempEmployee.documents,
+                            ];
+                            updatedDocuments[index].document_type =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              documents: updatedDocuments,
                             });
                           }}
                         />
@@ -485,32 +510,42 @@ const PatchEmployee = ({
                 <div className="border border-black p-4 rounded-md">
                   <h2 className="font-bold text-xl mb-4">Reference Details</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {tempEmployee.references.map((reference) => (
-                      <div key={reference.id}>
+                    {tempEmployee.references.map((reference, index) => (
+                      <div key={index}>
                         <InputField
                           type="text"
-                          name="references.reference_name"
+                          name={`references[${index}].reference_name`}
                           value={reference.reference_name}
                           placeholder="Reference Name"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedReferences = [
+                              ...tempEmployee.references,
+                            ];
+                            updatedReferences[index].reference_name =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              references: updatedReferences,
                             });
                           }}
                         />
 
                         <InputField
                           type="text"
-                          name="references.reference_phone"
+                          name={`references[${index}].reference_phone`}
                           value={reference.reference_phone}
                           placeholder="Reference Phone"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedReferences = [
+                              ...tempEmployee.references,
+                            ];
+                            updatedReferences[index].reference_phone =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              references: updatedReferences,
                             });
                           }}
                         />
@@ -523,74 +558,96 @@ const PatchEmployee = ({
                 <div className="border border-black p-4 rounded-md">
                   <h2 className="font-bold text-xl mb-4">Dependants Details</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {tempEmployee.dependants.map((dependant) => (
-                      <div key={dependant.id}>
+                    {tempEmployee.dependants.map((dependant, index) => (
+                      <div key={index}>
                         <InputField
                           type="text"
-                          name="dependants.first_name"
+                          name={`dependants[${index}].first_name`}
                           value={dependant.first_name}
                           placeholder="Dependants First name"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedDependants = [
+                              ...tempEmployee.dependants,
+                            ];
+                            updatedDependants[index].first_name =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              dependants: updatedDependants,
                             });
                           }}
                         />
 
                         <InputField
                           type="text"
-                          name="dependants.last_name"
+                          name={`dependants[${index}].last_name`}
                           value={dependant.last_name}
                           placeholder="Dependants last name"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedDependants = [
+                              ...tempEmployee.dependants,
+                            ];
+                            updatedDependants[index].last_name = e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              dependants: updatedDependants,
                             });
                           }}
                         />
 
                         <InputField
                           type="text"
-                          name="dependants.gender"
+                          name={`dependants[${index}].gender`}
                           value={dependant.gender}
                           placeholder="Dependants gender"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedDependants = [
+                              ...tempEmployee.dependants,
+                            ];
+                            updatedDependants[index].gender = e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              dependants: updatedDependants,
                             });
                           }}
                         />
 
                         <InputField
                           type="number"
-                          name="dependants.age"
+                          name={`dependants[${index}].age`}
                           value={dependant.age}
                           placeholder="Dependants age"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedDependants = [
+                              ...tempEmployee.dependants,
+                            ];
+                            updatedDependants[index].age = e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              dependants: updatedDependants,
                             });
                           }}
                         />
 
                         <InputField
                           type="text"
-                          name="dependants.relationship"
+                          name={`dependants[${index}].relationship`}
                           value={dependant.relationship}
                           placeholder="Dependants relationship"
                           onChange={(e) => {
                             setChanged(true);
+                            const updatedDependants = [
+                              ...tempEmployee.dependants,
+                            ];
+                            updatedDependants[index].relationship =
+                              e.target.value;
                             setTempEmployee({
                               ...tempEmployee,
-                              first_name: e.target.value,
+                              dependants: updatedDependants,
                             });
                           }}
                         />
