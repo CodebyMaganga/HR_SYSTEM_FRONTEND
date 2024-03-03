@@ -5,6 +5,7 @@ import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
 import toast from "react-hot-toast";
+import Avatar from "react-avatar";
 import SearchFilter from "../components/SearchFilter";
 
 function JobApplicants() {
@@ -116,8 +117,17 @@ function JobApplicants() {
                 key={searchedJobApplicant.id}
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
-                <td className="whitespace-nowrap px-4 py-4 hidden  sm:table-cell">
-                  {searchedJobApplicant.photo}
+                <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
+                  <Avatar
+                    name={
+                      searchedJobApplicant.first_name +
+                      " " +
+                      searchedJobApplicant.last_name
+                    }
+                    size="40"
+                    round={true}
+                    //onClick={() => openModal(searchedJobApplicant)}
+                  />
                 </td>
                 <td className="whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.first_name}

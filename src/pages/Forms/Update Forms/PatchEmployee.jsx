@@ -638,7 +638,7 @@ const PatchEmployee = ({
                       {" "}
                       <button
                         type="submit"
-                        className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
+                        className="bg-[#FF605C] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
                         onClick={(e) => {
                           setPatchModalContent({ ...patchModalContent });
                           setChanged(false);
