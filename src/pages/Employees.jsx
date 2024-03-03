@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
-import { MdDelete } from "react-icons/md";
+import { MdPersonOff } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
@@ -37,23 +37,27 @@ function Employees() {
   };
 
   //delete function
-  const deleteEmployee = async (id) => {
-    if (window.confirm("Are you sure you want to delete this employee?")) {
+  const deactivateEmployee = async (id) => {
+    if (window.confirm("Are you sure you want to deactivate this employee?")) {
       try {
         const res = await fetch(`${BASE_URL}/employees/${id}`, {
-          method: "DELETE",
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({active_status:0}),
         });
         const data = await res.json();
 
         if (!res.ok) {
-          throw new Error(data.message || "Failed to delete the employee");
+          throw new Error(data.message || "Failed to deactivate the employee");
         }
 
         setEmployees(employees.filter((employee) => employee.id !== id));
-        toast.success("Employee deleted successfully");
+        toast.success("Employee deactivated successfully");
       } catch (error) {
         console.error("Error:", error);
-        toast.error("Delete failed: " + error.message);
+        toast.error("Deactivate failed: " + error.message);
       }
     }
   };
@@ -92,6 +96,8 @@ function Employees() {
     categoryFilter === "all"
       ? searchedEmployees
       : searchedEmployees.filter((item) => item.category === categoryFilter));
+
+  
 
   return (
     <>
@@ -156,14 +162,18 @@ function Employees() {
                   </button>
                 </td>
                 <td className=" hidden lg:table-cell gap-4 flex py-4 px-6 text-xl">
-                  <MdDelete
+                {searchedEmployee.active_status ? (
+                  <>
+                  <MdPersonOff
                     className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
-                    onClick={() => deleteEmployee(searchedEmployee.id)}
+                    onClick={() => deactivateEmployee(searchedEmployee.id)}
                   />
                   <CiEdit
                     className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out"
                     onClick={() => openPatchModal(searchedEmployee)}
                   />
+                  </>
+                 ) : null}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedEmployee)}>
