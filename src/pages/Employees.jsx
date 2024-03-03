@@ -6,14 +6,18 @@ import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
 import toast from "react-hot-toast";
 import EmployeeDetailsModal from "../components/EmployeeDetailsModal";
+import PatchEmployee from "./Forms/Update Forms/PatchEmployee";
 import SearchFilter from "../components/SearchFilter";
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [isPatchModalOpen, setIsPatchModalOpen] = useState(false);
+  const [patchModalContent, setPatchModalContent] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [tempEmployee, setTempEmployee] = useState();
 
   useEffect(() => {
     fetch(`${BASE_URL}/employees`)
@@ -61,6 +65,16 @@ function Employees() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openPatchModal = (content) => {
+    setIsPatchModalOpen(true);
+    setPatchModalContent(content);
+    setTempEmployee(content);
+  };
+
+  const closePatchModal = () => {
+    setIsPatchModalOpen(false);
   };
 
   const searchedEmployees = employees.filter(
@@ -146,7 +160,10 @@ function Employees() {
                     className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
                     onClick={() => deleteEmployee(searchedEmployee.id)}
                   />
-                  <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
+                  <CiEdit
+                    className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out"
+                    onClick={() => openPatchModal(searchedEmployee)}
+                  />
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedEmployee)}>
@@ -171,6 +188,16 @@ function Employees() {
           isModalOpen={isModalOpen}
           modalContent={modalContent}
           onClose={closeModal}
+        />
+      </section>
+      <section className="displaycards">
+        <PatchEmployee
+          isPatchModalOpen={isPatchModalOpen}
+          patchModalContent={patchModalContent}
+          setPatchModalContent={setPatchModalContent}
+          tempEmployee={tempEmployee}
+          setTempEmployee={setTempEmployee}
+          onClose={closePatchModal}
         />
       </section>
       ;
