@@ -16,13 +16,13 @@ import Accordion from "../components/Accordion";
 function Home() {
   const employeeCardData = {
     title: "Total employees",
-    text: "200",
+    text: "10",
     icon: <IoIosPeople className=" text-5xl bg-[#87D8FB] rounded-full p-1" />,
   };
 
   const onLeaveEmployeeCardData = {
     title: "Employees on leave",
-    text: "30",
+    text: "5",
     icon: (
       <IoIosBriefcase className=" text-5xl bg-[#FFA3AF] rounded-full p-1" />
     ),
@@ -30,7 +30,7 @@ function Home() {
 
   const projectsCardData = {
     title: "Projects",
-    text: "Active 5 ",
+    text: "Active 3 ",
     icon: <IoIosPaper className=" text-5xl bg-[#FFD639] rounded-full p-1" />,
   };
 
@@ -44,7 +44,7 @@ function Home() {
 
   const jobApplicantCardData = {
     title: "Job Applicants",
-    text: "12",
+    text: "10",
     icon: (
       <IoIosCheckmarkCircleOutline className=" text-5xl bg-[#FFA3AF] rounded-full p-1" />
     ),

@@ -96,7 +96,7 @@ const Accordion = () => {
             aria-expanded={isOpen}
             aria-controls="accordion-collapse-body-1"
           >
-            <span className="text-center text-black">Show stats</span>
+            <span className="text-center text-black text-xl">Show stats</span>
             <svg
               className={`w-3 h-3 rotate-${isOpen ? "0" : "180"} shrink-0`}
               aria-hidden="true"

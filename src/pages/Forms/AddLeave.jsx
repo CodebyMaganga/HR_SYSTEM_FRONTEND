@@ -69,14 +69,14 @@ function AddLeave() {
               type="text"
               name="leave_from"
               value={formik.values.leave_from}
-              placeholder="Enter Day of leave"
+              placeholder="Enter Day of leave    Format:YYYY-MM-DD"
               onChange={formik.handleChange}
             />
             <InputField
               type="text"
               name="leave_to"
               value={formik.values.leave_to}
-              placeholder="Enter last day of leave"
+              placeholder="Enter last day of leave :Format:YYYY-MM-DD"
               onChange={formik.handleChange}
             />
             <InputField
