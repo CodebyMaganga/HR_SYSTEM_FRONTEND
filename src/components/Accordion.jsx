@@ -26,20 +26,20 @@ const Accordion = () => {
     fetch(`${BASE_URL}/departments`)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
+ 
         setDepartments(data);
       });
 
     fetch(`${BASE_URL}/employees`)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
+ 
         setEmployees(data);
       });
     fetch(`${BASE_URL}/leaves`)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data, "onleave");
+     
         setleaveData(data);
       });
   }, []);

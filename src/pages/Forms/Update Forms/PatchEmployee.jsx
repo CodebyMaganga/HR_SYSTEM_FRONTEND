@@ -27,12 +27,12 @@ const PatchEmployee = ({
 }) => {
   const [changed, setChanged] = useState(false);
 
-  console.log(tempEmployee);
-  console.log(patchModalContent);
-  let x = 10;
-  let y = x;
-  y = 5;
-  console.log(x, y);
+  // console.log(tempEmployee);
+  // console.log(patchModalContent);
+  // let x = 10;
+  // let y = x;
+  // y = 5;
+  // // console.log(x, y);
 
   const formik = useFormik({
     initialValues: tempEmployee,

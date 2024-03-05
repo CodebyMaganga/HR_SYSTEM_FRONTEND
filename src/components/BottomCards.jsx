@@ -7,7 +7,13 @@ function BottomCards() {
   const [projectData, setProjectData] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/projects`)
+    fetch(`${BASE_URL}/projects`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}` ,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         // Count projects by status
