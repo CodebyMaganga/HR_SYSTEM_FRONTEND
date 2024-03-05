@@ -1,19 +1,24 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
-import { MdDelete } from "react-icons/md";
+import { MdPersonOff } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
 import toast from "react-hot-toast";
+import Avatar from "react-avatar";
 import EmployeeDetailsModal from "../components/EmployeeDetailsModal";
+import PatchEmployee from "./Forms/Update Forms/PatchEmployee";
 import SearchFilter from "../components/SearchFilter";
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [isPatchModalOpen, setIsPatchModalOpen] = useState(false);
+  const [patchModalContent, setPatchModalContent] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [tempEmployee, setTempEmployee] = useState();
 
   useEffect(() => {
     fetch(`${BASE_URL}/employees`)
@@ -33,23 +38,27 @@ function Employees() {
   };
 
   //delete function
-  const deleteEmployee = async (id) => {
-    if (window.confirm("Are you sure you want to delete this employee?")) {
+  const deactivateEmployee = async (id) => {
+    if (window.confirm("Are you sure you want to deactivate this employee?")) {
       try {
         const res = await fetch(`${BASE_URL}/employees/${id}`, {
-          method: "DELETE",
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ active_status: 0 }),
         });
         const data = await res.json();
 
         if (!res.ok) {
-          throw new Error(data.message || "Failed to delete the employee");
+          throw new Error(data.message || "Failed to deactivate the employee");
         }
 
         setEmployees(employees.filter((employee) => employee.id !== id));
-        toast.success("Employee deleted successfully");
+        toast.success("Employee deactivated successfully");
       } catch (error) {
         console.error("Error:", error);
-        toast.error("Delete failed: " + error.message);
+        toast.error("Deactivate failed: " + error.message);
       }
     }
   };
@@ -61,6 +70,16 @@ function Employees() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openPatchModal = (content) => {
+    setIsPatchModalOpen(true);
+    setPatchModalContent(content);
+    setTempEmployee(content);
+  };
+
+  const closePatchModal = () => {
+    setIsPatchModalOpen(false);
   };
 
   const searchedEmployees = employees.filter(
@@ -102,7 +121,7 @@ function Employees() {
               <th className="px-6 py-4">Role</th>
               <th className="hidden sm:table-cell px-6 py-4">Phone</th>
               <th className="hidden lg:table-cell px-6 py-4">Status</th>
-              <th className="hidden lg:table-cell px-6 py-4">Action</th>
+              <th className=" px-6 py-4">Action</th>
               <th className="px-6 py-4">...</th>
             </tr>
           </thead>
@@ -113,7 +132,16 @@ function Employees() {
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
-                  {searchedEmployee.profile_picture}
+                  <Avatar
+                    name={
+                      searchedEmployee.first_name +
+                      " " +
+                      searchedEmployee.last_name
+                    }
+                    size="40"
+                    round={true}
+                    //onClick={() => openModal(searchedEmployee)}
+                  />
                 </td>
 
                 <td className="whitespace-nowrap px-6 py-4">
@@ -141,12 +169,19 @@ function Employees() {
                       : "Inactive"}
                   </button>
                 </td>
-                <td className=" hidden lg:table-cell gap-4 flex py-4 px-6 text-xl">
-                  <MdDelete
-                    className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out"
-                    onClick={() => deleteEmployee(searchedEmployee.id)}
-                  />
-                  <CiEdit className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out" />
+                <td className="displaycards gap-4 flex py-4 px-6 text-2xl">
+                  {searchedEmployee.active_status ? (
+                    <>
+                      <MdPersonOff
+                        className="hover:text-red-500 transition duration-150 hover:scale-150 hover:ease-in-out text-2xl mt-2"
+                        onClick={() => deactivateEmployee(searchedEmployee.id)}
+                      />
+                      <CiEdit
+                        className="hover:text-orange-600 transition duration-150 hover:scale-150 hover:ease-in-out text-2xl mt-2"
+                        onClick={() => openPatchModal(searchedEmployee)}
+                      />
+                    </>
+                  ) : null}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedEmployee)}>
@@ -171,6 +206,16 @@ function Employees() {
           isModalOpen={isModalOpen}
           modalContent={modalContent}
           onClose={closeModal}
+        />
+      </section>
+      <section className="displaycards">
+        <PatchEmployee
+          isPatchModalOpen={isPatchModalOpen}
+          patchModalContent={patchModalContent}
+          setPatchModalContent={setPatchModalContent}
+          tempEmployee={tempEmployee}
+          setTempEmployee={setTempEmployee}
+          onClose={closePatchModal}
         />
       </section>
       ;
