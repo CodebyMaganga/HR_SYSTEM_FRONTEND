@@ -32,7 +32,6 @@ const AddEmployee = () => {
       address: "",
       role: "",
       nationality: "",
-      emergency_contact: "",
       active_status: "",
       marital_status: "",
       date_joined: "",
@@ -76,7 +75,6 @@ const AddEmployee = () => {
       address: Yup.string().required("Address is required"),
       role: Yup.string().required("Role is required"),
       nationality: Yup.string().required("Nationality is required"),
-      emergency_contact: Yup.string().required("Emergency contact is required"),
       active_status: Yup.string().required("Active status is required"),
       marital_status: Yup.string().required("Marital status is required"),
       date_joined: Yup.date().required("Date joined is required"),
@@ -232,14 +230,6 @@ const AddEmployee = () => {
               name="nationality"
               value={formik.values.nationality}
               placeholder="Nationality"
-              onChange={formik.handleChange}
-            />
-
-            <InputField
-              type="text"
-              name="emergency_contact"
-              value={formik.values.emergency_contact}
-              placeholder="Emergency Contact"
               onChange={formik.handleChange}
             />
 
