@@ -64,7 +64,7 @@ function AddInterview() {
               type="text"
               name="time"
               value={formik.values.time}
-              placeholder="Enter interview allocated time"
+              placeholder="Enter interview allocated time:"
               onChange={formik.handleChange}
             />
 

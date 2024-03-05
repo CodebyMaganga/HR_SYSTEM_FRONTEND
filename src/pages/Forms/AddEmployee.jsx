@@ -32,10 +32,16 @@ const AddEmployee = () => {
       address: "",
       role: "",
       nationality: "",
-      emergency_contact: "",
       active_status: "",
       marital_status: "",
       date_joined: "",
+      emergency_contacts: {
+        first_name: "",
+        last_name: "",
+        gender: "",
+        relationship: "",
+        phone: "",
+      },
       bankdetails: {
         employee_salary: "",
         employee_account: "",
@@ -69,10 +75,18 @@ const AddEmployee = () => {
       address: Yup.string().required("Address is required"),
       role: Yup.string().required("Role is required"),
       nationality: Yup.string().required("Nationality is required"),
-      emergency_contact: Yup.string().required("Emergency contact is required"),
       active_status: Yup.string().required("Active status is required"),
       marital_status: Yup.string().required("Marital status is required"),
       date_joined: Yup.date().required("Date joined is required"),
+      emergency_contacts: Yup.object({
+        first_name: Yup.string().required("Emergency first name is required"),
+        last_name: Yup.string().required("Emergency's last name is required"),
+        gender: Yup.string().required("Emergency's gender is required"),
+        phone: Yup.string().required("Emergency's phone number is required"),
+        relationship: Yup.string().required(
+          "Emergency's relationship is required"
+        ),
+      }),
       bankdetails: Yup.object({
         employee_salary: Yup.string().required("Employee salary is required"),
         employee_account: Yup.string().required("Employee account is required"),
@@ -220,14 +234,6 @@ const AddEmployee = () => {
             />
 
             <InputField
-              type="text"
-              name="emergency_contact"
-              value={formik.values.emergency_contact}
-              placeholder="Emergency Contact"
-              onChange={formik.handleChange}
-            />
-
-            <InputField
               type="checkbox"
               name="active_status"
               value={formik.values.active_status}
@@ -253,6 +259,51 @@ const AddEmployee = () => {
           </div>
         </div>
 
+        {/* Emergency Contacts Details Section */}
+        <div className="border border-black p-4 rounded-md">
+          <h2 className="font-bold text-xl mb-4">Emergency Contacts Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputField
+              type="text"
+              name="emergency_contacts.first_name"
+              value={formik.values.emergency_contacts.first_name}
+              placeholder="Emergency Contact first name"
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              type="text"
+              name="emergency_contacts.last_name"
+              value={formik.values.emergency_contacts.last_name}
+              placeholder="Emergency Contact last name"
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              type="text"
+              name="emergency_contacts.gender"
+              value={formik.values.emergency_contacts.gender}
+              placeholder="Emergency Contact gender"
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              type="text"
+              name="emergency_contacts.phone"
+              value={formik.values.emergency_contacts.phone}
+              placeholder="Emergency Contact phone no:"
+              onChange={formik.handleChange}
+            />
+            <InputField
+              type="text"
+              name="emergency_contacts.relationship"
+              value={formik.values.emergency_contacts.relationship}
+              placeholder="Emergency Contact Relationship"
+              onChange={formik.handleChange}
+            />
+          </div>
+        </div>
+
         {/* Bank Details Section */}
         <div className="border border-black p-4 rounded-md">
           <h2 className="font-bold text-xl mb-4">Bank Details</h2>
@@ -261,7 +312,7 @@ const AddEmployee = () => {
               type="text"
               name="bankdetails.employee_salary"
               value={formik.values.bankdetails.employee_salary}
-              placeholder="Employee Salary"
+              placeholder="Employee Salaries"
               onChange={formik.handleChange}
             />
 

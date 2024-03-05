@@ -87,16 +87,16 @@ const Accordion = () => {
 
   return (
     <>
-      <div className="bg-white ">
+      <div className="bg-white hidden sm:block">
         <h2>
           <button
             type="button"
             onClick={toggleAccordion}
-            className="flex bg-white items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+            className="flex bg-white items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-[#CBF2FF] dark: gap-3"
             aria-expanded={isOpen}
             aria-controls="accordion-collapse-body-1"
           >
-            <span className="text-center">Show stats</span>
+            <span className="text-center text-black text-xl">Show stats</span>
             <svg
               className={`w-3 h-3 rotate-${isOpen ? "0" : "180"} shrink-0`}
               aria-hidden="true"
@@ -116,70 +116,72 @@ const Accordion = () => {
         </h2>
 
         {isOpen && (
-          <div className="grid place-items-center">
-            <div className="mb-10 mt-4 text-center">
-              <h2>No. of employees in each department</h2>
-            </div>
-            <LineChart
-              width={730}
-              height={250}
-              data={departmentData}
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="department_name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="department_employee_count"
-                stroke="#8884d8"
-              />
-            </LineChart>
-            <div>
+          <div className="container hidden sm:block">
+            <div className="row ">
               <div className="mb-10 mt-4 text-center">
-                <h2>Employees age in the company</h2>
+                <h2>No. of employees in each department</h2>
               </div>
-              <AreaChart
+              <LineChart
                 width={730}
                 height={250}
-                data={employeeData}
-                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                data={departmentData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="department_name" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Area
-                  type="monotone"
-                  dataKey="age"
-                  stackId="1"
-                  fill="#8884d8"
-                />
-              </AreaChart>
-            </div>
-            <div>
-              <div className="mb-10 mt-4 text-center">
-                <h2>Employees on Leave</h2>
-              </div>
-              <LineChart
-                width={730}
-                height={250}
-                data={processData()}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="employeesOnLeave" />
-                <YAxis dataKey="month" type="category" />
-                <Tooltip />
                 <Line
                   type="monotone"
-                  dataKey="employeesOnLeave"
+                  dataKey="department_employee_count"
                   stroke="#8884d8"
                 />
               </LineChart>
+              <div>
+                <div className="mb-10 mt-4 text-center">
+                  <h2>Employees age in the company</h2>
+                </div>
+                <AreaChart
+                  width={730}
+                  height={250}
+                  data={employeeData}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="department_name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Area
+                    type="monotone"
+                    dataKey="age"
+                    stackId="1"
+                    fill="#8884d8"
+                  />
+                </AreaChart>
+              </div>
+              <div>
+                <div className="mb-10 mt-4 text-center">
+                  <h2>Employees on Leave</h2>
+                </div>
+                <LineChart
+                  width={730}
+                  height={250}
+                  data={processData()}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="employeesOnLeave" />
+                  <YAxis dataKey="month" type="category" />
+                  <Tooltip />
+                  <Line
+                    type="monotone"
+                    dataKey="employeesOnLeave"
+                    stroke="#8884d8"
+                  />
+                </LineChart>
+              </div>
             </div>
           </div>
         )}
