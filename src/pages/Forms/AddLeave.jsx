@@ -79,21 +79,19 @@ function AddLeave() {
       leave_from: "",
       leave_to: "",
       leave_letter: "",
-      employees_on_leave: 0,
+      employee_id: 0,
     },
     validationSchema: Yup.object({
       leave_from: Yup.string().required("The day of leave is required"),
       leave_to: Yup.string().required("The last day of leave is required"),
       leave_letter: Yup.string().required("Leave letter is required"),
-      employees_on_leave: Yup.number().required(
-        "Employees on leave is required"
-      ),
+      employee_id: Yup.number().required("Employees on leave is required"),
     }),
     onSubmit: async (values, formikBag) => {
       try {
         const submissionValues = {
           ...values,
-          employee: selectedEmployee ? selectedEmployee.value : null,
+          employee_id: selectedEmployee ? selectedEmployee.value : null,
           leave_type: selectedLeaveType ? selectedLeaveType.value : null,
         };
 
@@ -134,7 +132,7 @@ function AddLeave() {
                 Employee
               </label>
               <Select
-                id="employees_on_leave"
+                id="employee_id"
                 value={selectedEmployee}
                 onChange={setSelectedEmployee}
                 options={employees}
