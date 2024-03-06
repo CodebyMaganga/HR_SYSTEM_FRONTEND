@@ -2,20 +2,20 @@
 ## Table of Contents
 - [OverView](#overview)
 - [Features](#features)
-- [Technologies](#Technologies)
-- [Installation](#Installation)
-- [Usage](#Usage)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Contributing](#contributing)
 - [Collaborators](#collaborators)
 - [License](#license)
 ## OverView
 The HR Management System is a comprehensive solution designed to streamline employee and department management, project oversight, and payroll administration within an organization. This system provides functionalities such as employee status tracking, leave management, interview and job applicant tracking, departmental organization, project status monitoring, and payroll management.
 ## Features
-**Employee Management**: Tracks active and inactive employees, as well as employees on leave.
-**Department Management**: Manages departmental organization and provides insights into department staff.
-**Project Overview**: Monitors the status of projects, including active, inactive, completed, and ongoing projects.
-**Payroll Management**: Calculates and displays the gross salary of employees and manages payroll information.
-**Statistics**: Provides statistics on employee age distribution and departmental staff count.
+- **Employee Management**: Tracks active and inactive employees, as well as employees on leave.
+- **Department Management**: Manages departmental organization and provides insights into department staff.
+- **Project Overview**: Monitors the status of projects, including active, inactive, completed, and ongoing projects.
+- **Payroll Management**: Calculates and displays the gross salary of employees and manages payroll information.
+- **Statistics**: Provides statistics on employee age distribution and departmental staff count.
 ## Technologies
 **Frontend**: React, HTML, CSS, Tailwind CSS
 **Backend**: Python, SQL, Flask
