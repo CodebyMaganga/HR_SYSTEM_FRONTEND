@@ -17,7 +17,7 @@ function Projects() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}` ,
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
     })
       .then((res) => res.json())
@@ -47,7 +47,6 @@ function Projects() {
   const searchedProjects = projects.filter((project) =>
     project.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  // console.log(searchedEmployees);
 
   const handleFilterChange = (category) => {
     setCategoryFilter(category);
