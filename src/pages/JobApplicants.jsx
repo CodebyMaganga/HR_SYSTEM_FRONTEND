@@ -97,7 +97,7 @@ function JobApplicants() {
       </div>
       <div className="overflow-x-auto m-5">
         <table className=" border-b text-center text-md bg-white rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b font-medium text-black bg-gray-300">
+          <thead className="border-b  font-medium text-black bg-[#EEAD49] ">
             <tr>
               <th className="px-4 py-4 hidden  sm:table-cell">Profile</th>
               <th className="px-4 py-4">First Name</th>

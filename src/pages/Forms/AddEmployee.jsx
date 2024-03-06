@@ -282,7 +282,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             /> */}
 
-<DropdownField
+            <DropdownField
               label="Nationality"
               name="nationality"
               required={true}
@@ -311,7 +311,7 @@ const AddEmployee = () => {
                 { label: "Saudi Arabian", value: "Saudi Arabian" },
               ]}
             />
-            
+
             {/* <InputField
               //type="checkbox"
               label="Active Status"
@@ -321,7 +321,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             /> */}
 
-<DropdownField
+            <DropdownField
               label="Active Status"
               name="active_status"
               required={true}
@@ -330,7 +330,7 @@ const AddEmployee = () => {
               options={[
                 { label: "Active", value: "Active" },
                 { label: "Inactive", value: "Inactive" },
-                
+
                 // Add any other relevant options here
               ]}
             />
@@ -534,11 +534,12 @@ const AddEmployee = () => {
         description: "",
         condition: "",
         serial_number: "",*/}
-        <h2 className="font-bold text-xl mb-4 text-center">Company Properites</h2>
+        <h2 className="font-bold text-xl mb-4 text-center">
+          Company Properites
+        </h2>
         <div className="border border-black p-4 rounded-md">
           <div className="space-y-4">
-
-          <DropdownField
+            <DropdownField
               label="Property Category"
               name="companyproperties.category"
               required={true}
@@ -553,11 +554,14 @@ const AddEmployee = () => {
                 { label: "Library books", value: "library books" },
                 { label: "Sports equipments", value: "equipments" },
                 { label: "Classroom furniture", value: "classroom furniture" },
-                { label: "Interractive whiteboard", value: "interactive whiteboard" },
+                {
+                  label: "Interractive whiteboard",
+                  value: "interactive whiteboard",
+                },
               ]}
             />
 
-<DropdownField
+            <DropdownField
               label="Property Condition"
               name="companyproperties.category"
               required={true}
@@ -570,7 +574,7 @@ const AddEmployee = () => {
               ]}
             />
 
-<InputField
+            <InputField
               label="Property Brand"
               name="companyproperties.brand"
               required={true}
@@ -579,7 +583,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             />
 
-<InputField
+            <InputField
               label="Property SerialNumber"
               name="companyproperties.serial_number"
               required={true}
@@ -587,7 +591,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             />
 
-<InputField
+            <InputField
               label="Property Description"
               name="companyproperties.description"
               required={true}
@@ -596,8 +600,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             />
           </div>
-          </div>
-
+        </div>
 
         {/* Document Details Section */}
         <h2 className="font-bold text-xl mb-4 text-center">Document Details</h2>
@@ -612,7 +615,7 @@ const AddEmployee = () => {
               onChange={formik.handleChange}
             /> */}
 
-<DropdownField
+            <DropdownField
               label="Document Type"
               name="documents.document_type"
               required={true}

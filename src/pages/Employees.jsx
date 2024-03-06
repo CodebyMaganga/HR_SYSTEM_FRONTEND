@@ -112,8 +112,8 @@ function Employees() {
         handleFilterChange={handleFilterChange}
       />
       <div className="container-fluid displaycards ">
-        <table className=" border-b tablecard text-center text-md bg-white   rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b  font-medium text-black bg-gray-300 ">
+        <table className=" border-b tablecard text-center text-md bg-white  rounded-[10px] overflow-hidden shadow-lg mb-5">
+          <thead className="border-b  font-medium text-black bg-[#EEAD49] ">
             <tr>
               <th className="hidden lg:table-cell px-6 py-4">Profile</th>
               <th className="px-6 py-4">First Name</th>
@@ -185,13 +185,7 @@ function Employees() {
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedEmployee)}>
-                    <button
-                      style={{
-                        backgroundColor: "lightblue",
-                        padding: "6px",
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <button className="bg-[#EEAD49] hover:bg-white text-black hover:text-black p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
                       View More Details
                     </button>
                   </p>
