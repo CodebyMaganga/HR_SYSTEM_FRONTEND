@@ -47,16 +47,16 @@ const ProjectDetailsModal = ({ isModalOpen, modalContent, onClose }) => {
                 <div className="flex flex-col justify-start p-6">
                   <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
                     {/* Card title :  */}
-                    Employee ID: {project_employee.employee.id}
+                    Employee ID: {project_employee.id}
                   </h5>
                   <p className="mb-4 text-xl text-base text-neutral-600 dark:text-neutral-200">
-                    Name : {project_employee.employee.first_name} &nbsp;
-                    {project_employee.employee.last_name}
+                    Name : {project_employee.first_name} &nbsp;
+                    {project_employee.last_name}
                     <br />
-                    Role: {project_employee.employee.role}
+                    Role: {project_employee.role}
                   </p>
                   <p className="text-xl text-neutral-500 dark:text-neutral-300">
-                    Contact: {project_employee.employee.phone}
+                    Contact: {project_employee.phone}
                   </p>
                 </div>
               </div>
