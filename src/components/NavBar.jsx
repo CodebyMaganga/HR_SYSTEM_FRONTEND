@@ -5,7 +5,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 import { FaRegBell, FaMoon, FaSun } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import LOGO from "../logo/LOGO.png"
+import LOGO from "../logo/LOGO.png";
 
 const navigation = [
   { name: "Dashboard", href: "/home", current: true },
@@ -41,7 +41,10 @@ function NavBar() {
   };
 
   return (
-    <Disclosure as="nav" className={`${darkMode && 'dark'} bg-gray-800 dark:bg-slate-300 `}>
+    <Disclosure
+      as="nav"
+      className={`${darkMode && "dark"} bg-[#13325A] dark:bg-slate-300 `}
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -61,12 +64,11 @@ function NavBar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <NavLink to="/home" activeclassname="active">
-                  <img
-          className="mx-auto h-14 w-auto "
-          src={LOGO}
-          alt="Your Company"
-        />
-           
+                    <img
+                      className="mx-auto h-14 w-auto "
+                      src={LOGO}
+                      alt="Your Company"
+                    />
                   </NavLink>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">

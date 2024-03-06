@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
 import SearchFilter from "../components/SearchFilter";
+import PaySlipModal from "../components/PaySlipModal";
 
 let totalTax, netSalary;
 
@@ -107,6 +108,8 @@ function Payroll() {
   const [payments, setPayments] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   const month = [
     "January",
@@ -202,6 +205,15 @@ function Payroll() {
       ? searchedPayments
       : searchedPayments.filter((item) => item.category === categoryFilter));
 
+  const openModal = (content) => {
+    setIsModalOpen(true);
+    setModalContent(content);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <SearchFilter
@@ -212,10 +224,10 @@ function Payroll() {
       />
       <div className="grid displaycards overflow-x-auto my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b  font-medium text-black bg-gray-300 ">
+          <thead className="border-b  font-medium text-black bg-[#EEAD49] ">
             <tr>
               <th className="px-6 py-4">Employee Name</th>
-              <th className="px-6 py-4">Bank Details</th>
+              {/* <th className="px-6 py-4">Bank Details</th> */}
               <th className="px-6 py-4">Gross Salary</th>
               <th className="px-6 py-4"> PAYE Deductions</th>
               <th className="px-6 py-4"> NHIF</th>
@@ -223,6 +235,7 @@ function Payroll() {
               <th className="px-6 py-4"> Housing</th>
               <th className="px-6 py-4">Net Salary</th>
               <th className="px-6 py-4">Month</th>
+              <th className="px-6 py-4"> ... </th>
             </tr>
           </thead>
           <tbody>
@@ -235,9 +248,9 @@ function Payroll() {
                   {searchedPayment.employee.first_name}{" "}
                   {searchedPayment.employee.last_name}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                {/* <td className="whitespace-nowrap px-6 py-4">
                   {searchedPayment.employee_bank}
-                </td>
+                </td> */}
                 <td className="whitespace-nowrap px-6 py-4">
                   {searchedPayment.employee_salary}
                 </td>
@@ -259,11 +272,30 @@ function Payroll() {
                 <td className="whitespace-nowrap px-6 py-4">
                   {paymentMonth} {paymentYear}
                 </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  <p onClick={() => openModal(searchedPayment)}>
+                    <button className="bg-[#EEAD49] hover:bg-white text-black hover:text-black p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
+                      View Pay Slip
+                    </button>
+                  </p>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <section>
+        <PaySlipModal
+          isModalOpen={isModalOpen}
+          modalContent={modalContent}
+          onClose={closeModal}
+          CountDeductions={CountDeductions}
+          handleNHIFdeductions={handleNHIFdeductions}
+          handleNSSFdeduction={handleNSSFdeduction}
+          houseLevyDeduction={houseLevyDeduction}
+          handleDeductions={handleDeductions}
+        />
+      </section>
     </>
   );
 }
