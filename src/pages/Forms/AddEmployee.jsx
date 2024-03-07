@@ -154,7 +154,7 @@ const AddEmployee = () => {
         ),
       }),
       companyproperties: Yup.object({
-        category: Yup.string().required("Categoty is required"),
+        category: Yup.string().required("Category is required"),
         brand: Yup.string().required("Brand is required"),
         description: Yup.string().required("Descriptionis required"),
         condition: Yup.string().required("Condition is required"),
@@ -162,6 +162,8 @@ const AddEmployee = () => {
       }),
     }),
     onSubmit: async (values, formikBag) => {
+      console.log("Form submitted:", values);
+      console.log("Form errors:", formikBag.errors); 
       try {
         const res = await fetch(`${BASE_URL}/employees`, {
           method: "POST",
@@ -176,11 +178,11 @@ const AddEmployee = () => {
           throw new Error("Failed to add employee");
         }
 
-        if (data.statusCode === 200) {
-          toast.success(data.message);
+        if (res.ok) {
+          toast.success("Employee added successfully");
           formikBag.resetForm();
         } else {
-          toast.error(data.message);
+          toast.error("Failed to add employee");
         }
       } catch (error) {
         console.log("Unable to add employee", error.message);
@@ -478,12 +480,6 @@ const AddEmployee = () => {
               value={formik.values.dependants.last_name}
               onChange={formik.handleChange}
             />
-            {/* <InputField
-              label="Dependants gender"
-              name="dependants.gender"
-              value={formik.values.dependants.gender}
-              onChange={formik.handleChange}
-            /> */}
 
             <DropdownField
               label="Dependants gender"
@@ -495,7 +491,6 @@ const AddEmployee = () => {
                 { label: "Female", value: "female" },
                 { label: "Male", value: "male" },
                 { label: "Prefer not to say", value: "prefer_not_to_say" },
-                // Add any other relevant options here
               ]}
             />
             <InputField
@@ -505,12 +500,6 @@ const AddEmployee = () => {
               value={formik.values.dependants.age}
               onChange={formik.handleChange}
             />
-            {/* <InputField
-              label="Dependants relationship"
-              name="dependants.relationship"
-              value={formik.values.dependants.relationship}
-              onChange={formik.handleChange}
-            /> */}
 
             <DropdownField
               label="Dependants relationship"
@@ -522,17 +511,11 @@ const AddEmployee = () => {
                 { label: "Son", value: "son" },
                 { label: "Daughter", value: "daughter" },
                 { label: "Mother", value: "mother" },
-                // Add any other relevant options here
               ]}
             />
           </div>
         </div>
 
-        {/* Company details Details Section  category: "",
-        brand: "",
-        description: "",
-        condition: "",
-        serial_number: "",*/}
         <h2 className="font-bold text-xl mb-4 text-center">
           Company Properites
         </h2>
@@ -605,15 +588,6 @@ const AddEmployee = () => {
         <h2 className="font-bold text-xl mb-4 text-center">Document Details</h2>
         <div className="border border-black p-4 rounded-md">
           <div className="space-y-4">
-            {/* <InputField
-              label="Document Type"
-              name="documents.document_type"
-              required={true}
-              placeholder={"eg; Contract, full time, part time"}
-              value={formik.values.documents.document_type}
-              onChange={formik.handleChange}
-            /> */}
-
             <DropdownField
               label="Document Type"
               name="documents.document_type"
