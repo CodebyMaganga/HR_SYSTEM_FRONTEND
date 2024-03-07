@@ -86,15 +86,13 @@ function AddJobapplicant() {
         });
         const data = await res.json();
 
-        if (!res.ok) {
-          throw new Error("Failed to add Job Applicant");
+        if (res.ok) {
+          toast.success("Applicant added successfully");
+          formikBag.resetForm();
         }
 
-        if (data.statusCode === 200) {
-          toast.success(data.message);
-          formikBag.resetForm();
-        } else {
-          toast.error(data.message);
+         else {
+          toast.error("Failed to add job applicants");
         }
       } catch (error) {
         console.log("Unable to add job applicants", error.message);
