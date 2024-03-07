@@ -4,8 +4,8 @@ import { FaBars } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
 import { FaRegBell, FaMoon, FaSun } from "react-icons/fa";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { FaMoon, FaSun } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+// import { FaMoon, FaSun } from "react-icons/fa";
+// import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import LOGO from "../logo/LOGO.jpg";
 

@@ -111,6 +111,8 @@ function Payroll() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
+  let counter = 0;
+
   const month = [
     "January",
     "February",
