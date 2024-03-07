@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import LOGO1 from "../logo/LOGO1.png"
+import LOGO from "../logo/LOGO.jpg";
 
 function Login() {
   {
@@ -61,8 +61,8 @@ function Login() {
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-2 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
-          className="mx-auto h-[200px] w-auto mb-0"
-          src={LOGO1}
+          className=" h-[200px] w-auto  logo1"
+          src={LOGO}
           alt="Your Company"
         />
         <h2 className="-mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -109,7 +109,7 @@ function Login() {
               <div className="text-sm">
                 <a
                   href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  className="font-semibold text-[#13325A] hover:text-indigo-500"
                 >
                   Forgot password?
                 </a>
@@ -132,7 +132,7 @@ function Login() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-white hover:bg-[#EEAD49] hover: border border-[#EEAD49] px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm "
             >
               Sign in
             </button>

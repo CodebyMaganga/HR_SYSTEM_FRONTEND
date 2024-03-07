@@ -11,7 +11,7 @@ function BottomCards() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}` ,
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
     })
       .then((res) => res.json())
@@ -98,7 +98,7 @@ function BottomCards() {
                     </div>
                   </div>
                   <div>
-                    <button className="px-3 text-sm hover:bg-[#F9DDEE]  bg-[#CBF2FF] text-black font-bold py-2 rounded-full">
+                    <button className="px-3 text-sm bg-white hover:bg-[#EEAD49] text-black hover:text-black hover: border border-[#EEAD49] font-bold py-2 rounded-full">
                       {jobApplicant.role_applied}
                     </button>
                   </div>
@@ -129,7 +129,7 @@ function BottomCards() {
                     </div>
                   </div>
                   <div>
-                    <button className="px-3 text-sm hover:bg-[#F9DDEE]  bg-[#CBF2FF] text-black font-bold py-2 rounded-full">
+                    <button className="px-3 text-sm text-black bg-white hover:bg-[#EEAD49] hover:text-black hover: border border-[#EEAD49] font-bold py-2 rounded-full">
                       {interview.time}
                     </button>
                   </div>

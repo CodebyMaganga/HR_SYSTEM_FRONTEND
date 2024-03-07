@@ -54,10 +54,10 @@ function ExampleParams() {
                     />
                     <div>
                       <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                        {department_employee.employee.first_name}
+                        {department_employee.first_name}
                       </h3>
                       <p className="text-sm font-semibold leading-6 text-indigo-600">
-                        {department_employee.employee.email}
+                        {department_employee.email}
                       </p>
                     </div>
                   </div>

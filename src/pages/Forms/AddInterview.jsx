@@ -57,14 +57,14 @@ function AddInterview() {
     <div className="container bg-white mx-auto p-4">
       <form className="space-y-8" onSubmit={formik.handleSubmit}>
         {/*   Interview Details Section */}
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <h2 className="font-bold text-xl mb-4">Interviews Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               type="text"
               name="time"
               value={formik.values.time}
-              placeholder="Enter interview allocated time:"
+              placeholder="Enter interview allocated time"
               onChange={formik.handleChange}
             />
 
@@ -79,7 +79,7 @@ function AddInterview() {
         </div>
         <button
           type="submit"
-          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
+          className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] displaycards font-bold py-2 px-4 rounded"
         >
           Submit
         </button>

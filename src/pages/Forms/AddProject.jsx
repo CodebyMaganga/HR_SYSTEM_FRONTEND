@@ -81,9 +81,7 @@ function AddProject() {
         if (res.ok) {
           toast.success("Project added successfully");
           formikBag.resetForm();
-        }
-
-         else {
+        } else {
           toast.error("Failed to add projects");
         }
       } catch (error) {
@@ -95,9 +93,9 @@ function AddProject() {
   return (
     <div className="w-2/4 mx-auto bg-white p-4 rounded">
       <form className="space-y-8" onSubmit={formik.handleSubmit}>
-        {/*   Project Details Section */}
-        <h2 className="font-bold text-xl mb-2 text-center">Project Details</h2>
-        <div className="border border-black p-4 rounded-md">
+        {/*   Job applicant Details Section */}
+        <div className="border border-[#EEAD49] p-4 rounded-md">
+          <h2 className="font-bold text-xl mb-4">Project Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               label="Project Title"
@@ -125,7 +123,7 @@ function AddProject() {
         </div>
         <button
           type="submit"
-          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
+          className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] displaycards font-bold py-2 px-4 rounded"
         >
           Submit
         </button>

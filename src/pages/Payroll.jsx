@@ -224,7 +224,7 @@ function Payroll() {
       />
       <div className="grid displaycards overflow-x-auto my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b  font-medium text-black bg-[#EEAD49] ">
+          <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-6 py-4">Employee Name</th>
               {/* <th className="px-6 py-4">Bank Details</th> */}
@@ -274,7 +274,7 @@ function Payroll() {
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedPayment)}>
-                    <button className="bg-[#EEAD49] hover:bg-white text-black hover:text-black p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
+                    <button className="bg-white hover:bg-[#EEAD49] text-black  p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
                       View Pay Slip
                     </button>
                   </p>

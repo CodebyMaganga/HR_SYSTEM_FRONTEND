@@ -97,9 +97,9 @@ function JobApplicants() {
       </div>
       <div className="overflow-x-auto m-5">
         <table className=" border-b text-center text-md bg-white rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b  font-medium text-black bg-[#EEAD49] ">
+          <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
-              <th className="px-4 py-4 hidden  sm:table-cell">Profile</th>
+              <th className="px-4 py-4 hidden lg:table-cell">Profile</th>
               <th className="px-4 py-4">First Name</th>
               <th className="px-4 py-4 hidden  lg:table-cell">Last Name</th>
               <th className="px-4 py-4">Email</th>
@@ -107,7 +107,7 @@ function JobApplicants() {
               <th className="px-4 py-4 hidden lg:table-cell">Experience</th>
               <th className="px-4 py-4 hidden sm:table-cell">Role</th>
               <th className="px-4 py-4 hidden lg:table-cell">Status</th>
-              <th className="px-4 py-4 hidden lg:table-cell">Interview</th>
+              <th className="px-4 py-4 hidden sm:table-cell">Interview</th>
               <th className="px-4 py-4">Action</th>
             </tr>
           </thead>
@@ -144,10 +144,10 @@ function JobApplicants() {
                 <td className=" hidden lg:table-cell whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.experience}
                 </td>
-                <td className="hidden sm:table-cell whitespace-nowrap px-4 py-4">
+                <td className="hidden hidden sm:table-cell whitespace-nowrap px-4 py-4">
                   {searchedJobApplicant.role_applied}
                 </td>
-                <td className=" hidden lg:table-cell whitespace-nowrap px-4 py-4">
+                <td className=" hidden hidden lg:table-cell whitespace-nowrap px-4 py-4">
                   <button
                     className={`rounded-md p-2 ${
                       searchedJobApplicant.active_status
@@ -160,7 +160,7 @@ function JobApplicants() {
                       : "Inactive"}
                   </button>
                 </td>
-                <td className="hidden lg:table-cell px-8">
+                <td className="hidden hidden sm:table-cell px-8">
                   jobapplicant_interview
                 </td>
                 <td className="flex gap-4 py-5 px-6 text-3xl">

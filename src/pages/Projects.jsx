@@ -72,7 +72,7 @@ function Projects() {
       />
       <div className="grid displaycards my-2 mx-10 ">
         <table className=" border-b  min-w-full  text-center text-md bg-white tablecard rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b  font-medium text-black bg-[#EEAD49] ">
+          <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-6 py-4">Title</th>
               <th className="px-6 py-4">Project status</th>
@@ -93,7 +93,7 @@ function Projects() {
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedProject)}>
-                    <button className="bg-[#EEAD49] hover:bg-white text-black hover:text-black p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
+                    <button className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
                       View Full List
                     </button>
                   </p>

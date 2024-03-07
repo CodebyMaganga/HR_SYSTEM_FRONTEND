@@ -169,7 +169,7 @@ function AddLeave() {
   return (
     <div className="container bg-white mx-auto p-4">
       <form className="space-y-8" onSubmit={formik.handleSubmit}>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <h2 className="font-bold text-xl mb-4">Leave Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="mb-4">
@@ -231,7 +231,7 @@ function AddLeave() {
         <div className="flex justify-center mt-4">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+            className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] px-4 py-2 rounded mr-2"
           >
             Submit
           </button>
