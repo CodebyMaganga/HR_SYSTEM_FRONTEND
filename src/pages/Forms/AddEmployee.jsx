@@ -196,7 +196,7 @@ const AddEmployee = () => {
         <h2 className=" font-bold text-xl mb-2 text-center">
           Personal Details
         </h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               label="Profile Picture"
@@ -354,7 +354,7 @@ const AddEmployee = () => {
         <h2 className="font-bold text-xl mb-4 text-center">
           Emergency Contacts Details
         </h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="space-y-4">
             <InputField
               label="Emergency Contact first name"
@@ -402,7 +402,7 @@ const AddEmployee = () => {
 
         {/* Bank Details Section */}
         <h2 className="font-bold text-xl mb-4 text-center">Bank Details</h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="space-y-4">
             <InputField
               label="Employee Salaries"
@@ -439,7 +439,7 @@ const AddEmployee = () => {
         <h2 className="font-bold text-xl mb-4 text-center">
           Reference Details
         </h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="space-y-4">
             <InputField
               label="Reference Name"
@@ -462,7 +462,7 @@ const AddEmployee = () => {
         <h2 className="font-bold text-xl mb-4 text-center">
           Dependants Details
         </h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="space-y-4">
             <InputField
               label="Dependants First name"
@@ -536,7 +536,7 @@ const AddEmployee = () => {
         <h2 className="font-bold text-xl mb-4 text-center">
           Company Properites
         </h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="space-y-4">
             <DropdownField
               label="Property Category"
@@ -603,7 +603,7 @@ const AddEmployee = () => {
 
         {/* Document Details Section */}
         <h2 className="font-bold text-xl mb-4 text-center">Document Details</h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49]  p-4 rounded-md">
           <div className="space-y-4">
             {/* <InputField
               label="Document Type"
@@ -632,7 +632,7 @@ const AddEmployee = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded-full text-center"
+          className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] displaycards font-bold py-2 px-4 rounded-full text-center"
         >
           Submit
         </button>

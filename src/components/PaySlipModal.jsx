@@ -44,10 +44,18 @@ const PaySlipModal = ({
               backgroundColor: "#FF605C",
               padding: "4px 9px",
               borderRadius: "10px",
+              transition: "transform 0.2s ease-in-out", // Adding transition for smooth effect
+              // Initial size
+              fontSize: "inherit",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = "scale(1.1)"; // Increase size by 10%
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)"; // Revert to original size
             }}
           >
-            {" "}
-            Close{" "}
+            Close
           </button>
         </div>
         <main className="modal-mainContents z-20 W-[200px] ">

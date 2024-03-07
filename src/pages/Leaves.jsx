@@ -35,7 +35,7 @@ function Leaves() {
 
       <div className="grid displaycards my-2  mx-10 ">
         <table className=" border-b  min-w-full tablecard text-center text-md bg-white  rounded-[10px] overflow-hidden shadow-lg mb-5">
-          <thead className="border-b  font-medium text-black bg-[#EEAD49] ">
+          <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="px-6 py-4">Employee on Leave</th>
               <th className="hidden sm:table-cell px-6 py-4">Leave Day</th>

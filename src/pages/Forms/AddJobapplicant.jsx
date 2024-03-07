@@ -109,7 +109,7 @@ function AddJobapplicant() {
         <h2 className="font-bold text-xl mb-2 text-center">
           Job Applicant Details
         </h2>
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               label="First Name"
@@ -240,7 +240,7 @@ function AddJobapplicant() {
         </div>
         <button
           type="submit"
-          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
+          className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] displaycards font-bold py-2 px-4 rounded"
         >
           Submit
         </button>

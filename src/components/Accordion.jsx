@@ -26,20 +26,17 @@ const Accordion = () => {
     fetch(`${BASE_URL}/departments`)
       .then((resp) => resp.json())
       .then((data) => {
- 
         setDepartments(data);
       });
 
     fetch(`${BASE_URL}/employees`)
       .then((resp) => resp.json())
       .then((data) => {
- 
         setEmployees(data);
       });
     fetch(`${BASE_URL}/leaves`)
       .then((resp) => resp.json())
       .then((data) => {
-     
         setleaveData(data);
       });
   }, []);
@@ -92,7 +89,7 @@ const Accordion = () => {
           <button
             type="button"
             onClick={toggleAccordion}
-            className="flex bg-white items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-[#CBF2FF] dark: gap-3"
+            className="flex bg-[#EEAD49] hover:bg-white text-black hover:text-black hover: border border-[#EEAD49] items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:dark: gap-3"
             aria-expanded={isOpen}
             aria-controls="accordion-collapse-body-1"
           >

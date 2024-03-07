@@ -39,6 +39,19 @@ h2 {
 }
 /*End of general styling*/
 
+/*logo*/
+.logo {
+  height: 20px;
+  width: auto;
+  border-radius: 3px;
+}
+.logo1 {
+  margin: 100px;
+  height: 20px;
+  width: auto;
+}
+/*End of logo*/
+
 /* Container */
 .container {
   width: 100%;

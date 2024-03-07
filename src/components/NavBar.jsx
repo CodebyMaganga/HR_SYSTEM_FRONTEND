@@ -3,17 +3,17 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FaBars } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
 import { FaRegBell, FaMoon, FaSun } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import LOGO from "../logo/LOGO.png";
+import LOGO from "../logo/LOGO.jpg";
 
 const navigation = [
-  { name: "Dashboard", href: "/home", current: true },
-  { name: "Employees", href: "/employees", current: false },
-  { name: "Projects", href: "/projects", current: false },
-  { name: "Job Applicants", href: "/job-applicants", current: false },
-  { name: "Employees on Leave", href: "/leaves", current: false },
-  { name: "Payroll", href: "/payroll", current: false },
+  { name: "Dashboard", href: "/home" },
+  { name: "Employees", href: "/employees" },
+  { name: "Projects", href: "/projects" },
+  { name: "Job Applicants", href: "/job-applicants" },
+  { name: "Employees on Leave", href: "/leaves" },
+  { name: "Payroll", href: "/payroll" },
 ];
 
 function classNames(...classes) {
@@ -65,7 +65,7 @@ function NavBar() {
                 <div className="flex flex-shrink-0 items-center">
                   <NavLink to="/home" activeclassname="active">
                     <img
-                      className="mx-auto h-14 w-auto "
+                      className="mx-auto logo w-auto "
                       src={LOGO}
                       alt="Your Company"
                     />
@@ -77,13 +77,13 @@ function NavBar() {
                       <NavLink
                         key={item.name}
                         to={item.href}
+                        activeClassName="font-bold"
                         className={classNames(
-                          item.current
-                            ? "  hover:bg-gray-700 text-white "
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium  "
+                          "block rounded-md px-3 py-2 text-sm font-medium",
+                          location.pathname === item.href
+                            ? "text-white bg-gray-900 dark:bg-slate-200"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white"
                         )}
-                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </NavLink>
