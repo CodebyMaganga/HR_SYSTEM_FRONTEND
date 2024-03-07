@@ -41,7 +41,7 @@ const DropdownField = ({ label, name, value, onChange, options, required }) => {
       <select
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={(value) => onChange(value)}
         className="border border-gray-300 p-2 rounded-md w-full"
       >
         {options.map((option) => (
@@ -163,7 +163,7 @@ const AddEmployee = () => {
     }),
     onSubmit: async (values, formikBag) => {
       console.log("Form submitted:", values);
-      console.log("Form errors:", formikBag.errors); 
+      console.log("Form errors:", formikBag.errors);
       try {
         const res = await fetch(`${BASE_URL}/employees`, {
           method: "POST",
@@ -191,6 +191,8 @@ const AddEmployee = () => {
     },
   });
 
+  console.log(formik.errors);
+  console.log(formik.values);
   return (
     <div className="w-2/4 mx-auto bg-white p-4 rounded">
       <form className="space-y-8" onSubmit={formik.handleSubmit}>
@@ -284,6 +286,7 @@ const AddEmployee = () => {
             /> */}
 
             <DropdownField
+              key={"nationality"}
               label="Nationality"
               name="nationality"
               required={true}
@@ -323,6 +326,7 @@ const AddEmployee = () => {
             /> */}
 
             <DropdownField
+              key={"active_status"}
               label="Active Status"
               name="active_status"
               required={true}
@@ -544,8 +548,9 @@ const AddEmployee = () => {
             />
 
             <DropdownField
+              key={"condition"}
               label="Property Condition"
-              name="companyproperties.category"
+              name="companyproperties.condition"
               required={true}
               value={formik.values.companyproperties.condition}
               onChange={formik.handleChange}

@@ -161,7 +161,7 @@ function JobApplicants() {
                   </button>
                 </td>
                 <td className="hidden hidden sm:table-cell px-8">
-                  jobapplicant_interview
+                  21st March 2024 12:00 P.M
                 </td>
                 <td className="flex gap-4 py-5 px-6 text-3xl">
                   <MdDelete
