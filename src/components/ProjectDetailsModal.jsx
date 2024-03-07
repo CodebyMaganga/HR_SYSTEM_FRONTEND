@@ -33,7 +33,7 @@ const ProjectDetailsModal = ({ isModalOpen, modalContent, onClose }) => {
           <hr />
 
           <p className="mt-lg-3 modalText">
-            {" "}
+            
             {modalContent.project_employees.map((project_employee) => (
               <div
                 key={project_employee.id}
