@@ -197,7 +197,6 @@ const AddEmployee = () => {
           Personal Details
         </h2>
         <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-2">Personal Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               label="Profile Picture"
