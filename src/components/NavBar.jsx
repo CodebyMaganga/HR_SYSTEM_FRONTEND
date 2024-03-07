@@ -77,7 +77,7 @@ function NavBar() {
                       <NavLink
                         key={item.name}
                         to={item.href}
-                        activeClassName="font-bold"
+                        activeclassname="font-bold"
                         className={classNames(
                           "block rounded-md px-3 py-2 text-sm font-medium",
                           location.pathname === item.href
