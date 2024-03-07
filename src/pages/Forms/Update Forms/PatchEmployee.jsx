@@ -50,6 +50,8 @@ const PatchEmployee = ({
 }) => {
   const [changed, setChanged] = useState(false);
 
+  console.log(patchModalContent);
+
   const formik = useFormik({
     initialValues: {
       profile_picture: "",
@@ -185,6 +187,9 @@ const PatchEmployee = ({
       }
     },
   });
+
+  // console.log(formik.values);
+  console.log(formik.errors);
 
   useEffect(() => {
     formik.setValues(tempEmployee);
@@ -907,7 +912,6 @@ const PatchEmployee = ({
                         <button
                           type="submit"
                           className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
-                          onClick={() => console.log("I have been clicked")}
                         >
                           Submit
                         </button>{" "}
