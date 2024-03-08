@@ -1,9 +1,10 @@
-import React from "react";
-
-import Card from "../components/Card";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import Card from "../components/Card";
 import MidCards from "../components/MidCards";
 import BottomCards from "../components/BottomCards";
+import Accordion from "../components/Accordion";
+import { BASE_URL } from "../components/utils";
 import {
   IoIosPeople,
   IoIosBriefcase,
@@ -11,9 +12,30 @@ import {
   IoIosChatbubbles,
   IoIosCheckmarkCircleOutline,
 } from "react-icons/io";
-import Accordion from "../components/Accordion";
 
 function Home() {
+  const [payments, setPayments] = useState([]);
+
+  const d = new Date();
+  const month = d.getMonth();
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/bank_details`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched payments:", data); // Log fetched payments
+        setPayments(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching payments:", error); // Log fetch error
+      });
+  }, []);
+
+  // Calculate the total payment
+  const totalPayment = payments.reduce((acc, payment) => {
+    return acc + parseFloat(payment.employee_salary);
+  }, 0);
+
   const employeeCardData = {
     title: "Total employees",
     text: "10",
@@ -36,7 +58,11 @@ function Home() {
 
   const payrollCardData = {
     title: "Payroll",
-    text: "March",
+    text: isNaN(totalPayment)
+      ? "N/A"
+      : `${new Date().toLocaleString("default", {
+          month: "long",
+        })} ${totalPayment}`,
     icon: (
       <IoIosChatbubbles className=" text-5xl bg-[#87D8FB] rounded-full p-1" />
     ),

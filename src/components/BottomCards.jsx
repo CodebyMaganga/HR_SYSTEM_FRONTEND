@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
+import moment from "moment";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
 function BottomCards() {
@@ -130,7 +131,7 @@ function BottomCards() {
                   </div>
                   <div>
                     <button className="px-3 text-sm text-black bg-white hover:bg-[#EEAD49] hover:text-black hover: border border-[#EEAD49] font-bold py-2 rounded-full">
-                      {interview.time}
+                      {moment(interview.time).format("DD/MM/yyyy hh:mm A")}
                     </button>
                   </div>
                 </div>
