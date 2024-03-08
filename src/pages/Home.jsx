@@ -62,7 +62,7 @@ function Home() {
       ? "N/A"
       : `${new Date().toLocaleString("default", {
           month: "long",
-        })} ${totalPayment}`,
+        })}:${totalPayment}ksh`,
     icon: (
       <IoIosChatbubbles className=" text-5xl bg-[#87D8FB] rounded-full p-1" />
     ),
