@@ -21,7 +21,13 @@ function Employees() {
   const [tempEmployee, setTempEmployee] = useState();
 
   useEffect(() => {
-    fetch(`${BASE_URL}/employees`)
+    fetch(`${BASE_URL}/employees`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setEmployees(data));
   }, []);
@@ -45,6 +51,7 @@ function Employees() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           body: JSON.stringify({ active_status: 0 }),
         });

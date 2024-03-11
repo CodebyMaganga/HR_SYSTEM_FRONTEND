@@ -11,7 +11,13 @@ function Leaves() {
   const [leaves, setLeaves] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/leaves`)
+    fetch(`${BASE_URL}/leaves`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setLeaves(data));
   }, []);

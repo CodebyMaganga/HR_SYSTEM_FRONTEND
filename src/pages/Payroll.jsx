@@ -133,7 +133,13 @@ function Payroll() {
   const paymentYear = d.getFullYear();
 
   useEffect(() => {
-    fetch(`${BASE_URL}/bank_details`)
+    fetch(`${BASE_URL}/bank_details`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setPayments(data));
   }, []);
