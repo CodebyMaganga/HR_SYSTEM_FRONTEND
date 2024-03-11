@@ -58,7 +58,13 @@ function BottomCards() {
   const [jobApplicants, setJobApplicants] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/job_applicants`)
+    fetch(`${BASE_URL}/job_applicants`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setJobApplicants(data));
   }, []);
@@ -66,7 +72,13 @@ function BottomCards() {
   const [interviews, setInterviews] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/interviews`)
+    fetch(`${BASE_URL}/interviews`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setInterviews(data));
   }, []);

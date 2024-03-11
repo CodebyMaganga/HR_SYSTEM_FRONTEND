@@ -81,6 +81,7 @@ function AddJobapplicant() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           body: JSON.stringify(values),
         });
@@ -89,9 +90,7 @@ function AddJobapplicant() {
         if (res.ok) {
           toast.success("Applicant added successfully");
           formikBag.resetForm();
-        }
-
-         else {
+        } else {
           toast.error("Failed to add job applicants");
         }
       } catch (error) {

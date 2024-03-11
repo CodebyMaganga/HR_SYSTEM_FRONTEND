@@ -13,7 +13,13 @@ function JobApplicants() {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   useEffect(() => {
-    fetch(`${BASE_URL}/job_applicants`)
+    fetch(`${BASE_URL}/job_applicants`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setJobapplicants(data));
   }, []);
@@ -35,6 +41,7 @@ function JobApplicants() {
       try {
         const res = await fetch(`${BASE_URL}/job_applicants/${id}`, {
           method: "DELETE",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         });
         const data = await res.json();
 

@@ -23,18 +23,36 @@ const Accordion = () => {
   };
 
   useEffect(() => {
-    fetch(`${BASE_URL}/departments`)
+    fetch(`${BASE_URL}/departments`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         setDepartments(data);
       });
 
-    fetch(`${BASE_URL}/employees`)
+    fetch(`${BASE_URL}/employees`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         setEmployees(data);
       });
-    fetch(`${BASE_URL}/leaves`)
+    fetch(`${BASE_URL}/leaves`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         setleaveData(data);

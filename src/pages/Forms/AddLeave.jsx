@@ -64,7 +64,13 @@ function AddLeave() {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const res = await fetch(`${BASE_URL}/employees`);
+        const res = await fetch(`${BASE_URL}/employees`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
         if (!res.ok) {
           throw new Error("Failed to fetch employees");
         }
@@ -124,6 +130,7 @@ function AddLeave() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           body: JSON.stringify(submissionValues),
         });
@@ -133,12 +140,9 @@ function AddLeave() {
         if (res.ok) {
           toast.success("Leave added successfully");
           formikBag.resetForm();
-        }
-          
-         else {
+        } else {
           toast.error("Failed to add leaves");
         }
-        
       } catch (error) {
         console.error("Unable to add leaves", error.message);
         toast.error("Failed to add leaves " + error.message);
