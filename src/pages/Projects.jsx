@@ -17,7 +17,7 @@ function Projects() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}` ,
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
     })
       .then((res) => res.json())
@@ -47,7 +47,6 @@ function Projects() {
   const searchedProjects = projects.filter((project) =>
     project.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  // console.log(searchedEmployees);
 
   const handleFilterChange = (category) => {
     setCategoryFilter(category);
@@ -94,13 +93,7 @@ function Projects() {
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedProject)}>
-                    <button
-                      style={{
-                        backgroundColor: "lightblue",
-                        padding: "6px",
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <button className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
                       View Full List
                     </button>
                   </p>

@@ -5,7 +5,7 @@ function AddButtons({ navigationFunction, text }) {
     <div className="container">
       <button
         onClick={navigationFunction}
-        className=" bg-violet-300 hover:bg-violet-300 text-black font-bold py-2 px-4 rounded-full m-6 absolute top-14 right-5"
+        className="bg-[#EEAD49] hover:bg-white text-black hover:text-black p-[6px] hover: border border-[#EEAD49] font-bold py-2 px-4 rounded-full m-6 absolute top-14 right-5"
       >
         + {text}
       </button>

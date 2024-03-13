@@ -4,16 +4,53 @@ import { useFormik } from "formik";
 import { toast } from "react-hot-toast";
 import { BASE_URL } from "../../components/utils";
 
-const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
+const InputField = ({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  required,
+}) => {
   return (
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="border border-gray-300 p-2 rounded-md w-full"
-      placeholder={placeholder}
-    />
+    <div className="mb-4">
+      <label className="block font-semibold mb-1">
+        {label}
+        {required && <span className="text-red-500">*</span>}
+      </label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="border border-gray-300 p-2 rounded-md w-full"
+        placeholder={placeholder}
+      />
+    </div>
+  );
+};
+
+const DropdownField = ({ label, name, value, onChange, options, required }) => {
+  return (
+    <div className="mb-4">
+      <label className="block font-semibold mb-1">
+        {label}
+        {required && <span className="text-red-500">*</span>}
+      </label>
+      <select
+        name={name}
+        value={value}
+        onChange={(value) => onChange(value)}
+        className="border border-gray-300 p-2 rounded-md w-full"
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
@@ -32,10 +69,16 @@ const AddEmployee = () => {
       address: "",
       role: "",
       nationality: "",
-      emergency_contact: "",
       active_status: "",
       marital_status: "",
       date_joined: "",
+      emergency_contacts: {
+        first_name: "",
+        last_name: "",
+        gender: "",
+        relationship: "",
+        phone: "",
+      },
       bankdetails: {
         employee_salary: "",
         employee_account: "",
@@ -56,6 +99,13 @@ const AddEmployee = () => {
         age: "",
         relationship: "",
       },
+      companyproperties: {
+        category: "",
+        brand: "",
+        description: "",
+        condition: "",
+        serial_number: "",
+      },
     },
     validationSchema: Yup.object({
       profile_picture: Yup.string().required("Profile picture is required"),
@@ -69,10 +119,18 @@ const AddEmployee = () => {
       address: Yup.string().required("Address is required"),
       role: Yup.string().required("Role is required"),
       nationality: Yup.string().required("Nationality is required"),
-      emergency_contact: Yup.string().required("Emergency contact is required"),
       active_status: Yup.string().required("Active status is required"),
       marital_status: Yup.string().required("Marital status is required"),
       date_joined: Yup.date().required("Date joined is required"),
+      emergency_contacts: Yup.object({
+        first_name: Yup.string().required("Emergency first name is required"),
+        last_name: Yup.string().required("Emergency's last name is required"),
+        gender: Yup.string().required("Emergency's gender is required"),
+        phone: Yup.string().required("Emergency's phone number is required"),
+        relationship: Yup.string().required(
+          "Emergency's relationship is required"
+        ),
+      }),
       bankdetails: Yup.object({
         employee_salary: Yup.string().required("Employee salary is required"),
         employee_account: Yup.string().required("Employee account is required"),
@@ -95,13 +153,23 @@ const AddEmployee = () => {
           "Dependant's relationship is required"
         ),
       }),
+      companyproperties: Yup.object({
+        category: Yup.string().required("Category is required"),
+        brand: Yup.string().required("Brand is required"),
+        description: Yup.string().required("Descriptionis required"),
+        condition: Yup.string().required("Condition is required"),
+        serial_number: Yup.string().required("Serial number is required"),
+      }),
     }),
     onSubmit: async (values, formikBag) => {
+      console.log("Form submitted:", values);
+      console.log("Form errors:", formikBag.errors);
       try {
         const res = await fetch(`${BASE_URL}/employees`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           body: JSON.stringify(values),
         });
@@ -111,11 +179,11 @@ const AddEmployee = () => {
           throw new Error("Failed to add employee");
         }
 
-        if (data.statusCode === 200) {
-          toast.success(data.message);
+        if (res.ok) {
+          toast.success("Employee added successfully");
           formikBag.resetForm();
         } else {
-          toast.error(data.message);
+          toast.error("Failed to add employee");
         }
       } catch (error) {
         console.log("Unable to add employee", error.message);
@@ -124,258 +192,427 @@ const AddEmployee = () => {
     },
   });
 
+  console.log(formik.errors);
+  console.log(formik.values);
   return (
-    <div className="container bg-white mx-auto p-4">
+    <div className="w-2/4 mx-auto bg-white p-4 rounded">
       <form className="space-y-8" onSubmit={formik.handleSubmit}>
         {/* Personal Details Section */}
-        <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Personal Details</h2>
+        <h2 className=" font-bold text-xl mb-2 text-center">
+          Personal Details
+        </h2>
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
-              type="text"
+              label="Profile Picture"
               name="profile_picture"
               value={formik.values.profile_picture}
-              placeholder="Profile Picture"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="First Name"
               name="first_name"
+              required={true}
               value={formik.values.first_name}
-              placeholder="First Name"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Last Name"
               name="last_name"
+              required={true}
               value={formik.values.last_name}
-              placeholder="Last Name"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="D.O.B"
               name="DOB"
+              required={true}
               value={formik.values.DOB}
-              placeholder="D.O.B"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Email"
               name="email"
+              required={true}
               value={formik.values.email}
-              placeholder="Email"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Phone Number"
               name="phone"
+              required={true}
               value={formik.values.phone}
-              placeholder="Phone Number"
               onChange={formik.handleChange}
             />
-
-            <InputField
-              type="text"
+            <DropdownField
+              label="Gender"
               name="gender"
+              required={true}
               value={formik.values.gender}
-              placeholder="Gender"
               onChange={formik.handleChange}
+              options={[
+                { label: "Female", value: "female" },
+                { label: "Male", value: "male" },
+                { label: "Prefer not to say", value: "prefer_not_to_say" },
+                // Add any other relevant options here
+              ]}
             />
-
             <InputField
-              type="text"
+              label="National ID"
               name="national_ID"
+              required={true}
               value={formik.values.national_ID}
-              placeholder="National ID"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Address"
               name="address"
+              required={true}
               value={formik.values.address}
-              placeholder="Address"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Role"
               name="role"
+              required={true}
               value={formik.values.role}
-              placeholder="Role"
               onChange={formik.handleChange}
             />
-
-            <InputField
-              type="text"
+            {/* <InputField
+              label="Nationality"
               name="nationality"
+              required={true}
               value={formik.values.nationality}
-              placeholder="Nationality"
               onChange={formik.handleChange}
+            /> */}
+
+            <DropdownField
+              key={"nationality"}
+              label="Nationality"
+              name="nationality"
+              required={true}
+              value={formik.values.nationality}
+              onChange={formik.handleChange}
+              options={[
+                { label: "Kenyan", value: "Kenyan" },
+                { label: "American", value: "American" },
+                { label: "Japanese", value: "Japanese" },
+                { label: "Brazilian", value: "Brazilian" },
+                { label: "Australian", value: "Australian" },
+                { label: "Canadian", value: "Canadian" },
+                { label: "Mexican", value: "Mexican" },
+                { label: "Chinese", value: "Chinese" },
+                { label: "Indian", value: "Indian" },
+                { label: "British", value: "British" },
+                { label: "German", value: "German" },
+                { label: "French", value: "French" },
+                { label: "Italian", value: "Italian" },
+                { label: "Russian", value: "Russian" },
+                { label: "South African", value: "South African" },
+                { label: "Swedish", value: "Swedish" },
+                { label: "Spanish", value: "Spanish" },
+                { label: "Argentinian", value: "Argentinian" },
+                { label: "Turkish", value: "Turkish" },
+                { label: "Saudi Arabian", value: "Saudi Arabian" },
+              ]}
             />
 
-            <InputField
-              type="text"
-              name="emergency_contact"
-              value={formik.values.emergency_contact}
-              placeholder="Emergency Contact"
-              onChange={formik.handleChange}
-            />
-
-            <InputField
-              type="checkbox"
+            {/* <InputField
+              //type="checkbox"
+              label="Active Status"
+              required={true}
               name="active_status"
+              checked={formik.values.active_status}
+              onChange={formik.handleChange}
+            /> */}
+
+            <DropdownField
+              key={"active_status"}
+              label="Active Status"
+              name="active_status"
+              required={true}
               value={formik.values.active_status}
-              placeholder="Active status"
               onChange={formik.handleChange}
-            />
+              options={[
+                { label: "Active", value: "Active" },
+                { label: "Inactive", value: "Inactive" },
 
+                // Add any other relevant options here
+              ]}
+            />
             <InputField
-              type="text"
+              label="Marital Status"
               name="marital_status"
+              required={true}
               value={formik.values.marital_status}
-              placeholder="Marital status"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Date joined"
               name="date_joined"
+              required={true}
               value={formik.values.date_joined}
-              placeholder="Date joined"
               onChange={formik.handleChange}
+            />
+          </div>
+        </div>
+
+        {/* Emergency Contacts Details Section */}
+        <h2 className="font-bold text-xl mb-4 text-center">
+          Emergency Contacts Details
+        </h2>
+        <div className="border border-[#EEAD49] p-4 rounded-md">
+          <div className="space-y-4">
+            <InputField
+              label="Emergency Contact first name"
+              name="emergency_contacts.first_name"
+              required={true}
+              value={formik.values.emergency_contacts.first_name}
+              onChange={formik.handleChange}
+            />
+            <InputField
+              label="Emergency Contact last name"
+              name="emergency_contacts.last_name"
+              required={true}
+              value={formik.values.emergency_contacts.last_name}
+              onChange={formik.handleChange}
+            />
+            <InputField
+              label="Emergency Contact gender"
+              name="emergency_contacts.gender"
+              required={true}
+              value={formik.values.emergency_contacts.gender}
+              onChange={formik.handleChange}
+            />
+            <InputField
+              label="Emergency Contact phone no:"
+              name="emergency_contacts.phone"
+              required={true}
+              value={formik.values.emergency_contacts.phone}
+              onChange={formik.handleChange}
+            />
+            <DropdownField
+              label="Emergency Contact Relationship"
+              name="emergency_contacts.relationship"
+              required={true}
+              value={formik.values.emergency_contacts.relationship}
+              onChange={formik.handleChange}
+              options={[
+                { label: "Son", value: "son" },
+                { label: "Daughter", value: "daughter" },
+                { label: "Mother", value: "mother" },
+                // Add any other relevant options here
+              ]}
             />
           </div>
         </div>
 
         {/* Bank Details Section */}
-        <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Bank Details</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 className="font-bold text-xl mb-4 text-center">Bank Details</h2>
+        <div className="border border-[#EEAD49] p-4 rounded-md">
+          <div className="space-y-4">
             <InputField
-              type="text"
+              label="Employee Salaries"
               name="bankdetails.employee_salary"
+              required={true}
               value={formik.values.bankdetails.employee_salary}
-              placeholder="Employee Salary"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Employee Account"
               name="bankdetails.employee_account"
+              required={true}
               value={formik.values.bankdetails.employee_account}
-              placeholder="Employee Account"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Employee Bank"
               name="bankdetails.employee_bank"
+              required={true}
               value={formik.values.bankdetails.employee_bank}
-              placeholder="Employee Bank"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Branch Code"
               name="bankdetails.branch_code"
+              required={true}
               value={formik.values.bankdetails.branch_code}
-              placeholder="Branch Code"
-              onChange={formik.handleChange}
-            />
-          </div>
-        </div>
-
-        {/* Document Details Section */}
-        <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Document Details</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputField
-              type="text"
-              name="documents.document_type"
-              value={formik.values.documents.document_type}
-              placeholder="Document Type"
               onChange={formik.handleChange}
             />
           </div>
         </div>
 
         {/* Reference Details Section */}
-        <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Reference Details</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 className="font-bold text-xl mb-4 text-center">
+          Reference Details
+        </h2>
+        <div className="border border-[#EEAD49] p-4 rounded-md">
+          <div className="space-y-4">
             <InputField
-              type="text"
+              label="Reference Name"
               name="references.reference_name"
+              required={true}
               value={formik.values.references.reference_name}
-              placeholder="Reference Name"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Reference Phone"
               name="references.reference_phone"
+              required={true}
               value={formik.values.references.reference_phone}
-              placeholder="Reference Phone"
               onChange={formik.handleChange}
             />
           </div>
         </div>
 
         {/* Dependants Details Section */}
-        <div className="border border-black p-4 rounded-md">
-          <h2 className="font-bold text-xl mb-4">Dependants Details</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 className="font-bold text-xl mb-4 text-center">
+          Dependants Details
+        </h2>
+        <div className="border border-[#EEAD49] p-4 rounded-md">
+          <div className="space-y-4">
             <InputField
-              type="text"
+              label="Dependants First name"
               name="dependants.first_name"
+              required={true}
               value={formik.values.dependants.first_name}
-              placeholder="Dependants First name"
               onChange={formik.handleChange}
             />
-
             <InputField
-              type="text"
+              label="Dependants last name"
               name="dependants.last_name"
+              required={true}
               value={formik.values.dependants.last_name}
-              placeholder="Dependants last name"
               onChange={formik.handleChange}
             />
 
-            <InputField
-              type="text"
+            <DropdownField
+              label="Dependants gender"
               name="dependants.gender"
+              required={true}
               value={formik.values.dependants.gender}
-              placeholder="Dependants gender"
               onChange={formik.handleChange}
+              options={[
+                { label: "Female", value: "female" },
+                { label: "Male", value: "male" },
+                { label: "Prefer not to say", value: "prefer_not_to_say" },
+              ]}
             />
-
             <InputField
-              type="number"
+              label="Dependants age"
               name="dependants.age"
+              required={true}
               value={formik.values.dependants.age}
-              placeholder="Dependants age"
+              onChange={formik.handleChange}
+            />
+
+            <DropdownField
+              label="Dependants relationship"
+              name="dependants.relationship"
+              required={true}
+              value={formik.values.dependants.relationship}
+              onChange={formik.handleChange}
+              options={[
+                { label: "Son", value: "son" },
+                { label: "Daughter", value: "daughter" },
+                { label: "Mother", value: "mother" },
+              ]}
+            />
+          </div>
+        </div>
+
+        <h2 className="font-bold text-xl mb-4 text-center">
+          Company Properites
+        </h2>
+        <div className="border border-[#EEAD49] p-4 rounded-md">
+          <div className="space-y-4">
+            <DropdownField
+              label="Property Category"
+              name="companyproperties.category"
+              required={true}
+              value={formik.values.companyproperties.category}
+              onChange={formik.handleChange}
+              options={[
+                { label: "Phone", value: "phone" },
+                { label: "Laptop", value: "laptop" },
+                { label: "Vehicle", value: "vehicle" },
+                { label: "Computor", value: "computor" },
+                { label: "Microscope", value: "microscope" },
+                { label: "Library books", value: "library books" },
+                { label: "Sports equipments", value: "equipments" },
+                { label: "Classroom furniture", value: "classroom furniture" },
+                {
+                  label: "Interractive whiteboard",
+                  value: "interactive whiteboard",
+                },
+              ]}
+            />
+
+            <DropdownField
+              key={"condition"}
+              label="Property Condition"
+              name="companyproperties.condition"
+              required={true}
+              value={formik.values.companyproperties.condition}
+              onChange={formik.handleChange}
+              options={[
+                { label: "New", value: "new" },
+                { label: "Old", value: "Old" },
+                { label: "Refurbished", value: "refurbished" },
+              ]}
+            />
+
+            <InputField
+              label="Property Brand"
+              name="companyproperties.brand"
+              required={true}
+              placeholder={"eg; hp,toyota"}
+              value={formik.values.companyproperties.brand}
               onChange={formik.handleChange}
             />
 
             <InputField
-              type="text"
-              name="dependants.relationship"
-              value={formik.values.dependants.relationship}
-              placeholder="Dependants relationship"
+              label="Property SerialNumber"
+              name="companyproperties.serial_number"
+              required={true}
+              value={formik.values.companyproperties.serial_number}
+              onChange={formik.handleChange}
+            />
+
+            <InputField
+              label="Property Description"
+              name="companyproperties.description"
+              required={true}
+              placeholder={"Please enter any extra note about the propery"}
+              value={formik.values.companyproperties.description}
               onChange={formik.handleChange}
             />
           </div>
         </div>
 
+        {/* Document Details Section */}
+        <h2 className="font-bold text-xl mb-4 text-center">Document Details</h2>
+        <div className="border border-[#EEAD49]  p-4 rounded-md">
+          <div className="space-y-4">
+            <DropdownField
+              label="Document Type"
+              name="documents.document_type"
+              required={true}
+              value={formik.values.documents.document_type}
+              onChange={formik.handleChange}
+              options={[
+                { label: "Resume", value: "resume" },
+                { label: "CV", value: "cv" },
+                { label: "Contract", value: "contract" },
+              ]}
+            />
+          </div>
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
-          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
+          className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] displaycards font-bold py-2 px-4 rounded-full text-center"
         >
           Submit
         </button>

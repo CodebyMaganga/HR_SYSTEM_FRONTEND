@@ -3,7 +3,13 @@ import { BASE_URL } from "./utils";
 
 function Card({ title, text, icon }) {
   useEffect(() => {
-    fetch(`${BASE_URL}/on_leave_employees`)
+    fetch(`${BASE_URL}/leaves`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => console.log(data));
   }, []);

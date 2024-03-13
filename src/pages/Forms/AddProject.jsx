@@ -3,16 +3,53 @@ import { useFormik } from "formik";
 import { toast } from "react-hot-toast";
 import { BASE_URL } from "../../components/utils";
 
-const InputField = ({ name, value, onChange, placeholder, type = "text" }) => {
+const InputField = ({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  required,
+}) => {
   return (
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="border border-gray-300 p-2 rounded-md w-full"
-      placeholder={placeholder}
-    />
+    <div className="mb-4">
+      <label className="block font-semibold mb-1">
+        {label}
+        {required && <span className="text-red-500">*</span>}
+      </label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="border border-gray-300 p-2 rounded-md w-full"
+        placeholder={placeholder}
+      />
+    </div>
+  );
+};
+
+const DropdownField = ({ label, name, value, onChange, options, required }) => {
+  return (
+    <div className="mb-4">
+      <label className="block font-semibold mb-1">
+        {label}
+        {required && <span className="text-red-500">*</span>}
+      </label>
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="border border-gray-300 p-2 rounded-md w-full"
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
@@ -36,20 +73,17 @@ function AddProject() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           body: JSON.stringify(values),
         });
         const data = await res.json();
 
-        if (!res.ok) {
-          throw new Error("Failed to add Project");
-        }
-
-        if (data.statusCode === 200) {
-          toast.success(data.message);
+        if (res.ok) {
+          toast.success("Project added successfully");
           formikBag.resetForm();
         } else {
-          toast.error(data.message);
+          toast.error("Failed to add projects");
         }
       } catch (error) {
         console.log("Unable to add projects", error.message);
@@ -58,38 +92,39 @@ function AddProject() {
     },
   });
   return (
-    <div className="container bg-white mx-auto p-4">
+    <div className="w-2/4 mx-auto bg-white p-4 rounded">
       <form className="space-y-8" onSubmit={formik.handleSubmit}>
         {/*   Job applicant Details Section */}
-        <div className="border border-black p-4 rounded-md">
+        <div className="border border-[#EEAD49] p-4 rounded-md">
           <h2 className="font-bold text-xl mb-4">Project Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
-              type="text"
+              label="Project Title"
               name="title"
+              required={true}
+              placeholder="Enter project title"
               value={formik.values.title}
-              placeholder="Enter Project Title"
               onChange={formik.handleChange}
             />
-            <InputField
-              type="text"
+
+            <DropdownField
+              label="Project status"
               name="project_status"
+              required={true}
               value={formik.values.project_status}
-              placeholder="Enter the status of project"
               onChange={formik.handleChange}
+              options={[
+                { label: "Active ", value: "Active" },
+                { label: "In progress ", value: "In progress " },
+                { label: "Completed ", value: "Completed " },
+                { label: "Planning", value: "Planning " },
+              ]}
             />
-            {/* <InputField
-              type="text"
-              name="project_employees"
-              value={formik.values.project_employees}
-              placeholder="Employees assigned to project"
-              onChange={formik.handleChange}
-            /> */}
           </div>
         </div>
         <button
           type="submit"
-          className="bg-[#CBF2FF] hover:bg-[#F9DDEE] displaycards text-black font-bold py-2 px-4 rounded"
+          className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] displaycards font-bold py-2 px-4 rounded"
         >
           Submit
         </button>

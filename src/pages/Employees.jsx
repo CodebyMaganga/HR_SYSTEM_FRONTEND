@@ -21,7 +21,13 @@ function Employees() {
   const [tempEmployee, setTempEmployee] = useState();
 
   useEffect(() => {
-    fetch(`${BASE_URL}/employees`)
+    fetch(`${BASE_URL}/employees`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setEmployees(data));
   }, []);
@@ -45,6 +51,7 @@ function Employees() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           body: JSON.stringify({ active_status: 0 }),
         });
@@ -112,13 +119,13 @@ function Employees() {
         handleFilterChange={handleFilterChange}
       />
       <div className="container-fluid displaycards ">
-        <table className=" border-b tablecard text-center text-md bg-white   rounded-[10px] overflow-hidden shadow-lg mb-5">
+        <table className=" border-b tablecard text-center text-md bg-white  rounded-[10px] overflow-hidden shadow-lg mb-5">
           <thead className="border-b  font-medium text-black bg-gray-300 ">
             <tr>
               <th className="hidden lg:table-cell px-6 py-4">Profile</th>
               <th className="px-6 py-4">First Name</th>
               <th className=" hidden lg:table-cell px-6 py-4">Last Name</th>
-              <th className="px-6 py-4">Role</th>
+              <th className="hidden sm:table-cell px-6 py-4">Role</th>
               <th className="hidden sm:table-cell px-6 py-4">Phone</th>
               <th className="hidden lg:table-cell px-6 py-4">Status</th>
               <th className=" px-6 py-4">Action</th>
@@ -150,7 +157,7 @@ function Employees() {
                 <td className=" hidden lg:table-cell whitespace-nowrap px-6 py-4">
                   {searchedEmployee.last_name}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className=" hidden sm:table-cell whitespace-nowrap px-6 py-4">
                   {searchedEmployee.role}
                 </td>
                 <td className="hidden sm:table-cell whitespace-nowrap px-6 py-4">
@@ -185,13 +192,7 @@ function Employees() {
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <p onClick={() => openModal(searchedEmployee)}>
-                    <button
-                      style={{
-                        backgroundColor: "lightblue",
-                        padding: "6px",
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <button className="bg-white hover:bg-[#EEAD49] text-black p-[6px] hover: border border-[#EEAD49] rounded-[10px] ">
                       View More Details
                     </button>
                   </p>

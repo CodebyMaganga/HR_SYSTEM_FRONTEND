@@ -2,18 +2,20 @@ import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FaBars } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
-import { FaRegBell, FaMoon, FaSun } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+// import { FaRegBell, FaMoon, FaSun } from "react-icons/fa";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { FaMoon, FaSun } from "react-icons/fa";
+// import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import LOGO from "../logo/LOGO.png"
+import LOGO from "../logo/LOGO.jpg";
 
 const navigation = [
-  { name: "Dashboard", href: "/home", current: true },
-  { name: "Employees", href: "/employees", current: false },
-  { name: "Projects", href: "/projects", current: false },
-  { name: "Job Applicants", href: "/job-applicants", current: false },
-  { name: "Employees on Leave", href: "/leaves", current: false },
-  { name: "Payroll", href: "/payroll", current: false },
+  { name: "Dashboard", href: "/home" },
+  { name: "Employees", href: "/employees" },
+  { name: "Projects", href: "/projects" },
+  { name: "Job Applicants", href: "/job-applicants" },
+  { name: "Employees on Leave", href: "/leaves" },
+  { name: "Payroll", href: "/payroll" },
 ];
 
 function classNames(...classes) {
@@ -41,7 +43,10 @@ function NavBar() {
   };
 
   return (
-    <Disclosure as="nav" className={`${darkMode && 'dark'} bg-gray-800 dark:bg-slate-300 `}>
+    <Disclosure
+      as="nav"
+      className={`${darkMode && "dark"} bg-[#13325A] dark:bg-slate-300 `}
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -61,12 +66,11 @@ function NavBar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <NavLink to="/home" activeclassname="active">
-                  <img
-          className="mx-auto h-14 w-auto "
-          src={LOGO}
-          alt="Your Company"
-        />
-           
+                    <img
+                      className="mx-auto logo w-auto "
+                      src={LOGO}
+                      alt="Your Company"
+                    />
                   </NavLink>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -75,13 +79,13 @@ function NavBar() {
                       <NavLink
                         key={item.name}
                         to={item.href}
+                        activeclassname="font-bold"
                         className={classNames(
-                          item.current
-                            ? "  hover:bg-gray-700 text-white "
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium  "
+                          "block rounded-md px-3 py-2 text-sm font-medium",
+                          location.pathname === item.href
+                            ? "text-white bg-gray-900 dark:bg-slate-200"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white"
                         )}
-                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </NavLink>
@@ -91,7 +95,7 @@ function NavBar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/*Dark Mode button */}
-                <button
+                {/* <button
                   onClick={toogleDarkMode}
                   className="mr-4 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none"
                   aria-label="Toggle Dark Mode"
@@ -101,7 +105,7 @@ function NavBar() {
                   ) : (
                     <FaMoon className="h-6 4-6" />
                   )}
-                </button>
+                </button> */}
 
                 {/* <button
                   type="button"
@@ -120,7 +124,7 @@ function NavBar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://cdn.wallpapersafari.com/82/82/5PjKtk.jpg"
                         alt=""
                       />
                     </Menu.Button>

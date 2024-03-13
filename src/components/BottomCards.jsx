@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BASE_URL } from "../components/utils";
+import moment from "moment";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
 function BottomCards() {
@@ -11,7 +12,7 @@ function BottomCards() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}` ,
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
     })
       .then((res) => res.json())
@@ -57,7 +58,13 @@ function BottomCards() {
   const [jobApplicants, setJobApplicants] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/job_applicants`)
+    fetch(`${BASE_URL}/job_applicants`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setJobApplicants(data));
   }, []);
@@ -65,7 +72,13 @@ function BottomCards() {
   const [interviews, setInterviews] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/interviews`)
+    fetch(`${BASE_URL}/interviews`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setInterviews(data));
   }, []);
@@ -98,7 +111,7 @@ function BottomCards() {
                     </div>
                   </div>
                   <div>
-                    <button className="px-3 text-sm hover:bg-[#F9DDEE]  bg-[#CBF2FF] text-black font-bold py-2 rounded-full">
+                    <button className="px-3 text-sm bg-white hover:bg-[#EEAD49] text-black hover:text-black hover: border border-[#EEAD49] font-bold py-2 rounded-full">
                       {jobApplicant.role_applied}
                     </button>
                   </div>
@@ -129,8 +142,8 @@ function BottomCards() {
                     </div>
                   </div>
                   <div>
-                    <button className="px-3 text-sm hover:bg-[#F9DDEE]  bg-[#CBF2FF] text-black font-bold py-2 rounded-full">
-                      {interview.time}
+                    <button className="px-3 text-sm text-black bg-white hover:bg-[#EEAD49] hover:text-black hover: border border-[#EEAD49] font-bold py-2 rounded-full">
+                      {moment(interview.time).format("DD/MM/yyyy hh:mm A")}
                     </button>
                   </div>
                 </div>

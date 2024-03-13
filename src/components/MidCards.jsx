@@ -16,7 +16,13 @@ function EmployeeSalaryChart() {
   const [employeeSalaries, setEmployeeSalaries] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/bank_details`)
+    fetch(`${BASE_URL}/bank_details`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -74,7 +80,7 @@ function EmployeeSalaryChart() {
         />
         <Tooltip />
         <Legend />
-        <Bar dataKey="grossSalary" fill="#82ca9d" />
+        <Bar dataKey="grossSalary" fill="#13325A" />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -108,7 +114,7 @@ function MidCards() {
                 {/* Applicant Details and Button */}
                 <div className="w-full">
                   <NavLink
-                    className=" w-full rounded-[15px] h-38 bg-[#CBF2FF] overflow-auto displaycards hover:bg-[#F9DDEE] shadow-lg p-4 m-1 font-medium text-gray-700"
+                    className=" w-full rounded-[15px] h-38 bg-white overflow-auto displaycards hover:bg-[#EEAD49] text-black hover:text-black hover: border border-[#EEAD49] shadow-lg p-4 m-1 font-medium "
                     to={`/example-params/${department.id}`}
                   >
                     <div className="displaycards">

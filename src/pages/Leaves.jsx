@@ -5,12 +5,19 @@ import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import AddButtons from "../components/AddButtons";
 import SearchFilter from "../components/SearchFilter";
+import moment from "moment";
 
 function Leaves() {
   const [leaves, setLeaves] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/leaves`)
+    fetch(`${BASE_URL}/leaves`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setLeaves(data));
   }, []);
@@ -52,18 +59,13 @@ function Leaves() {
                 className=" border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className="whitespace-nowrap px-6 py-4">
-                  {leave.employees_on_leave.map((employee_on_leave) => (
-                    <p key={employee_on_leave.id}>
-                      {employee_on_leave.employee.first_name}{" "}
-                      {employee_on_leave.employee.last_name}
-                    </p>
-                  ))}
+                  {leave.employee.first_name} {leave.employee.last_name}
                 </td>
                 <td className="hidden sm:table-cell hitespace-nowrap px-6 py-4">
-                  {leave.leave_from}
+                  {moment(leave.leave_from).format("DD/MM/yyyy hh:mm A")}
                 </td>
                 <td className="hidden sm:table-cell whitespace-nowrap px-6 py-4">
-                  {leave.leave_to}
+                  {moment(leave.leave_to).format("DD/MM/yyyy hh:mm A")}
                 </td>
                 <td className=" whitespace-nowrap px-6 py-4">
                   {leave.leave_type}
